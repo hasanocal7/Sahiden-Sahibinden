@@ -46,6 +46,31 @@ exports.beforeRegister = async (req, res, next) => {
       new Error("Password must be between 8 and 255 characters long")
     );
   }
+  const emailCheck = email.split("@").splice(0, 1);
+  const first_nameCheck = first_name.toLowerCase();
+  const last_nameCheck = last_name.toLowerCase();
+  const passwordCheck = password.toLowerCase();
+  if (
+    passwordCheck.includes(emailCheck) ||
+    passwordCheck.includes(first_nameCheck) ||
+    passwordCheck.includes(last_nameCheck)
+  ) {
+    res.status(400);
+    return next(
+      new Error(
+        "Password cannot contain your first name, last name or e-mail address"
+      )
+    );
+  }
+
+  if (/(\w)\1\1/.test(passwordCheck)) {
+    res.status(400);
+    return next(
+      new Error(
+        "Three consecutive identical characters or numbers cannot be used in the password."
+      )
+    );
+  }
 
   const containsLowercase = (value) => {
     if (!/[a-z]/.test(value)) {
