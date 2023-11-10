@@ -1,5 +1,6 @@
 const { User } = require("../models");
 const validator = require("validator");
+const cryptor = require("../utils/cryptor");
 
 exports.beforeRegister = async (req, res, next) => {
   const { email, first_name, last_name, password } = req.body;
@@ -91,5 +92,33 @@ exports.beforeRegister = async (req, res, next) => {
 
   containsLowercase(password);
   containsUppercase(password);
+  next();
+};
+
+exports.beforeLogin = async (req, res, next) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ where: { email: email } });
+
+  if (!email) {
+    res.status(400);
+    return next(new Error("Please enter a email address"));
+  }
+
+  if (!password) {
+    res.status(400);
+    return next(new Error("Please enter a password"));
+  }
+
+  if (!user) {
+    res.status(400);
+    return next(new Error("Your email address or password is incorrect."));
+  } else {
+    const isPasswordCorrect = await cryptor.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      res.status(400);
+      return next(new Error("Your email address or password is incorrect."));
+    }
+  }
+
   next();
 };
