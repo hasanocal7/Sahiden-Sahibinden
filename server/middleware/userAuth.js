@@ -1,6 +1,7 @@
 const { User } = require("../models");
 const validator = require("validator");
 const cryptor = require("../utils/cryptor");
+const jwt = require("jsonwebtoken");
 
 exports.beforeRegister = async (req, res, next) => {
   const { email, first_name, last_name, password } = req.body;
@@ -120,5 +121,61 @@ exports.beforeLogin = async (req, res, next) => {
     }
   }
 
+  if (req.cookies.accessToken) {
+    res.status(401);
+    return next(new Error("User already exists"));
+  }
+
   next();
+};
+
+exports.authenticationToken = (req, res, next) => {
+  try {
+    const token = req.cookies.accessToken;
+    if (token) {
+      jwt.verify(token, process.env.ACCESSTOKEN_SECRET_KEY, (err) => {
+        if (err) {
+          res.status(401);
+          return next(new Error(err.message));
+        } else {
+          next();
+        }
+      });
+    } else {
+      res.status(404);
+      return next(new Error("Token not found"));
+    }
+  } catch (error) {
+    res.status(401);
+    throw new Error("Token is not authorized");
+  }
+};
+
+exports.checkUser = (req, res, next) => {
+  try {
+    const token = req.cookies.accessToken;
+    if (token) {
+      jwt.verify(
+        token,
+        process.env.ACCESSTOKEN_SECRET_KEY,
+        async (err, decodedToken) => {
+          if (err) {
+            res.locals.user = null;
+            next();
+          } else {
+            const user = await User.findOne({
+              where: { id: decodedToken.id },
+            });
+            res.locals.user = user;
+            next();
+          }
+        }
+      );
+    } else {
+      res.locals.user = null;
+      next();
+    }
+  } catch (error) {
+    next(error);
+  }
 };
