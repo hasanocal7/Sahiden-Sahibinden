@@ -8,20 +8,10 @@ module.exports = (sequelize, DataTypes) => {
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: "Please enter your first name",
-        },
-      },
     },
     last_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: "Please enter your first name",
-        },
-      },
     },
     password: {
       type: DataTypes.STRING,

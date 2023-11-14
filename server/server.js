@@ -2,11 +2,13 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const morgan = require("morgan");
+
 const errorHandler = require("./middleware/errorHandler");
 
 //* Database
 const db = require("./models");
-
 //* App
 const app = express();
 
@@ -14,8 +16,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(morgan("dev"));
+
+app.get("/", (req, res) => res.send("Hello"));
 
 //* Routes
+const { checkUser } = require("./middleware/userAuth");
+app.use("*", checkUser);
 app.use("/users", require("./routes/userRoute"));
 
 //* Error Handler
@@ -32,5 +40,5 @@ db.sequelize
     });
   })
   .catch((err) => {
-    console.error("Database sync error:", err);
+    console.error("Database sync error:", err.message);
   });
