@@ -2,12 +2,17 @@ const { User } = require("../models");
 const cryptor = require("../utils/cryptor");
 const jwt = require("jsonwebtoken");
 
-exports.getAllUsers = async (req, res) => {
-  const users = await User.findAll();
-  res.status(200).json(users);
+exports.getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.findAll();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500);
+    return next(new Error(error.message));
+  }
 };
 
-exports.getUser = async (req, res) => {
+exports.getUser = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { id: req.params.id } });
     res.status(200).json(user);
@@ -29,7 +34,7 @@ exports.createUser = async (req, res, next) => {
     });
     res.status(201).json(user);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500);
     return next(new Error(error.message));
   }
 };
@@ -38,15 +43,14 @@ exports.loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email: email } });
-    const accessToken = jwt.sign(
-      { ...user.dataValues },
-      process.env.ACCESSTOKEN_SECRET_KEY,
-      {
+    const createToken = (UserId) => {
+      return jwt.sign({ UserId }, process.env.ACCESSTOKEN_SECRET_KEY, {
         expiresIn: "1d",
-      }
-    );
+      });
+    };
+    const accessToken = createToken(user.id);
     /*     const refreshToken = jwt.sign(
-      { ...user.dataValues },
+      user.id,
       process.env.REFRESHTOKEN_SECRET_KEY
     ); */
     const maxAge = 24 * 60 * 60 * 1000;
@@ -54,9 +58,9 @@ exports.loginUser = async (req, res, next) => {
       maxAge: maxAge,
       httpOnly: true,
     });
-    res.status(200).redirect("/");
+    res.status(200).redirect("/users/panel");
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500);
     return next(new Error(error.message));
   }
 };
@@ -77,7 +81,7 @@ exports.getPanelPage = async (req, res, next) => {
 exports.logoutUser = async (req, res, next) => {
   try {
     res.clearCookie("accessToken");
-    res.redirect("/");
+    res.status(200).json({ message: "Logout successful" });
   } catch (error) {
     next(error);
   }

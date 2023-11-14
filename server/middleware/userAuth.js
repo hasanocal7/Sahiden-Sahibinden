@@ -112,12 +112,12 @@ exports.beforeLogin = async (req, res, next) => {
 
   if (!user) {
     res.status(400);
-    return next(new Error("Your email address or password is incorrect."));
+    return next(new Error("Invalid email address or password."));
   } else {
     const isPasswordCorrect = await cryptor.compare(password, user.password);
     if (!isPasswordCorrect) {
       res.status(400);
-      return next(new Error("Your email address or password is incorrect."));
+      return next(new Error("Invalid email address or password."));
     }
   }
 
@@ -142,8 +142,7 @@ exports.authenticationToken = (req, res, next) => {
         }
       });
     } else {
-      res.status(404);
-      return next(new Error("Token not found"));
+      return res.status(401).redirect("/users/signin");
     }
   } catch (error) {
     res.status(401);
@@ -164,7 +163,7 @@ exports.checkUser = (req, res, next) => {
             next();
           } else {
             const user = await User.findOne({
-              where: { id: decodedToken.id },
+              where: { id: decodedToken.UserId },
             });
             res.locals.user = user;
             next();
