@@ -1,0 +1,1 @@
+const aysu = 1;
