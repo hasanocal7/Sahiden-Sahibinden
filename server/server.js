@@ -1,14 +1,18 @@
 //* Modules
 const express = require("express");
 require("dotenv").config();
+
+//* Middlewares Modules
+const errorHandler = require("./src/middlewares/errorHandler");
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 
-const errorHandler = require("./middleware/errorHandler");
+//* Routes Modules
+const router = require("./src/routes/routes");
 
 //* Database
-const db = require("./models");
+const db = require("./src/models");
+
 //* App
 const app = express();
 
@@ -16,15 +20,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => res.send("Hello"));
-
 //* Routes
-const { checkUser } = require("./middleware/userAuth");
-app.use("*", checkUser);
-app.use("/users", require("./routes/userRoute"));
+app.use("/api", router);
 
 //* Error Handler
 app.use(errorHandler);
