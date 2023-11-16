@@ -4,7 +4,7 @@ const cryptor = require("../utils/cryptor");
 const crypto = require("crypto");
 const { sendingMail } = require("../utils/mailer");
 
-exports.createUser = async (req, res, next) => {
+const createUser = async (req, res, next) => {
   try {
     const { email, first_name, last_name, password } = req.body;
     const user = await User.findOne({ where: { email: email } });
@@ -27,7 +27,7 @@ exports.createUser = async (req, res, next) => {
   }
 };
 
-exports.loginUser = async (req, res, next) => {
+const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email: email } });
@@ -55,7 +55,7 @@ exports.loginUser = async (req, res, next) => {
   }
 };
 
-exports.forgotPassword = async (req, res, next) => {
+const forgotPassword = async (req, res, next) => {
   try {
     const { email } = req.body;
     const token = crypto.randomBytes(32).toString("hex");
@@ -72,7 +72,7 @@ exports.forgotPassword = async (req, res, next) => {
         to: email,
         subject: "Forgot Password",
         text: `Hello! Please click on this link to change your password:
-            http://localhost:${process.env.PORT}/users/forgot-password/${user.id}/${token} `,
+            http://localhost:${process.env.PORT}/api/forgot-password/${user.id}/${token} `,
       });
       res.status(200).json({
         message: `We have sent an email to your ${maskedEmail} address. You can change your password by clicking on the link in this email.`,
@@ -84,7 +84,7 @@ exports.forgotPassword = async (req, res, next) => {
   }
 };
 
-exports.changePassword = async (req, res, next) => {
+const changePassword = async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findOne({ where: { id: id } });
@@ -99,7 +99,7 @@ exports.changePassword = async (req, res, next) => {
       );
       res.status(200).json({
         success: true,
-        message: `Your password has been successfully changed! You can log in to your sahibinden.com account using your new password.`,
+        message: `Your password has been successfully changed! You can log in to your sahiden sahibinden account using your new password.`,
         user: user,
       });
     } else {
@@ -111,3 +111,5 @@ exports.changePassword = async (req, res, next) => {
     return next(new Error(error.message));
   }
 };
+
+module.exports = { createUser, loginUser, forgotPassword, changePassword };

@@ -1,6 +1,6 @@
 const { User } = require("../models");
 
-exports.getAllUsers = async (req, res, next) => {
+const getAllUsers = async (req, res, next) => {
   try {
     if (res.locals.user !== null) {
       const users = await User.findAll();
@@ -12,7 +12,7 @@ exports.getAllUsers = async (req, res, next) => {
   }
 };
 
-exports.getUser = async (req, res, next) => {
+const getUser = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { id: req.params.id } });
     res.status(200).json(user);
@@ -22,7 +22,7 @@ exports.getUser = async (req, res, next) => {
   }
 };
 
-exports.getPanelPage = async (req, res, next) => {
+const getPanelPage = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { id: res.locals.user.id } });
     res.status(200).json({
@@ -35,7 +35,7 @@ exports.getPanelPage = async (req, res, next) => {
   }
 };
 
-exports.logoutUser = async (req, res, next) => {
+const logoutUser = async (req, res, next) => {
   try {
     res.clearCookie("accessToken");
     res.status(200).json({ message: "Logout successful" });
@@ -44,3 +44,5 @@ exports.logoutUser = async (req, res, next) => {
     return next(new Error(error.message));
   }
 };
+
+module.exports = { getAllUsers, getUser, getPanelPage, logoutUser };

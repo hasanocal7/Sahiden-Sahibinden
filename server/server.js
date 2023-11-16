@@ -1,13 +1,18 @@
 //* Modules
 const express = require("express");
 require("dotenv").config();
+
+//* Middlewares Modules
+const errorHandler = require("./src/middlewares/errorHandler");
 const cors = require("cors");
 const morgan = require("morgan");
 
-const errorHandler = require("./middleware/errorHandler");
+//* Routes Modules
+const router = require("./src/routes/routes");
 
 //* Database
-const db = require("./models");
+const db = require("./src/models");
+
 //* App
 const app = express();
 
@@ -18,10 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 //* Routes
-const { checkUser } = require("./middleware/authentication");
-app.use(["/users"], checkUser);
-app.use("/users", require("./routes/userRoute"));
-app.use("/", require("./routes/pageRoute"));
+app.use("/api", router);
 
 //* Error Handler
 app.use(errorHandler);

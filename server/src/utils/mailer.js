@@ -14,8 +14,8 @@ exports.sendingMail = async ({ from, to, subject, text }) => {
       host: "smtp.ethereal.email",
       port: 587,
       auth: {
-        user: "alexandrea77@ethereal.email",
-        pass: "ag6rjW2ZqcuznWCjr7",
+        user: process.env.TRANSPORTER_USER,
+        pass: process.env.TRANSPORTER_PASS,
       },
     });
 
