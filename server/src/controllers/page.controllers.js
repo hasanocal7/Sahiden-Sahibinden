@@ -43,7 +43,6 @@ const loginUser = async (req, res, next) => {
         expiresIn: "1d",
       }
     );
-    req.headers.authorization = accessToken;
     res.status(200).json({
       success: true,
       message: `${user.first_name} ${user.last_name} is logged successful`,
