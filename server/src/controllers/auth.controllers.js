@@ -37,7 +37,6 @@ const getPanelPage = async (req, res, next) => {
 
 const logoutUser = async (req, res, next) => {
   try {
-    res.clearCookie("accessToken");
     res.status(200).json({ message: "Logout successful" });
   } catch (error) {
     res.status(500);
