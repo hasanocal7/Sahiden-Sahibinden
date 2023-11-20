@@ -1,23 +1,16 @@
-const { Op } = require("sequelize");
-const { Ilan } = require("../models");
-const slugify = require("slugify");
+const services = require("../services/index");
 
 const createAd = async (req, res, next) => {
   try {
+    const userID = res.locals.user.id;
     const { title, description, price, category, address } = req.body;
-    const ad = await Ilan.create({
-      title: title,
-      description: description,
-      price: Number(price),
-      category: category,
-      address: address,
-      UserId: res.locals.user.id,
-    });
-    await Ilan.update(
-      {
-        slug: slugify(`${ad.category} ${ad.title} ${ad.id}`),
-      },
-      { where: { id: ad.id } }
+    const ad = await services.ilanServices.createAd(
+      title,
+      description,
+      price,
+      category,
+      address,
+      userID
     );
     res.status(201);
     res.json({
@@ -33,17 +26,10 @@ const createAd = async (req, res, next) => {
 const getAllAds = async (req, res, next) => {
   try {
     const query = req.query.search;
-    let ads = await Ilan.findAll();
-    if (query) {
-      ads = ads.filter((ilan) => ilan.slug.includes(query));
-      res.status(200).json({
-        ilanlar: ads,
-      });
-    } else {
-      res.status(200).json({
-        ilanlar: ads,
-      });
-    }
+    const ads = await services.ilanServices.getAllAds(query);
+    res.status(200).json({
+      ilanlar: ads,
+    });
   } catch (error) {
     next(error);
   }
@@ -52,10 +38,7 @@ const getAllAds = async (req, res, next) => {
 const getAd = async (req, res, next) => {
   try {
     const slug = req.params.slug;
-    const filter = slug.split("-").at(-1);
-    const ad = await Ilan.findOne({
-      where: { id: filter },
-    });
+    const ad = await services.ilanServices.getAd(slug);
     res.status(200);
     res.json({
       ad: ad,
@@ -68,8 +51,7 @@ const getAd = async (req, res, next) => {
 const categoryFilter = async (req, res, next) => {
   try {
     const category = req.params.category;
-    const filter = category ? { category } : {};
-    const ads = await Ilan.findAll({ where: filter });
+    const ads = await services.ilanServices.categoryFilter(category);
     res.status(200).json({
       ads: ads,
     });

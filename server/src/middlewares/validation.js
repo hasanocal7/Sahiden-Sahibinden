@@ -36,7 +36,7 @@ exports.beforeForgotPassword = async (req, res, next) => {
     validators.validationEmail(email);
     next();
   } catch (error) {
-    res.status(500);
+    res.status(error.statusCode || 400);
     return next(new Error(error.message));
   }
 };
@@ -64,7 +64,7 @@ exports.beforeChangePassword = async (req, res, next) => {
     );
     next();
   } catch (error) {
-    res.status(500);
+    res.status(error.statusCode || 400);
     return next(new Error(error.message));
   }
 };
