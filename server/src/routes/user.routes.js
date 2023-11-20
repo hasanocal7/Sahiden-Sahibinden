@@ -3,17 +3,6 @@ const router = require("express").Router();
 const authentication = require("../middlewares/authentication");
 
 router
-  .route("/")
-  .get(
-    authentication.authenticationToken,
-    controller.authController.getAllUsers
-  );
-
-router
-  .route("/:id")
-  .get(authentication.authenticationToken, controller.authController.getUser);
-
-router
   .route("/signout")
   .post(
     authentication.authenticationToken,
