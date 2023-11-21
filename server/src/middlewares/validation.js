@@ -9,7 +9,7 @@ exports.beforeRegister = async (req, res, next) => {
     validators.validationPassword(email, first_name, last_name, password);
     next();
   } catch (error) {
-    res.status(error.statusCode || 400);
+    res.status(400);
     return next(new Error(error.message));
   }
 };
@@ -25,7 +25,7 @@ exports.beforeLogin = async (req, res, next) => {
     }
     next();
   } catch (error) {
-    res.status(error.statusCode || 400);
+    res.status(400);
     return next(new Error(error.message));
   }
 };
@@ -36,7 +36,7 @@ exports.beforeForgotPassword = async (req, res, next) => {
     validators.validationEmail(email);
     next();
   } catch (error) {
-    res.status(error.statusCode || 400);
+    res.status(400);
     return next(new Error(error.message));
   }
 };
@@ -64,7 +64,7 @@ exports.beforeChangePassword = async (req, res, next) => {
     );
     next();
   } catch (error) {
-    res.status(error.statusCode || 400);
+    res.status(400);
     return next(new Error(error.message));
   }
 };

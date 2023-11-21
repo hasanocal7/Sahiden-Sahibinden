@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const cryptor = require("../utils/cryptor");
 const { sendingMail } = require("../utils/mailer");
 const crypto = require("crypto");
+const multer = require("multer");
 
 const createUser = async (email, first_name, last_name, password) => {
   const existingUser = await User.findOne({ email: email });
@@ -25,8 +26,7 @@ const getAllUsers = async () => {
     const users = await User.findAll();
     return users;
   } catch (error) {
-    res.status(500);
-    return next(new Error(error.message));
+    throw new Error(error.message);
   }
 };
 
@@ -35,16 +35,14 @@ const getUser = async (id) => {
     const user = await User.findOne({ where: { id: id } });
     return user;
   } catch (error) {
-    res.status(500);
-    return next(new Error(error.message));
+    throw new Error(error.message);
   }
 };
 
 const loginUser = async (email) => {
   const user = await User.findOne({ where: { email: email } });
   if (!user) {
-    res.status(400);
-    return next(new Error("Invalid email address or password."));
+    throw new Error("Invalid email address or password.");
   }
   const userID = user.id;
   const accessToken = jwt.sign({ userID }, process.env.ACCESSTOKEN_SECRET_KEY, {
@@ -57,9 +55,8 @@ const forgotPassword = async (email) => {
   const token = crypto.randomBytes(32).toString("hex");
   const user = await User.findOne({ where: { email: email } });
   if (!user) {
-    res.status(404);
-    return next(
-      new Error("No user matching this username or email address was found.")
+    throw new Error(
+      "No user matching this username or email address was found."
     );
   } else {
     const maskedEmail = `${email[0]}***@${email.split("@")[1]}`;
@@ -86,8 +83,41 @@ const changePassword = async (id, newPassword) => {
     );
     return user;
   } else {
-    res.status(404);
-    return next(new Error("The connection cannot be accessed."));
+    throw new Error("User not found");
+  }
+};
+
+const editPersonalInfo = async (
+  id,
+  phonenumber_home,
+  phonenumber_bussines,
+  image
+) => {
+  const user = await User.findOne({ where: { id: id } });
+  if (user) {
+    await User.update(
+      {
+        phonenumber_home: phonenumber_home,
+        phonenumber_bussines: phonenumber_bussines,
+        image: image,
+      },
+      { where: { id: id } }
+    );
+  } else {
+  }
+};
+
+const addPhoneNumber = async (id, phonenumber) => {
+  const user = await User.findOne({ where: { id: id } });
+  if (user) {
+    await User.update(
+      {
+        phonenumber: phonenumber,
+      },
+      { where: { id: id } }
+    );
+  } else {
+    throw new Error("User not found");
   }
 };
 
@@ -98,4 +128,6 @@ module.exports = {
   loginUser,
   forgotPassword,
   changePassword,
+  editPersonalInfo,
+  addPhoneNumber,
 };

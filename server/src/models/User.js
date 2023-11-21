@@ -25,6 +25,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    phonenumber_home: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    phonenumber_bussines: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    phonenumber: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   });
 
   User.associate = (models) => {
