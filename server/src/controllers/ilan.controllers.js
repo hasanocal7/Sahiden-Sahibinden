@@ -3,7 +3,17 @@ const services = require("../services/index");
 const createAd = async (req, res, next) => {
   try {
     const userID = res.locals.user.id;
-    const { title, description, price, category, address } = req.body;
+    const {
+      title,
+      description,
+      price,
+      category,
+      province,
+      district,
+      neighborhood,
+    } = req.body;
+    let address = [province, district, neighborhood];
+    address = address.join(" / ");
     const ad = await services.ilanServices.createAd(
       title,
       description,
