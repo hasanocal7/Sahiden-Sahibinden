@@ -1,4 +1,4 @@
-const { Ilan } = require("../models");
+const { Ad } = require("../models");
 const slugify = require("slugify");
 
 const createAd = async (
@@ -7,17 +7,19 @@ const createAd = async (
   price,
   category,
   address,
+  image,
   userID
 ) => {
-  const ad = await Ilan.create({
+  const ad = await Ad.create({
     title: title,
     description: description,
     price: Number(price),
     category: category,
     address: address,
+    image: image,
     UserId: userID,
   });
-  await Ilan.update(
+  await Ad.update(
     {
       slug: String(
         slugify(`${ad.category} ${ad.title} ${ad.id}`)
@@ -29,9 +31,9 @@ const createAd = async (
 };
 
 const getAllAds = async (query = "") => {
-  let ads = await Ilan.findAll();
+  let ads = await Ad.findAll();
   if (query) {
-    const filteredAds = ads.filter((ilan) => ilan.slug.includes(query));
+    const filteredAds = ads.filter((ad) => ad.slug.includes(query));
     return filteredAds;
   } else {
     return ads;
@@ -40,7 +42,7 @@ const getAllAds = async (query = "") => {
 
 const getAd = async (slug) => {
   const filter = slug.split("-").at(-1);
-  const ad = await Ilan.findOne({
+  const ad = await Ad.findOne({
     where: { id: filter },
   });
   return ad;
@@ -48,8 +50,13 @@ const getAd = async (slug) => {
 
 const categoryFilter = async (category) => {
   const filter = category ? { category } : {};
-  const ads = await Ilan.findAll({ where: filter });
+  const ads = await Ad.findAll({ where: filter });
   return ads;
 };
 
-module.exports = { createAd, getAllAds, getAd, categoryFilter };
+const updateAd = async (id, ad = {}) => {
+  const updatedAd = await Ad.update(ad, { where: { id: id } });
+  return updatedAd;
+};
+
+module.exports = { createAd, getAllAds, getAd, categoryFilter, updateAd };

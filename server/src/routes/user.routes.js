@@ -11,11 +11,6 @@ router.route("/panel").post(controller.authController.getPanelPage);
 router
   .route("/update")
   .patch(upload.single("image"), controller.authController.editPersonalInfo);
-router
-  .route("/phonenumber")
-  .patch(
-    authentication.authenticationToken,
-    controller.authController.addPhoneNumber
-  );
+router.route("/phonenumber").patch(controller.authController.addPhoneNumber);
 
 module.exports = router;
