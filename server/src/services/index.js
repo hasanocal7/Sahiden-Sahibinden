@@ -1,4 +1,4 @@
 const userServices = require("./user.services");
-const ilanServices = require("./ilan.services");
+const adServices = require("./ad.services");
 
-module.exports = { userServices, ilanServices };
+module.exports = { userServices, adServices };

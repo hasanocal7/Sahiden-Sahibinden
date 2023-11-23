@@ -1,5 +1,5 @@
 const authController = require("./auth.controllers");
 const pageController = require("./page.controllers");
-const ilanController = require("./ilan.controllers");
+const adController = require("./ad.controllers");
 
-module.exports = { authController, pageController, ilanController };
+module.exports = { authController, pageController, adController };

@@ -68,3 +68,28 @@ exports.beforeChangePassword = async (req, res, next) => {
     return next(new Error(error.message));
   }
 };
+
+exports.beforeAd = async (req, res, next) => {
+  try {
+    const {
+      title,
+      description,
+      price,
+      category,
+      province,
+      distcrict,
+      neighborhood,
+    } = req.body;
+    const images = req.files.map((file) => file.filename);
+    validators.validationTitle(title);
+    validators.validationDescription(description);
+    validators.validationPrice(price);
+    validators.validationCategory(category);
+    validators.validationAddress(province, distcrict, neighborhood);
+    validators.validationImage(images);
+    next();
+  } catch (error) {
+    res.status(400);
+    return next(new Error(error.message));
+  }
+};
