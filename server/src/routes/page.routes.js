@@ -2,6 +2,8 @@ const controller = require("../controllers/index");
 const router = require("express").Router();
 const validation = require("../middlewares/validation");
 
+const authentication = require("../middlewares/authentication");
+router.use(authentication.checkUser);
 router
   .route("/signup")
   .post(validation.beforeRegister, controller.pageController.createUser);

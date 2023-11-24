@@ -59,4 +59,16 @@ const updateAd = async (id, ad = {}) => {
   return updatedAd;
 };
 
-module.exports = { createAd, getAllAds, getAd, categoryFilter, updateAd };
+const deleteAd = async (id) => {
+  const updatedAd = await Ad.destroy({ where: { id: id } });
+  return updatedAd;
+};
+
+module.exports = {
+  createAd,
+  getAllAds,
+  getAd,
+  categoryFilter,
+  updateAd,
+  deleteAd,
+};

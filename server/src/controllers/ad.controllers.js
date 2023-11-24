@@ -40,11 +40,15 @@ const getAllAds = async (req, res, next) => {
   try {
     const query = req.query.search;
     const ads = await services.adServices.getAllAds(query);
+    if (!ads) {
+      throw new Error("Ad not found");
+    }
     res.status(200).json({
       ilanlar: ads,
     });
   } catch (error) {
-    next(error);
+    res.status(404);
+    return next(new Error(error.message));
   }
 };
 
@@ -61,7 +65,8 @@ const getAd = async (req, res, next) => {
       ad: ad,
     });
   } catch (error) {
-    next(error);
+    res.status(404);
+    return next(new Error(error.message));
   }
 };
 
@@ -69,20 +74,23 @@ const categoryFilter = async (req, res, next) => {
   try {
     const category = req.params.category;
     const ads = await services.adServices.categoryFilter(category);
+    if (!ads) {
+      throw new Error("Ads not found");
+    }
     res.status(200).json({
       ads: ads,
     });
   } catch (error) {
-    next(error);
+    res.status(404);
+    return next(new Error(error.message));
   }
 };
 
 const updateAd = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const ad = await services.adServices.updateAd(id);
-    if (ad) {
-      res.status(404);
+    const ad = await services.adServices.updateAd(id, req.body);
+    if (ad <= 0) {
       throw new Error("Ad not found");
     }
     res.status(200).json({
@@ -90,8 +98,32 @@ const updateAd = async (req, res, next) => {
       ad: ad,
     });
   } catch (error) {
-    next(error);
+    res.status(404);
+    return next(new Error(error.message));
   }
 };
 
-module.exports = { createAd, getAllAds, getAd, categoryFilter, updateAd };
+const deleteAd = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const ad = await services.adServices.deleteAd(id);
+    if (ad <= 0) {
+      throw new Error("Ad not found");
+    }
+    res.status(200).json({
+      message: `${id} was deleted`,
+    });
+  } catch (error) {
+    res.status(404);
+    return next(new Error(error.message));
+  }
+};
+
+module.exports = {
+  createAd,
+  getAllAds,
+  getAd,
+  categoryFilter,
+  updateAd,
+  deleteAd,
+};

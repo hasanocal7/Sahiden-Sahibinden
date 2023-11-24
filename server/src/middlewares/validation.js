@@ -7,6 +7,10 @@ exports.beforeRegister = async (req, res, next) => {
     validators.validationFirstName(first_name);
     validators.validationLastName(last_name);
     validators.validationPassword(email, first_name, last_name, password);
+    if (req.headers.authorization) {
+      res.status(401);
+      return next(new Error("User already logged"));
+    }
     next();
   } catch (error) {
     res.status(400);
