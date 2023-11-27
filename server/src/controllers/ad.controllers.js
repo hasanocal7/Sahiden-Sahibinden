@@ -3,27 +3,35 @@ const services = require("../services/index");
 const createAd = async (req, res, next) => {
   try {
     const userID = res.locals.user.id;
-    const images = req.files.map((file) => file.path);
-    const {
-      title,
-      description,
-      price,
-      category,
-      province,
-      distcrict,
-      neighborhood,
-    } = req.body;
-    let address = [province, distcrict, neighborhood];
+    let adData = req.body;
+    const images = req.files.map((image) => image.path);
+    let address = [adData.province, adData.distcrict, adData.neighborhood];
+    delete adData.province;
+    delete adData.distcrict;
+    delete adData.neighborhood;
     address = address.join(" / ");
-    const ad = await services.adServices.createAd(
-      title,
-      description,
-      price,
-      category,
-      address,
-      images,
-      userID
-    );
+    const subCategoryData = {};
+
+    let foundSubCat = false;
+
+    for (const key in adData) {
+      if (key === "sub_category") {
+        foundSubCat = true;
+        continue;
+      }
+
+      if (foundSubCat) {
+        subCategoryData[key] = adData[key];
+        delete adData[key];
+      }
+    }
+    adData = {
+      ...adData,
+      address: address,
+      image: images,
+      UserId: userID,
+    };
+    const ad = await services.adServices.createAd(adData, subCategoryData);
     res.status(201);
     res.json({
       success: true,
@@ -88,8 +96,17 @@ const categoryFilter = async (req, res, next) => {
 
 const updateAd = async (req, res, next) => {
   try {
+    let adData = req.body;
+    const images = req.files.map((image) => image.path);
+    if (images) {
+      adData = {
+        ...adData,
+        image: images,
+      };
+    }
+    let subCategoryData = {};
     const id = req.params.id;
-    const ad = await services.adServices.updateAd(id, req.body);
+    const ad = await services.adServices.updateAd(id, adData, subCategoryData);
     if (ad <= 0) {
       throw new Error("Ad not found");
     }
