@@ -1,4 +1,5 @@
 const services = require("../services/index");
+const { Ad } = require("../models");
 
 const createAd = async (req, res, next) => {
   try {
@@ -96,22 +97,54 @@ const categoryFilter = async (req, res, next) => {
 
 const updateAd = async (req, res, next) => {
   try {
-    let adData = req.body;
-    const images = req.files.map((image) => image.path);
-    if (images) {
-      adData = {
-        ...adData,
-        image: images,
-      };
+    const { body: adData, files } = req;
+    const images = files.map((image) => image.path);
+
+    let updatedAdData = { ...adData };
+
+    if (images && adData) {
+      updatedAdData = { ...adData, image: images };
     }
+
+    if (
+      updatedAdData.province ||
+      updatedAdData.distcrict ||
+      updatedAdData.neighborhood
+    ) {
+      res.status(400);
+      throw new Error("Missing address details");
+    }
+
+    const columnNames = Object.keys(Ad.rawAttributes);
+    const adDataKeys = Object.keys(updatedAdData);
     let subCategoryData = {};
-    const id = req.params.id;
-    const ad = await services.adServices.updateAd(id, adData, subCategoryData);
-    if (ad <= 0) {
-      throw new Error("Ad not found");
+
+    for (const key of adDataKeys) {
+      if (!columnNames.includes(key)) {
+        subCategoryData[key] = updatedAdData[key];
+        delete updatedAdData[key];
+      }
     }
+
+    const id = req.params.id;
+    let ad;
+
+    if (Object.keys(subCategoryData).length > 0) {
+      ad = await services.adServices.updateAd(
+        id,
+        updatedAdData,
+        subCategoryData
+      );
+    } else {
+      ad = await services.adServices.updateAd(id, updatedAdData);
+    }
+
+    if (!ad) {
+      throw new Error("Update error");
+    }
+
     res.status(200).json({
-      message: "Ad updated successfuly",
+      message: "Ad updated successfully",
       ad: ad,
     });
   } catch (error) {
@@ -123,7 +156,7 @@ const updateAd = async (req, res, next) => {
 const deleteAd = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const ad = await services.adServices.deleteAd(id);
+    const ad = await services.adServices.deleteAd(id).image;
     if (ad <= 0) {
       throw new Error("Ad not found");
     }
