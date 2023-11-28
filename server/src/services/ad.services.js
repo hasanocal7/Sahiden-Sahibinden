@@ -9,6 +9,7 @@ const {
 } = require("../models");
 const slugify = require("slugify");
 const { Op } = require("sequelize");
+const fs = require("fs");
 
 const createAd = async (adData, subCategoryData) => {
   try {
@@ -116,7 +117,6 @@ const getAd = async (slug) => {
 
     return ad;
   } catch (error) {
-    console.error("Error in getAd:", error);
     throw error;
   }
 };
@@ -127,9 +127,13 @@ const categoryFilter = async (category) => {
   return ads;
 };
 
-const updateAd = async (id, ad = {}, info = {}) => {
-  const updatedAd = await Ad.update(ad, { where: { id: id } });
+const updateAd = async (id, adData, info) => {
+  let updatedAd = await Ad.update(adData, { where: { id: id } });
+  const ad = await Ad.findOne({ where: { id: id } });
   if (info) {
+    if (!ad) {
+      throw new Error("Ad not found");
+    }
     let subModel;
     switch (ad.sub_category) {
       case "Housing":
@@ -153,15 +157,29 @@ const updateAd = async (id, ad = {}, info = {}) => {
       default:
         throw new Error("Invalid sub category");
     }
-    const updatedAdInfo = await Ad.update(info, { where: { AdId: id } });
-    return updatedAdInfo;
+    const updatedAdInfo = await subModel.update(info, { where: { AdId: id } });
+    updatedAd = {
+      ...updatedAd,
+      ...updatedAdInfo,
+    };
+    return updatedAd;
   }
   return updatedAd;
 };
 
+// TODO: BURADA DÜZELTME YAPILACAK
 const deleteAd = async (id) => {
-  const updatedAd = await Ad.destroy({ where: { id: id } });
-  return updatedAd;
+  const ad = await Ad.findOne({ where: { id: id } });
+  const imgPaths = ad.image;
+  for (const img of imgPaths) {
+    fs.unlink(img, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
+  }
+  const deletedAd = await Ad.destroy({ where: { id: id } });
+  return deletedAd;
 };
 
 module.exports = {
