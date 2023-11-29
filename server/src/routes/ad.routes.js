@@ -12,6 +12,9 @@ router
 router.route("/").get(controller.adController.getAllAds);
 router.route("/:slug/detay").get(controller.adController.getAd);
 router.route("/category/:category").get(controller.adController.categoryFilter);
-router.route("/:id").patch(controller.adController.updateAd);
+router
+  .route("/:id")
+  .patch(upload.array("image", 10), controller.adController.updateAd);
+router.route("/:id").delete(controller.adController.deleteAd);
 
 module.exports = router;

@@ -1,29 +1,38 @@
 const services = require("../services/index");
+const { Ad } = require("../models");
 
 const createAd = async (req, res, next) => {
   try {
     const userID = res.locals.user.id;
-    const images = req.files.map((file) => file.path);
-    const {
-      title,
-      description,
-      price,
-      category,
-      province,
-      distcrict,
-      neighborhood,
-    } = req.body;
-    let address = [province, distcrict, neighborhood];
+    let adData = req.body;
+    const images = req.files.map((image) => image.path);
+    let address = [adData.province, adData.distcrict, adData.neighborhood];
+    delete adData.province;
+    delete adData.distcrict;
+    delete adData.neighborhood;
     address = address.join(" / ");
-    const ad = await services.adServices.createAd(
-      title,
-      description,
-      price,
-      category,
-      address,
-      images,
-      userID
-    );
+    const subCategoryData = {};
+
+    let foundSubCat = false;
+
+    for (const key in adData) {
+      if (key === "sub_category") {
+        foundSubCat = true;
+        continue;
+      }
+
+      if (foundSubCat) {
+        subCategoryData[key] = adData[key];
+        delete adData[key];
+      }
+    }
+    adData = {
+      ...adData,
+      address: address,
+      image: images,
+      UserId: userID,
+    };
+    const ad = await services.adServices.createAd(adData, subCategoryData);
     res.status(201);
     res.json({
       success: true,
@@ -40,11 +49,15 @@ const getAllAds = async (req, res, next) => {
   try {
     const query = req.query.search;
     const ads = await services.adServices.getAllAds(query);
+    if (!ads) {
+      throw new Error("Ad not found");
+    }
     res.status(200).json({
       ilanlar: ads,
     });
   } catch (error) {
-    next(error);
+    res.status(404);
+    return next(new Error(error.message));
   }
 };
 
@@ -61,7 +74,8 @@ const getAd = async (req, res, next) => {
       ad: ad,
     });
   } catch (error) {
-    next(error);
+    res.status(404);
+    return next(new Error(error.message));
   }
 };
 
@@ -69,29 +83,97 @@ const categoryFilter = async (req, res, next) => {
   try {
     const category = req.params.category;
     const ads = await services.adServices.categoryFilter(category);
+    if (!ads) {
+      throw new Error("Ads not found");
+    }
     res.status(200).json({
       ads: ads,
     });
   } catch (error) {
-    next(error);
+    res.status(404);
+    return next(new Error(error.message));
   }
 };
 
 const updateAd = async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const ad = await services.adServices.updateAd(id);
-    if (ad) {
-      res.status(404);
-      throw new Error("Ad not found");
+    const { body: adData, files } = req;
+    const images = files.map((image) => image.path);
+
+    let updatedAdData = { ...adData };
+
+    if (images && adData) {
+      updatedAdData = { ...adData, image: images };
     }
+
+    if (
+      updatedAdData.province ||
+      updatedAdData.distcrict ||
+      updatedAdData.neighborhood
+    ) {
+      res.status(400);
+      throw new Error("Missing address details");
+    }
+
+    const columnNames = Object.keys(Ad.rawAttributes);
+    const adDataKeys = Object.keys(updatedAdData);
+    let subCategoryData = {};
+
+    for (const key of adDataKeys) {
+      if (!columnNames.includes(key)) {
+        subCategoryData[key] = updatedAdData[key];
+        delete updatedAdData[key];
+      }
+    }
+
+    const id = req.params.id;
+    let ad;
+
+    if (Object.keys(subCategoryData).length > 0) {
+      ad = await services.adServices.updateAd(
+        id,
+        updatedAdData,
+        subCategoryData
+      );
+    } else {
+      ad = await services.adServices.updateAd(id, updatedAdData);
+    }
+
+    if (!ad) {
+      throw new Error("Update error");
+    }
+
     res.status(200).json({
-      message: "Ad updated successfuly",
+      message: "Ad updated successfully",
       ad: ad,
     });
   } catch (error) {
-    next(error);
+    res.status(404);
+    return next(new Error(error.message));
   }
 };
 
-module.exports = { createAd, getAllAds, getAd, categoryFilter, updateAd };
+const deleteAd = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const ad = await services.adServices.deleteAd(id).image;
+    if (ad <= 0) {
+      throw new Error("Ad not found");
+    }
+    res.status(200).json({
+      message: `${id} was deleted`,
+    });
+  } catch (error) {
+    res.status(error.statusCode);
+    return next(new Error(error.message));
+  }
+};
+
+module.exports = {
+  createAd,
+  getAllAds,
+  getAd,
+  categoryFilter,
+  updateAd,
+  deleteAd,
+};
