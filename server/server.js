@@ -1,11 +1,17 @@
 //* Modules
 const express = require("express");
 require("dotenv").config();
+
+//* Middlewares Modules
+const errorHandler = require("./src/middlewares/errorHandler");
 const cors = require("cors");
-const errorHandler = require("./middleware/errorHandler");
+const morgan = require("morgan");
+
+//* Routes Modules
+const router = require("./src/routes/routes");
 
 //* Database
-const db = require("./models");
+const db = require("./src/models");
 
 //* App
 const app = express();
@@ -14,9 +20,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
 //* Routes
-app.use("/users", require("./routes/userRoute"));
+app.use("/api", router);
 
 //* Error Handler
 app.use(errorHandler);
@@ -32,5 +39,5 @@ db.sequelize
     });
   })
   .catch((err) => {
-    console.error("Database sync error:", err);
+    console.error("Database sync error:", err.message);
   });

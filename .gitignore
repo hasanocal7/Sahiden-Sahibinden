@@ -45,6 +45,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+uploads/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -153,5 +154,9 @@ node_modules
 psd
 thumb
 sketch
+
+.dockerignore
+docker-compose.yml
+Dockerfile
 
 # End of https://www.toptal.com/developers/gitignore/api/node,react

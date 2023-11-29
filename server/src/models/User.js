@@ -8,20 +8,10 @@ module.exports = (sequelize, DataTypes) => {
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: "Please enter your first name",
-        },
-      },
     },
     last_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: "Please enter your first name",
-        },
-      },
     },
     password: {
       type: DataTypes.STRING,
@@ -35,7 +25,30 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    phonenumber_home: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    phonenumber_bussines: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    phonenumber: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   });
+
+  User.associate = (models) => {
+    User.hasMany(models.Ad, {
+      onUpdate: "cascade",
+      onDelete: "cascade",
+    });
+  };
 
   return User;
 };
