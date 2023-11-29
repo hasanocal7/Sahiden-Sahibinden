@@ -128,12 +128,12 @@ const categoryFilter = async (category) => {
 };
 
 const updateAd = async (id, adData, info) => {
-  let updatedAd = await Ad.update(adData, { where: { id: id } });
   const ad = await Ad.findOne({ where: { id: id } });
+  if (!ad) {
+    throw new Error("Ad not found");
+  }
+  let updatedAd = await Ad.update(adData, { where: { id: id } });
   if (info) {
-    if (!ad) {
-      throw new Error("Ad not found");
-    }
     let subModel;
     switch (ad.sub_category) {
       case "Housing":
@@ -170,13 +170,18 @@ const updateAd = async (id, adData, info) => {
 // TODO: BURADA DÜZELTME YAPILACAK
 const deleteAd = async (id) => {
   const ad = await Ad.findOne({ where: { id: id } });
-  const imgPaths = ad.image;
-  for (const img of imgPaths) {
-    fs.unlink(img, (err) => {
-      if (err) {
-        throw err;
-      }
-    });
+  if (ad) {
+    const imgPaths = ad.image;
+    for (const img of imgPaths) {
+      console.log(img);
+      fs.unlink(img, (err) => {
+        if (err) {
+          throw err;
+        }
+      });
+    }
+  } else {
+    throw new Error("Ad not found");
   }
   const deletedAd = await Ad.destroy({ where: { id: id } });
   return deletedAd;
