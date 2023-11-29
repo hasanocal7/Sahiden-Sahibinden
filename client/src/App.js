@@ -1,5 +1,5 @@
 import './App.css'
-import UrunEkle from './urunEkle';
+import UrunEkle from '../src/urunEkle';
 function App() {
   return (
     <div className="App">
