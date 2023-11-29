@@ -25,7 +25,7 @@ const UrunFormModal = ({ show, category, handleClose }) => {
         fiyat: "",
       });
     } else {
-      console.log("Lütfen tüm alanları doldurun.");
+      alert("Lütfen veri giriniz");
     }
   };
 
