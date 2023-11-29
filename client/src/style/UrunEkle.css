@@ -5,7 +5,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #d2dde7;
+  /* background: #d2dde7; */
   font-family: consolas;
 }
 .baslik ,
