@@ -1,9 +1,9 @@
-import './App.css';
-
+import './App.css'
+import UrunEkle from './urunEkle';
 function App() {
   return (
     <div className="App">
-    react
+      <UrunEkle/>
     </div>
   );
 }
