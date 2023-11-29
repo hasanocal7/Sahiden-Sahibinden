@@ -164,7 +164,7 @@ const deleteAd = async (req, res, next) => {
       message: `${id} was deleted`,
     });
   } catch (error) {
-    res.status(404);
+    res.status(error.statusCode);
     return next(new Error(error.message));
   }
 };
