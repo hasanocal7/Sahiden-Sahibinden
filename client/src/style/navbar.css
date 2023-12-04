@@ -16,6 +16,9 @@
 
 
 }
+.rightSide p{
+    color: white;
+}
 .iconn svg{
     margin-left: -57px;
     position: absolute;

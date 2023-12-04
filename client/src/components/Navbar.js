@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className="containerrr">
+    <div className="containerrr ">
       <div className="tools">
         <div className="leftSide">
           <Link to="/">
@@ -36,7 +36,7 @@ function Navbar() {
         <div className="rightSide">
           <Link to="login">
             {" "}
-            <p>Giriş Yap</p>
+            <p style={{fontSize:'20px'}} >Giris Yap</p>
           </Link>
           <p>Hesap Aç</p>
 
