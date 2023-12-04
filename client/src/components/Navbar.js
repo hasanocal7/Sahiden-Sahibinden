@@ -33,7 +33,7 @@ function Navbar() {
           </div>
         </div>
         <div className="rightSide">
-          <p>Giriş Yap</p>
+        <Link to='login'>   <p>Giriş Yap</p></Link>
           <p>Hesap Aç</p>
           
 <Link to='ilanyukle'>
