@@ -1,0 +1,50 @@
+.kapsayıcı{
+    display: flex;
+    height: 30vh;
+    background-color: #f9f9f9;
+}
+.first{
+    flex: 1;
+    margin-left: 70px;
+}
+.second{
+    flex: 1;
+}
+.third{
+    flex: 1;
+}
+.bottomArea{
+    display: flex;
+    background-color: #f9f9f9;
+    height: 24vh;
+}
+.bir{
+    flex: 1;
+    display: flex;
+    margin-left: 70px;
+    gap: 12px;
+    
+}
+.bir svg{
+    margin-top: 31px;
+}
+.iki{
+    flex: 1;
+    display: flex;
+    gap: 12px;
+}
+.iki svg{
+    margin-top: 31px;
+}
+.üç{
+    flex: 1;
+    gap: 12px;
+   
+}
+.kapsam{
+    border: 1px solid #dfdfdf;
+}
+ul{
+    list-style: none;
+    margin-left: -40px;
+}

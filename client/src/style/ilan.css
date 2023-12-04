@@ -1,0 +1,29 @@
+.toplam{
+    display: flex;
+}
+.fotograf{
+    flex: 1;
+    margin-left: 100px;
+    background-color: rgb(119, 109, 109);
+    height: 350px;
+    margin-top: 65px;
+}
+.özellik{
+    flex: 1;
+}
+.property{
+
+    margin-top: 27px;
+    width: 500px;
+    margin-left: 50px;
+}
+.slider{
+    margin-left: 100px;
+    width: 616px;
+    background-color: darkgrey;
+    height: 101px;
+}
+.icon{
+    text-align: center;
+    margin-top: 40px;
+}

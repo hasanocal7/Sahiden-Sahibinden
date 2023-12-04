@@ -1,0 +1,66 @@
+.contain{
+    display: flex;
+    margin-left: 60px;
+    margin-top: 30px;
+}
+.lefSide{
+    flex: 2;
+    height: 100vh;
+}
+.rightSidee{
+    flex: 5;
+    height: 100vh;
+}
+.emlakArea{
+    display: flex;
+    font-size: 14px;
+}
+.emlakArea svg{
+    margin-top: 15px;
+    margin-right: 6px;
+}
+.vasıtaArea{
+    display: flex;
+    font-size: 14px;
+}
+.vasıtaArea svg{
+    margin-top: 15px;
+    margin-right: 6px;
+}
+.emlak ul{
+    list-style: none;
+    color:#0033a6;
+}
+.Vasıta ul{
+    list-style: none;
+    color:#0033a6;
+}
+.emlak li{
+    margin-top: 10px;
+}
+.Vasıta li{
+    margin-top: 10px;
+}
+li:hover{
+    text-decoration: underline;
+}
+h4:hover{
+    text-decoration: underline;
+}
+.emlak ul{
+    width: 32px;
+    cursor: pointer;
+}
+.Vasıta ul{
+    width: 32px;
+    cursor: pointer;
+}
+.emlak{
+    width: 164px;
+}
+.emlakArea{
+    cursor: pointer;
+}
+.vasıtaArea{
+    cursor: pointer;
+}

@@ -1,12 +1,19 @@
-import './style/Login.css'
-import UrunEkle from './urunEkle';
-//import Login from './src/Login';
+import "./App.css";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Ilan from "./components/Ilan";
 
-import './App.css'
 function App() {
   return (
     <div className="App">
-      <UrunEkle/>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/ilan" element={<Ilan/>}/>
+      </Routes>
+      <Footer />
     </div>
   );
 }
