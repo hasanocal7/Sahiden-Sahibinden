@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/ilan.css";
+import "../style/ilan.css";
 function Ilan() {
   return (
     <>

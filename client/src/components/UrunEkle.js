@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../src/style/UrunEkle.css";
-import UrunFormModal from "../src/components/UrunFormModal";
+import "../style/UrunEkle.css";
+import UrunFormModal from "./UrunFormModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faCar, faLaptopMedical } from "@fortawesome/free-solid-svg-icons";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/footer.css";
+import "../style/footer.css";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import Box from "@mui/material/Box";

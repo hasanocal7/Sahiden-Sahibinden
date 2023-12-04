@@ -1,6 +1,6 @@
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import "../styles/home.css";
+import "../style/home.css";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import { Link } from "react-router-dom";
 import axios from 'axios'

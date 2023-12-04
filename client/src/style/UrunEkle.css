@@ -1,12 +1,12 @@
 body {
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  /* display: flex; */
+  /* justify-content: center;
+  align-items: center; */
+  /* min-height: 100vh; */
   /* background: #d2dde7; */
-  font-family: consolas;
+  /* font-family: consolas; */
 }
 .baslik ,
 .detay , 

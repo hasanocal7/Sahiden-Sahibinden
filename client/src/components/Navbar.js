@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/navbar.css";
+import "../style/navbar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -35,7 +35,13 @@ function Navbar() {
         <div className="rightSide">
           <p>Giriş Yap</p>
           <p>Hesap Aç</p>
-          <button>Ücretsiz Ilan Ver</button>
+          
+<Link to='ilanyukle'>
+<button>Ücretsiz Ilan Ver</button>
+</Link>
+            
+            
+          
         </div>
       </div>
     </div>
