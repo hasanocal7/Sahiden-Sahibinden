@@ -4,6 +4,7 @@
     padding: 15px;
     background-color: #3f475f;
     height: 140px;
+    width: 100%;
 }
 .rightSide{
     gap: 20px;
@@ -42,6 +43,9 @@
     background-color: yellow;
     font-weight: bold;
 }
+.containerrr{
+    width: 1337px;
+}
 .leftSide input{
     font-size: 25px;
     border-radius: 4px;
@@ -66,7 +70,4 @@
 }
 .rightSide p:hover{
  text-decoration: underline;
-}
-.containerrr{
-    width: 1446px;
 }
