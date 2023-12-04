@@ -1,9 +1,11 @@
-import './App.css'
-import UrunEkle from '../src/urunEkle';
+import './style/Login.css'
+import UrunEkle from './urunEkle';
+import Login from '../src/Login';
+
 function App() {
   return (
     <div className="App">
-      <UrunEkle/>
+      <Login/>
     </div>
   );
 }
