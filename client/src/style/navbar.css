@@ -3,6 +3,7 @@
     justify-content: space-between;
     padding: 15px;
     background-color: #3f475f;
+    height: 140px;
 }
 .rightSide{
     gap: 20px;
@@ -62,4 +63,7 @@
 }
 .rightSide p:hover{
  text-decoration: underline;
+}
+.containerrr{
+    width: 1446px;
 }

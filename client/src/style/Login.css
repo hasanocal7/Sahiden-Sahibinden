@@ -1,8 +1,15 @@
-form .container{
+form .container {
   padding: 100px;
-  width: 50%;
-  background-color: bisque;
+
   justify-content: center;
   text-align: center;
-  font-size: 30px
+  font-size: 30px;
+
+  width: 500px;
+  margin-top: 61px;
+  height: 400px;
+  margin-bottom: 61px;
+  border-radius: 27px;
+  background-color: #3f475f;
+  color: white;
 }
