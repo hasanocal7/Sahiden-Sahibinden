@@ -7,24 +7,25 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className="container">
+    <div className="containerrr ">
       <div className="tools">
         <div className="leftSide">
-          <Link to='/' ><p> Sahipİlan.com </p></Link>
-          
+          <Link to="/">
+            <p> Sahipİlan.com </p>
+          </Link>
+
           <Box
             component="form"
             sx={{
-                "& > :not(style)": { m: 1, width: "25ch" },
-                "& label": { color: "white" }, // "Kelime ile ara" rengini burada belirtebilirsiniz
-              }}
+              "& > :not(style)": { m: 1, width: "25ch" },
+              "& label": { color: "white" }, // "Kelime ile ara" rengini burada belirtebilirsiniz
+            }}
             noValidate
             autoComplete="off">
             <TextField
               id="filled-basic"
               label="Kelime ile ara"
               variant="filled"
-              
             />
           </Box>
 
@@ -33,15 +34,15 @@ function Navbar() {
           </div>
         </div>
         <div className="rightSide">
-          <p>Giriş Yap</p>
+          <Link to="login">
+            {" "}
+            <p style={{fontSize:'20px'}} >Giris Yap</p>
+          </Link>
           <p>Hesap Aç</p>
-          
-<Link to='ilanyukle'>
-<button>Ücretsiz Ilan Ver</button>
-</Link>
-            
-            
-          
+
+          <Link to="ilanyukle">
+            <button>Ücretsiz Ilan Ver</button>
+          </Link>
         </div>
       </div>
     </div>
