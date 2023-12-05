@@ -7,9 +7,21 @@ form .container {
 
   width: 500px;
   margin-top: 61px;
-  height: 400px;
+  height: 490px;
   margin-bottom: 61px;
   border-radius: 27px;
   background-color: #3f475f;
   color: white;
+}
+.error{
+  color: red;
+  margin-right: 93px;
+  width: 100%;
+}
+.mb-3{
+  font-size: 20px;
+  /* margin-right: 75px; */
+}
+.mb-3 input{
+  width: 100%;
 }

@@ -29,13 +29,15 @@ function Login() {
             </label>
             <input
               type="email"
-              className="form-control"
+              // className="form-control"
               id="email"
               aria-describedby="emailHelp"
               placeholder="Email giriniz"
               value={values.email}
               onChange={handleChange}
+              className={errors.email ? "form-control " : ""}
             />
+            {errors.email && <p className="error">{errors.email}</p>}
           </div>
           <div className="mb-3">
             <label htmlFor="exampleInputPassword1" className="form-label">
@@ -43,12 +45,14 @@ function Login() {
             </label>
             <input
               type="password"
-              className="form-control"
+              // className="form-control"
               id="password"
               placeholder="Şİfre giriniz"
               value={values.password}
               onChange={handleChange}
+              className={errors.password ? "form-control" : ""}
             />
+            {errors.password && <p className="error">{errors.password}</p>}
           </div>
 
           <button type="submit" className="btn btn-primary">

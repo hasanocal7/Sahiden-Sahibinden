@@ -20,6 +20,9 @@
 .rightSide p{
     color: white;
 }
+.rightSide a{
+    text-decoration: none;
+}
 .iconn svg{
     margin-left: -57px;
     position: absolute;
