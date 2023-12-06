@@ -167,7 +167,6 @@ const updateAd = async (id, adData, info) => {
   return updatedAd;
 };
 
-// TODO: BURADA DÜZELTME YAPILACAK
 const deleteAd = async (id) => {
   const ad = await Ad.findOne({ where: { id: id } });
   if (ad) {
