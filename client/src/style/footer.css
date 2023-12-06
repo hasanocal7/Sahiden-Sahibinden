@@ -1,50 +1,39 @@
-.kapsayıcı{
+.kapsayıcı {
     display: flex;
-    height: 30vh;
+    flex-wrap: wrap; 
     background-color: #f9f9f9;
-}
-.first{
+  }
+  
+  .first, .second, .third {
     flex: 1;
-    margin-left: 70px;
-}
-.second{
-    flex: 1;
-}
-.third{
-    flex: 1;
-}
-.bottomArea{
+    margin: 10px; 
+  }
+  
+  .bottomArea {
     display: flex;
+    flex-wrap: wrap;
     background-color: #f9f9f9;
-    height: 24vh;
-}
-.bir{
-    flex: 1;
-    display: flex;
-    margin-left: 70px;
-    gap: 12px;
-    
-}
-.bir svg{
-    margin-top: 31px;
-}
-.iki{
+  }
+  
+  .bir, .iki, .üç {
     flex: 1;
     display: flex;
     gap: 12px;
-}
-.iki svg{
-    margin-top: 31px;
-}
-.üç{
-    flex: 1;
-    gap: 12px;
-   
-}
-.kapsam{
+    margin: 10px; 
+  }
+  
+  .kapsam {
     border: 1px solid #dfdfdf;
-}
-ul{
-    list-style: none;
-    margin-left: -40px;
-}
+    padding: 10px; 
+  }
+  
+  @media (max-width: 768px) {
+    .kapsayıcı, .bottomArea {
+      flex-direction: column; 
+    }
+    .first, .second, .third, .bir, .iki, .üç {
+      flex: 1;
+      margin: 10px 0;
+    }
+  }
+  
