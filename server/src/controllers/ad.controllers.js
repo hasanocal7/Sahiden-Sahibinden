@@ -158,6 +158,7 @@ const deleteAd = async (req, res, next) => {
     const id = req.params.id;
     const ad = await services.adServices.deleteAd(id).image;
     if (ad <= 0) {
+      res.status(400);
       throw new Error("Ad not found");
     }
     res.status(200).json({
