@@ -7,7 +7,7 @@ import axios from 'axios'
 import {useState,useEffect} from 'react'
 function Home() {
   // const [data, setData] = useState([])
-  // axios.get('https://api.unsplash.com/photos/?client_id=SmQktg8eGtoo7E5xtU4UXb0-HHbqlDyajbdKYmDlpiU')
+  // axios.get('http://localhost:5000')
   // .then(response=>setData(response.data.results))
   return (
     <div className="contain">
