@@ -1,12 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
-  /* min-height: 100vh; */
-  /* background: #d2dde7; */
-  /* font-family: consolas; */
+  font-family: Arial, Helvetica, sans-serif;
 }
 .baslik ,
 .detay , 
@@ -15,10 +10,10 @@ body {
   font-size: 20px;
 }
 
-div.modal-title.h4,
+/* div.modal-title.h4,
 form{
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
 
 input ,
 textarea

@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className="containerrr ">
+    <div className="containerrr">
       <div className="tools">
         <div className="leftSide">
           <Link to="/">
-            <p> Sahipİlan.com </p>
+            <p className="logo"> Sahiden </p>
           </Link>
 
           <Box
@@ -28,11 +28,12 @@ function Navbar() {
               variant="filled"
             />
           </Box>
-
           <div className="iconn">
             <SearchIcon />
           </div>
         </div>
+
+
         <div className="rightSide">
           <Link to="login">
             {" "}
