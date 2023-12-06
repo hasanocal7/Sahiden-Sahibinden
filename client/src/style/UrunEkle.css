@@ -7,20 +7,24 @@ body {
 .urunEkle {
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 16px; 
+  margin-bottom: 16px;
   height: 236px;
   border: 1px solid lightsteelblue;
   align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: column;
-  width: 80%; 
-  max-width: 1000px; 
-  margin-left: auto; 
+  width: 80%;
+  max-width: 1000px;
+  margin-left: auto;
   margin-right: auto;
   border-radius: 24px;
 }
-
+.kategoriCevre {
+  color: #3f475f;
+  font-size: 25px;
+  background-color: yellow;
+}
 input,
 textarea {
   border-radius: 5px;
@@ -32,12 +36,12 @@ textarea {
 a {
   position: relative;
   display: inline-block;
-  padding: 15px 10px; 
+  padding: 15px 10px;
   color: black;
   text-transform: uppercase;
-  letter-spacing: 2px; 
+  letter-spacing: 2px;
   text-decoration: none;
-  font-size: 16px; 
+  font-size: 16px;
   overflow: hidden;
   transition: 0.2s;
 }
@@ -52,15 +56,25 @@ a i {
   top: 20%;
   left: 50%;
   transform: translate(-40%, -40%);
-  font-size: 12px; 
+  font-size: 12px;
 }
 
-#emlak:hover,
-#vasita:hover,
-#elektronik:hover {
+#emlak:hover {
   color: black;
   background: #fcae1a;
   box-shadow: 0 0 2px #fcae1a, 0 0 5px #fcae1a, 0 0 10px #fcae1a;
+  transition-delay: 1ms;
+}
+#vasita:hover {
+  color: black;
+  background: #f32b2d;
+  box-shadow: 0 0 2px #f32b2d, 0 0 5px #f32b2d, 0 0 10px #f32b2d;
+  transition-delay: 1ms;
+}
+#elektronik:hover {
+  color: black;
+  background: #09b8bd;
+  box-shadow: 0 0 2px #09b8bd, 0 0 5px #09b8bd, 0 0 10px #09b8bd;
   transition-delay: 1ms;
 }
 
@@ -73,14 +87,14 @@ a i {
 
 @media (max-width: 768px) {
   a {
-    font-size: 14px; 
-    padding: 15px 10px; 
+    font-size: 14px;
+    padding: 15px 10px;
   }
 }
 
 @media (max-width: 576px) {
   a {
-    font-size: 12px; 
-    padding: 10px 8px; 
+    font-size: 12px;
+    padding: 10px 8px;
   }
 }

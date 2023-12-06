@@ -23,7 +23,7 @@ const UrunEkle = () => {
   return (
     <>
       <div className="urunEkle">
-        <div className="kategori">Kategori Seçiniz</div>
+        <div className="kategoriCevre">Kategori Seçiniz</div>
         <div className="altKategori">
           <a id="emlak" href="#" onClick={() => handleCategoryClick("Emlak")}>
             <HomeIcon />
