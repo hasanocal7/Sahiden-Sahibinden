@@ -1,0 +1,45 @@
+version: "3.4"
+services:
+  sahiden-app:
+    container_name: sahiden
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - mysqlserver
+    volumes:
+      - sahiden-uploads:/src/uploads
+    environment:
+      - PORT=3000
+      - HOST=mysqlserver
+      - MYSQL_ROOT_PASSWORD=sahiden123
+      - ACCESSTOKEN_SECRET_KEY=2984e04b73850225d35efb27d10210ab7fc0c1ea0bccf9de64b63a4027b5c363
+      - REFRESHTOKEN_SECRET_KEY=8a4db8fbe755e193a137f57a7467c82e5113fb5208f3bc6355b48f101062f13b
+      - EMAIL=hasanocal7@gmail.com
+      - PASSWORD=bnrdbuyklczivngh
+      - TRANSPORTER_USER=alexandrea77@ethereal.email
+      - TRANSPORTER_PASS=ag6rjW2ZqcuznWCjr7
+
+  mysqlserver:
+    container_name: Sahiden-MySQL
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: sahiden123
+      MYSQL_DATABASE: sahidendb_development
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  adminer:
+    container_name: Sahiden-Adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqlserver
+
+volumes:
+  mysql_data:
+  sahiden-uploads:
