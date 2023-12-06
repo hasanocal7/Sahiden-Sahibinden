@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Ilan from "./components/Ilan";
 import UrunEkle from "./components/UrunEkle";
 import Login from "./components/Login";
+
 function App() {
   return (
     <div className="App">

@@ -3,36 +3,41 @@ body {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
-.baslik ,
-.detay , 
-.adres ,
-.fiyat{
-  font-size: 20px;
+
+.urunEkle {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 16px; 
+  height: 236px;
+  border: 1px solid lightsteelblue;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 80%; 
+  max-width: 1000px; 
+  margin-left: auto; 
+  margin-right: auto;
+  border-radius: 24px;
 }
 
-/* div.modal-title.h4,
-form{
-  font-family: Arial, Helvetica, sans-serif;
-} */
-
-input ,
-textarea
-{
+input,
+textarea {
   border-radius: 5px;
-  width: 100%; 
+  width: 100%;
   box-sizing: border-box;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 a {
   position: relative;
   display: inline-block;
-  padding: 45px 30px;
+  padding: 15px 10px; 
   color: black;
   text-transform: uppercase;
-  letter-spacing: 4px;
+  letter-spacing: 2px; 
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px; 
   overflow: hidden;
   transition: 0.2s;
 }
@@ -47,27 +52,15 @@ a i {
   top: 20%;
   left: 50%;
   transform: translate(-40%, -40%);
-  font-size: 15px;
+  font-size: 12px; 
 }
 
-#emlak:hover {
+#emlak:hover,
+#vasita:hover,
+#elektronik:hover {
   color: black;
   background: #fcae1a;
   box-shadow: 0 0 2px #fcae1a, 0 0 5px #fcae1a, 0 0 10px #fcae1a;
-  transition-delay: 1ms;
-}
-
-#vasita:hover {
-  color: black;
-  background: #f32b2d;
-  box-shadow: 0 0 2px #f32b2d, 0 0 5px #f32b2d, 0 0 10px #f32b2d;
-  transition-delay: 1ms;
-}
-
-#elektronik:hover {
-  color: black;
-  background: #09b8bd;
-  box-shadow: 0 0 2px #09b8bd, 0 0 5px #09b8bd, 0 0 10px #09b8bd;
   transition-delay: 1ms;
 }
 
@@ -80,28 +73,14 @@ a i {
 
 @media (max-width: 768px) {
   a {
-    font-size: 16px;
-    padding: 30px 20px;
+    font-size: 14px; 
+    padding: 15px 10px; 
   }
 }
 
 @media (max-width: 576px) {
   a {
-    font-size: 14px;
-    padding: 20px 15px;
+    font-size: 12px; 
+    padding: 10px 8px; 
   }
-}
-.urunEkle{
-  text-align: center;
-  margin-top: 140px;
-  margin-bottom: 163px;
-  height: 236px;
-  border: 1px solid lightsteelblue;
-  /* width: 1312px; */
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  width: 1000px;
-  margin-left: 176px;
-  border-radius: 24px;
 }

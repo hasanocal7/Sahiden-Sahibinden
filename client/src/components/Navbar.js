@@ -21,7 +21,8 @@ function Navbar() {
               "& label": { color: "white" }, // "Kelime ile ara" rengini burada belirtebilirsiniz
             }}
             noValidate
-            autoComplete="off">
+            autoComplete="off"
+          >
             <TextField
               id="filled-basic"
               label="Kelime ile ara"
@@ -33,11 +34,10 @@ function Navbar() {
           </div>
         </div>
 
-
         <div className="rightSide">
           <Link to="login">
             {" "}
-            <p style={{fontSize:'20px'}} >Giris Yap</p>
+            <p style={{ fontSize: "20px" }}>Giris Yap</p>
           </Link>
           <p>Hesap Aç</p>
 

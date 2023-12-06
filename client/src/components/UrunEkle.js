@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/UrunEkle.css";
 import UrunFormModal from "./UrunFormModal";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faHouse, faCar, faLaptopMedical } from "@fortawesome/free-solid-svg-icons";
 import HomeIcon from "@mui/icons-material/Home";
 import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 import ComputerIcon from "@mui/icons-material/Computer";
@@ -26,24 +24,26 @@ const UrunEkle = () => {
     <>
       <div className="urunEkle">
         <div className="kategori">Kategori Seçiniz</div>
-        <a id="emlak" href="#" onClick={() => handleCategoryClick("Emlak")}>
-          <HomeIcon />
-          Emlak
-        </a>
+        <div className="altKategori">
+          <a id="emlak" href="#" onClick={() => handleCategoryClick("Emlak")}>
+            <HomeIcon />
+            Emlak
+          </a>
 
-        <a id="vasita" href="#" onClick={() => handleCategoryClick("Vasıta")}>
-          <DirectionsCarFilledIcon />
-          Vasıta
-        </a>
+          <a id="vasita" href="#" onClick={() => handleCategoryClick("Vasıta")}>
+            <DirectionsCarFilledIcon />
+            Vasıta
+          </a>
 
-        <a
-          id="elektronik"
-          href="#"
-          onClick={() => handleCategoryClick("Elektronik")}
-        >
-          <ComputerIcon />
-          Elektronik
-        </a>
+          <a
+            id="elektronik"
+            href="#"
+            onClick={() => handleCategoryClick("Elektronik")}
+          >
+            <ComputerIcon />
+            Elektronik
+          </a>
+        </div>
       </div>
 
       <UrunFormModal
