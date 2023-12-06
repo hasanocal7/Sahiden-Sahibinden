@@ -10,15 +10,15 @@ services:
     volumes:
       - sahiden-uploads:/src/uploads
     environment:
-      - PORT=3000
-      - HOST=mysqlserver
-      - MYSQL_ROOT_PASSWORD=sahiden123
-      - ACCESSTOKEN_SECRET_KEY=2984e04b73850225d35efb27d10210ab7fc0c1ea0bccf9de64b63a4027b5c363
-      - REFRESHTOKEN_SECRET_KEY=8a4db8fbe755e193a137f57a7467c82e5113fb5208f3bc6355b48f101062f13b
-      - EMAIL=hasanocal7@gmail.com
-      - PASSWORD=bnrdbuyklczivngh
-      - TRANSPORTER_USER=alexandrea77@ethereal.email
-      - TRANSPORTER_PASS=ag6rjW2ZqcuznWCjr7
+      - PORT=${PORT}
+      - HOST=${HOST}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - ACCESSTOKEN_SECRET_KEY=${ACCESSTOKEN_SECRET_KEY}
+      - REFRESHTOKEN_SECRET_KEY=${REFRESHTOKEN_SECRET_KEY}
+      - EMAIL=${EMAIL}
+      - PASSWORD=${PASSWORD}
+      - TRANSPORTER_USER=${TRANSPORTER_USER}
+      - TRANSPORTER_PASS=${TRANSPORTER_PASS}
 
   mysqlserver:
     container_name: Sahiden-MySQL
