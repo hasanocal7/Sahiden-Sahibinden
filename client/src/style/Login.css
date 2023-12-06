@@ -1,8 +1,11 @@
-form .container{
-  padding: 100px;
+#floatingInput {
+justify-content: center;
   width: 50%;
-  background-color: bisque;
-  justify-content: center;
-  text-align: center;
-  font-size: 30px
 }
+
+#floatingPassword {
+ width: 50%;
+ margin: 0 auto;
+ 
+}
+

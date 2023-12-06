@@ -1,26 +1,33 @@
-import React, { useState } from 'react';
+// Login.js
+
+import React from 'react';
 import '../style/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 function Login() {
   return (
     <div>
       <form>
-        <div className='container'>
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-          <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+        <div className="form-floating mb-3">
+          <input
+            type="email"
+            className="form-control"
+            id="floatingInput"
+            placeholder="e-posta"
+          />
+          <label htmlFor="floatingInput">E-posta adresi</label>
         </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" />
-        </div>
-        
-        <button type="submit" className="btn btn-primary">Giriş Yap</button>
+        <div className="form-floating">
+          <input
+            type="password"
+            className="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label htmlFor="floatingPassword">Şifre</label>
         </div>
       </form>
-      
     </div>
-    
   );
 }
 
