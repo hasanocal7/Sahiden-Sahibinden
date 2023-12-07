@@ -29,7 +29,7 @@ function Login() {
           <label htmlFor="email" className="form-label">
             E-Posta
           </label>
-          <input
+          <input                                                                                                                                                                                                                                                  
             type="email"
             id="email"
             className={`form-control ${errors.email ? 'is-invalid' : ''}`}
