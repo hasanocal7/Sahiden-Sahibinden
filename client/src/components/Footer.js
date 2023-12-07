@@ -14,7 +14,7 @@ function Footer() {
     setAge(event.target.value);
   };
   return (
-    <div className="kapsam">
+    <div className="kapsam mt-5">
       <div className="kapsayıcı">
         <div className="first">
           <h4 style={{color:'#dfdfdf'}} >Kurumsal</h4>
