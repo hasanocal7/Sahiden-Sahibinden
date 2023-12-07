@@ -1,0 +1,76 @@
+.tools{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #3f475f;
+    height: 140px;
+    width: 100%;
+}
+.rightSide{
+    gap: 20px;
+    display: flex;
+    cursor: pointer;
+    color: white;
+    margin-right: 150px;
+    display: flex;
+    align-items: center;
+
+
+}
+.rightSide p{
+    color: white;
+}
+.rightSide a{
+    text-decoration: none;
+}
+.iconn svg{
+    margin-left: -57px;
+    position: absolute;
+    margin-top: -7px;
+}
+.rightSide button{
+    padding: 20px;
+}
+.rightSide button:hover{
+   background-color: #4685c8;
+}
+.leftSide{
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+.leftSide p{
+    font-size: 25px;
+    background-color: yellow;
+    font-weight: bold;
+}
+.containerrr{
+    width: 1337px;
+}
+.leftSide input{
+    font-size: 25px;
+    border-radius: 4px;
+    border: none;
+    background-color: #3f475f;
+    padding: 8px;
+
+}
+.leftSide input::placeholder{
+    font-size:17px;
+    /* background-color: #2f3546; */
+    color: #738aa0;
+   
+}
+.rightSide button{
+    background-color: #489af1;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+.rightSide p:hover{
+ text-decoration: underline;
+}

@@ -1,81 +1,49 @@
-import React, { useState } from "react";
-
+import React from "react";
+import { Form } from "react-bootstrap";
 const UrunFormContent = ({ handleFormChange, formValues }) => {
-  const [baslik, setBaslik] = useState(formValues.baslik || "");
-  const [value, setValue] = useState(formValues.detay || "");
-  const [urunFiyati, setUrunFiyati] = useState(formValues.fiyat || "");
-
-  const handleKeyPress = (event) => {
-    const charCode = event.which ? event.which : event.keyCode;
-
-    if (charCode < 48 || charCode > 57) {
-      event.preventDefault();
-    }
-  };
-
-  const handlePasteInput = (event) => {
-    event.preventDefault();
-    const pastedText = event.clipboardData.getData("text/plain");
-    const onlyNumbers = pastedText.replace(/\D/g, "");
-    document.exeCommand("insertText", false, onlyNumbers);
-  };
-
-  const handleInputChange = (event) => {
-    const onlyNumbers = event.target.value.replace(/\D/g, "");
-    setUrunFiyati(onlyNumbers);
-    handleFormChange("fiyat", onlyNumbers);
-  };
-
   return (
-    <form>
-      <div className="baslik">
-        <label htmlFor="baslik">Ürün Başlığı:</label>
-        <input
+    <Form>
+      <Form.Group controlId="formBaslik">
+        <Form.Label>Başlık</Form.Label>
+        <Form.Control
           type="text"
-          id="baslik"
-          value={baslik}
-          onChange={(e) => {
-            setBaslik(e.target.value);
-            handleFormChange("baslik", e.target.value);
-          }}
+          placeholder="Başlık"
+          value={formValues.baslik}
+          onChange={(e) => handleFormChange("baslik", e.target.value)}
         />
-      </div>
+      </Form.Group>
 
-      <div className="detay">
-        <label htmlFor="detay">Ürün Detayı:</label>
-        <textarea
-          id="detay"
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-            handleFormChange("detay", e.target.value);
-          }}
-        ></textarea>
-      </div>
+      <Form.Group controlId="formDetay">
+        <Form.Label>Detay</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
+          placeholder="Detay"
+          value={formValues.detay}
+          onChange={(e) => handleFormChange("detay", e.target.value)}
+        />
+      </Form.Group>
 
-      <div className="adres">
-        <label htmlFor="adres">Ürün Adresi:</label>
-        <input
+      <Form.Group controlId="formAdres">
+        <Form.Label>Adres</Form.Label>
+        <Form.Control
           type="text"
-          id="adres"
+          placeholder="Adres"
+          value={formValues.adres}
           onChange={(e) => handleFormChange("adres", e.target.value)}
         />
-      </div>
+      </Form.Group>
 
-      <div className="fiyat">
-        <label htmlFor="fiyat">Ürün Fiyatı:</label>
-        <input
-          type="text"
-          id="fiyat"
-          value={urunFiyati}
-          onKeyPress={handleKeyPress}
-          onPaste={handlePasteInput}
-          onInput={handleInputChange}
+      <Form.Group controlId="formFiyat">
+        <Form.Label>Fiyat</Form.Label>
+        <Form.Control
+          type="number"
+          placeholder="Fiyat"
+          value={formValues.fiyat}
+          onChange={(e) => handleFormChange("fiyat", e.target.value)}
         />
-      </div>
-
-      {value !== baslik && <p>Value ve Başlık Farklı!</p>}
-    </form>
+      </Form.Group>
+    </Form>
   );
 };
 
