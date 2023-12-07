@@ -1,52 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "../style/navbar.css";
-import SearchIcon from "@mui/icons-material/Search";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
+import { CodeIcon, HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
 
 function Navbar() {
-  return (
-    <div className="containerrr">
-      <div className="tools">
-        <div className="leftSide">
-          <Link to="/">
-            <p className="logo"> Sahiden </p>
-          </Link>
+  const [click, setClick] = useState(false);
 
-          <Box
-            component="form"
-            sx={{
-              "& > :not(style)": { m: 1, width: "25ch" },
-              "& label": { color: "white" }, // "Kelime ile ara" rengini burada belirtebilirsiniz
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <TextField
-              id="filled-basic"
-              label="Kelime ile ara"
-              variant="filled"
-            />
-          </Box>
-          <div className="iconn">
-            <SearchIcon />
+  const handleClick = () => setClick(!click);
+  const handleClose = () => setClick(false); 
+
+  return (
+    <>
+      <nav className="navbar">
+        <div className="nav-container">
+          <NavLink exact to="/" className="nav-logo">
+            <span>Sahiden</span>
+          </NavLink>
+
+          <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/login"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClose} 
+              >
+                Giriş Yap
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/register"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClose} 
+              >
+                Hesap Aç
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/ilanyukle"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClose} 
+                id="ilan"
+              >
+                Ücretsiz İlan Ver
+              </NavLink>
+            </li>
+          </ul>
+          <div className="nav-icon" onClick={handleClick}>
+            {click ? (
+              <span className="icon">
+                <HamburgetMenuClose onClick={handleClose} />{" "}
+              </span>
+            ) : (
+              <span className="icon">
+                <HamburgetMenuOpen onClick={handleClick} />
+              </span>
+            )}
           </div>
         </div>
-
-        <div className="rightSide">
-          <Link to="login">
-            {" "}
-            <p style={{ fontSize: "20px" }}>Giris Yap</p>
-          </Link>
-          <p>Hesap Aç</p>
-
-          <Link to="ilanyukle">
-            <button>Ücretsiz Ilan Ver</button>
-          </Link>
-        </div>
-      </div>
-    </div>
+      </nav>
+    </>
   );
 }
 

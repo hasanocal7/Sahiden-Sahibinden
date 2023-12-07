@@ -1,40 +1,38 @@
-
-#floatingInput {
-justify-content: center;
-  width: 50%;
+input {
+  font-size: large;
+  height: 70px;
 }
 
-#floatingPassword {
- width: 50%;
- margin: 0 auto;
- 
+#email{
+  max-width:700px;
+  font-size: 20px;
 }
+#password{
+  max-width:700px;
+  font-size: 20px;
 
-
+}
 form .container {
-  padding: 100px;
-
   justify-content: center;
   text-align: center;
   font-size: 30px;
-
-  width: 500px;
-  margin-top: 61px;
-  height: 490px;
-  margin-bottom: 61px;
+  max-width: 500px;
+  height: auto;
   border-radius: 27px;
   background-color: #3f475f;
   color: white;
 }
-.error{
-  color: red;
-  margin-right: 93px;
-  width: 100%;
+
+
+.container{
+background-color: rgb(230, 227, 223);
 }
-.mb-3{
-  font-size: 20px;
-  /* margin-right: 75px; */
+
+form .inputs{
+  justify-content: center;
+  align-items: center;
 }
-.mb-3 input{
-  width: 100%;
+
+.form-title{
+text-align: center;
 }

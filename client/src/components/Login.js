@@ -22,13 +22,14 @@ function Login() {
   });
 
   return (
-    <div className="container">
+    <div className="container mt-5" style={{height:"70vh"}}>
+      <h1 className='form-title mt-5'>Giriş Yap</h1>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+        <div className="inputs mb-3 mt-5">
           <label htmlFor="email" className="form-label">
-            Email address
+            E-Posta
           </label>
-          <input
+          <input                                                                                                                                                                                                                                                  
             type="email"
             id="email"
             className={`form-control ${errors.email ? 'is-invalid' : ''}`}
@@ -37,8 +38,7 @@ function Login() {
             onChange={handleChange}
           />
           {errors.email && <p className="invalid-feedback">{errors.email}</p>}
-        </div>
-        <div className="mb-3">
+    
           <label htmlFor="password" className="form-label">
             Password
           </label>
