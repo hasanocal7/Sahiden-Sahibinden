@@ -3,6 +3,9 @@
     margin-left: 60px;
     margin-top: 30px;
 }
+hr{
+    width: 175px;
+}
 .lefSide{
     flex: 2;
     height: 100vh;
@@ -27,6 +30,16 @@
     margin-top: 15px;
     margin-right: 6px;
 }
+
+.elektronikArea{
+    display: flex;
+    font-size: 14px;
+}
+/* .elektronikArea svg{
+    margin-top: 15px;
+    margin-right: 6px;
+} */
+
 .emlak ul{
     list-style: none;
     color:#0033a6;
@@ -55,6 +68,15 @@ h4:hover{
     width: 32px;
     cursor: pointer;
 }
+.elektronik ul{
+    list-style: none;
+    width: 32px;
+    color:#0033a6;
+    cursor: pointer;
+}
+.elektronik li{
+    margin-top: 10px;
+}
 .emlak{
     width: 164px;
 }
@@ -62,5 +84,8 @@ h4:hover{
     cursor: pointer;
 }
 .vasıtaArea{
+    cursor: pointer;
+}
+.elektronikArea{
     cursor: pointer;
 }

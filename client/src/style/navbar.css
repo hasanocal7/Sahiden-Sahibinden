@@ -97,7 +97,11 @@
     color: black;
     border-radius: 8px;
   }
+
   @media screen and (max-width: 960px) {
+    body, html {
+      overflow: hidden;
+    }
     .nav-menu {
       display: flex;
       flex-direction: column;

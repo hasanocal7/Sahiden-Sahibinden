@@ -4,21 +4,20 @@ import Home from "./components/Home";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Ilan from "./components/Ilan";
-import UrunEkle from "./components/UrunEkle";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import AddProduct from "./components/AddProduct";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/ilan" element={<Ilan />} />
-        <Route path="/ilanyukle" element={<UrunEkle />} />
-        
+        <Route path="/ilanyukle" element={<AddProduct />} />
       </Routes>
       <Footer />
     </div>
