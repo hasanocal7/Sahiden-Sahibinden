@@ -1,39 +1,61 @@
 .kapsayıcı {
-    display: flex;
-    flex-wrap: wrap; 
-    background-color: #f9f9f9;
-  }
-  
-  .first, .second, .third {
-    flex: 1;
-    margin: 10px; 
-  }
-  
+  display: flex;
+  flex-wrap: wrap; 
+  background-color: #f9f9f9;
+  max-height: 100%; 
+}
+
+.first,
+.second,
+.third {
+  flex: 1;
+  margin: 10px;
+}
+.third .ul{
+  list-style-type: none;
+  padding: 0;
+}
+.third .li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.bottomArea {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f9f9f9;
+}
+
+.bir,
+.iki,
+.üç {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  margin: 10px;
+}
+
+.kapsam {
+  border: 1px solid #dfdfdf;
+  padding: 10px;
+}
+.iconFooterList{
+  list-style: none;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .kapsayıcı,
   .bottomArea {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #f9f9f9;
+    flex-direction: column;
   }
-  
-  .bir, .iki, .üç {
+  .first,
+  .second,
+  .third,
+  .bir,
+  .iki,
+  .üç {
     flex: 1;
-    display: flex;
-    gap: 12px;
-    margin: 10px; 
+    margin: 10px 0;
   }
-  
-  .kapsam {
-    border: 1px solid #dfdfdf;
-    padding: 10px; 
-  }
-  
-  @media (max-width: 768px) {
-    .kapsayıcı, .bottomArea {
-      flex-direction: column; 
-    }
-    .first, .second, .third, .bir, .iki, .üç {
-      flex: 1;
-      margin: 10px 0;
-    }
-  }
-  
+}

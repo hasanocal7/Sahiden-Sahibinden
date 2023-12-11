@@ -7,6 +7,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+
 function Footer() {
   const [age, setAge] = React.useState("");
 
@@ -18,7 +23,7 @@ function Footer() {
       <div className="kapsayıcı">
         <div className="first">
           <h4 style={{color:'#dfdfdf'}} >Kurumsal</h4>
-          <ul>
+          <ul className="iconFooterList">
             <li>Hakkımızda</li>
             <li>Sürdürülebilirlik</li>
             <li>İnsan Kaynakları</li>
@@ -27,7 +32,7 @@ function Footer() {
         </div>
         <div className="second">
           <h4 style={{color:'#dfdfdf'}} >Hizmetlerimiz</h4>
-          <ul>
+          <ul className="iconFooterList">
             <li>S-Param Güvende</li>
             <li>Güvenli e-Ticaret</li>
             <li>Reklam</li>
@@ -36,11 +41,11 @@ function Footer() {
         </div>
         <div className="third">
           <h4 style={{color:'#dfdfdf'}} >Bizi Takip Edin</h4>
-          <ul>
-            <li>Facebook</li>
-            <li>Linkedin</li>
-            <li>Instagram</li>
-            <li>Youtube </li>
+          <ul className="iconFooterList">
+            <li ><FacebookIcon/>Facebook</li>
+            <li><LinkedInIcon/>Linkedin</li>
+            <li><InstagramIcon/>Instagram</li>
+            <li><YouTubeIcon/>Youtube </li>
           </ul>
         </div>
       </div>

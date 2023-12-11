@@ -1,0 +1,7 @@
+body, html {
+    overflow-y: auto;
+    height: 100%;
+  }
+  body {
+    overscroll-behavior-y: contain;
+  }
