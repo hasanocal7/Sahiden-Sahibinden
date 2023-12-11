@@ -22,23 +22,23 @@ function Login() {
   });
 
   return (
-    <div className="container mt-5" style={{height:"70vh"}}>
-      <h1 className='form-title mt-5'>Giriş Yap</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="inputs mb-3 mt-5">
+    <div className="container mt-5 d-flex flex-column align-items-center" style={{ height: "70vh" }}>
+      <h1 className='form-title mb-4'>Giriş Yap</h1>
+      <form onSubmit={handleSubmit} className="w-50">
+        <div className="inputs mb-3">
           <label htmlFor="email" className="form-label">
             E-Posta
           </label>
-          <input                                                                                                                                                                                                                                                  
+          <input
             type="email"
             id="email"
             className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-            placeholder="Email giriniz"
+            placeholder="E-posta giriniz"
             value={values.email}
             onChange={handleChange}
           />
           {errors.email && <p className="invalid-feedback">{errors.email}</p>}
-    
+
           <label htmlFor="password" className="form-label">
             Password
           </label>
