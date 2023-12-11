@@ -1,38 +1,13 @@
-input {
-  font-size: large;
-  height: 70px;
+
+.loginContainer {
+  width: 50%;
+  
 }
 
-#email{
-  max-width:700px;
-  font-size: 20px;
-}
-#password{
-  max-width:700px;
-  font-size: 20px;
-
-}
-form .container {
-  justify-content: center;
-  text-align: center;
-  font-size: 30px;
-  max-width: 500px;
-  height: auto;
-  border-radius: 27px;
-  background-color: #3f475f;
+.loginButton{
+  background-color: #3f475f ;
   color: white;
 }
-
-
-.container{
-background-color: rgb(230, 227, 223);
-}
-
-form .inputs{
-  justify-content: center;
-  align-items: center;
-}
-
-.form-title{
-text-align: center;
+.loginİnputs{
+  font-size: 22px;
 }

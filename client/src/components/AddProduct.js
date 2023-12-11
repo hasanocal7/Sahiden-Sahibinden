@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import PhotoUpload from "./PhotoUpload";
 const AddProduct = () => {
   const [title, setTitle] = useState("");
-  const [detail, setDetail] = useState("");
+  const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -35,7 +35,7 @@ const AddProduct = () => {
     }
     console.log("Ürün eklendi:", {
       title,
-      detail,
+      description,
       address,
       price,
       category,
@@ -64,7 +64,7 @@ const AddProduct = () => {
 
   const resetForm = () => {
     setTitle("");
-    setDetail("");
+    setDescription("");
     setAddress("");
     setPrice("");
     setCategory("");
@@ -132,15 +132,15 @@ const AddProduct = () => {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="detail" className="form-label">
+              <label htmlFor="description" className="form-label">
                 Ürün Detayı:
               </label>
-              <input
+              <textarea
                 type="text"
-                id="detail"
+                id="description"
                 className="form-control"
-                value={detail}
-                onChange={(e) => setDetail(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 required
               />
             </div>
@@ -148,8 +148,7 @@ const AddProduct = () => {
               <label htmlFor="address" className="form-label">
                 Adres:
               </label>
-              <input
-                type="text"
+              <textarea
                 id="address"
                 className="form-control"
                 value={address}

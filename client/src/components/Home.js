@@ -11,7 +11,7 @@ function Home() {
   // axios.get('http://localhost:5000')
   // .then(response=>setData(response.data.results))
   return (
-    <div className="contain">
+    <div className="homeContainer container">
       <div className="lefSide">
         <div className="emlak">
           <div className="emlakArea">
