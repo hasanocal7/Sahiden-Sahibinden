@@ -101,7 +101,8 @@
 @media screen and (max-width: 960px) {
   body,
   html {
-    overflow: hidden;
+    overflow: auto;
+    overflow-x: hidden;
   }
   .nav-menu {
     display: flex;
