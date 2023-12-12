@@ -5,16 +5,16 @@
   max-height: 100%; 
 }
 
-.first,
-.second,
-.third {
+.first, .second, .third {
   flex: 1;
   margin: 10px;
 }
-.third .ul{
+
+.third .ul {
   list-style-type: none;
   padding: 0;
 }
+
 .third .li {
   display: flex;
   align-items: center;
@@ -27,9 +27,7 @@
   background-color: #f9f9f9;
 }
 
-.bir,
-.iki,
-.üç {
+.bir, .iki, .üç {
   flex: 1;
   display: flex;
   gap: 12px;
@@ -39,23 +37,16 @@
 .kapsam {
   border: 1px solid #dfdfdf;
   padding: 10px;
+  overflow-x: hidden;
 }
-.iconFooterList{
+
+.iconFooterList {
   list-style: none;
   cursor: pointer;
 }
+
 @media (max-width: 768px) {
-  .kapsayıcı,
-  .bottomArea {
-    flex-direction: column;
-  }
-  .first,
-  .second,
-  .third,
-  .bir,
-  .iki,
-  .üç {
-    flex: 1;
-    margin: 10px 0;
+  .kapsam {
+    overflow-x: hidden;
   }
 }

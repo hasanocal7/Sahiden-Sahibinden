@@ -1,51 +1,61 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/footer.css";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 function Footer() {
-  const [age, setAge] = React.useState("");
+  const [language, setLanguage] = React.useState("");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleLanguageChange = (event) => {
+    setLanguage(event.target.value);
   };
+
   return (
     <div className="kapsam mt-5">
       <div className="kapsayıcı">
         <div className="first">
-          <h4 style={{color:'#dfdfdf'}} >Kurumsal</h4>
+          <h4>Kurumsal</h4>
           <ul className="iconFooterList">
             <li>Hakkımızda</li>
             <li>Sürdürülebilirlik</li>
             <li>İnsan Kaynakları</li>
-            <li>İletişim </li>
+            <li>İletişim</li>
           </ul>
         </div>
         <div className="second">
-          <h4 style={{color:'#dfdfdf'}} >Hizmetlerimiz</h4>
+          <h4>Hizmetlerimiz</h4>
           <ul className="iconFooterList">
             <li>S-Param Güvende</li>
             <li>Güvenli e-Ticaret</li>
             <li>Reklam</li>
-            <li>Mobil </li>
+            <li>Mobil</li>
           </ul>
         </div>
         <div className="third">
-          <h4 style={{color:'#dfdfdf'}} >Bizi Takip Edin</h4>
+          <h4>Bizi Takip Edin</h4>
           <ul className="iconFooterList">
-            <li ><FacebookIcon/>Facebook</li>
-            <li><LinkedInIcon/>Linkedin</li>
-            <li><InstagramIcon/>Instagram</li>
-            <li><YouTubeIcon/>Youtube </li>
+            <li>
+              <FacebookIcon />
+              Facebook
+            </li>
+            <li>
+              <LinkedInIcon />
+              Linkedin
+            </li>
+            <li>
+              <InstagramIcon />
+              Instagram
+            </li>
+            <li>
+              <YouTubeIcon />
+              Youtube
+            </li>
           </ul>
         </div>
       </div>
@@ -65,21 +75,19 @@ function Footer() {
           </div>
         </div>
         <div className="üç">
-          <Box sx={{ width: 200 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                Türkçe(Turkish)
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                label="Türkçe(Turkish)"
-                onChange={handleChange}>
-                <MenuItem value={10}>İngilizce(English)</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+          <FormControl fullWidth>
+            <InputLabel id="language-select-label">Dil</InputLabel>
+            <Select
+              labelId="language-select-label"
+              id="language-select"
+              value={language}
+              label="Dil"
+              onChange={handleLanguageChange}
+            >
+              <MenuItem value="tr">Türkçe</MenuItem>
+              <MenuItem value="en">English</MenuItem>
+            </Select>
+          </FormControl>
         </div>
       </div>
     </div>
