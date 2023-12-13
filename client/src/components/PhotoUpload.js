@@ -12,15 +12,16 @@ const PhotoUpload = ({ photos, setPhotos }) => {
       const isImage =
         file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png";
       const isSizeValid = file.size <= 20 * 1024 * 1024; // 20 MB'a kadar olan dosyalar
-
+  
       if (!isImage) {
+        console.log("Geçersiz dosya türü:", file.type);
         setErrorMessage("Yalnızca jpg, jpeg ve png uzantılı dosyaları kabul ediyoruz.");
       } else if (!isSizeValid) {
         setErrorMessage("Dosya boyutu 20 MB'ı geçemez.");
       } else {
         setErrorMessage(""); // Hata yoksa hata mesajını temizle
       }
-
+  
       return isImage && isSizeValid;
     });
 
