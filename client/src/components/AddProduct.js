@@ -2,6 +2,7 @@ import "../style/AddProduct.css";
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PhotoUpload from "./PhotoUpload";
+import axios from "axios";
 
 const AddProduct = () => {
   const [title, setTitle] = useState("");
@@ -54,46 +55,58 @@ const AddProduct = () => {
       alert("Lütfen bir kategori seçin.");
       return;
     }
-    console.log("Ürün eklendi:", {
-      title,
-      description,
-      address,
-      price,
-      category,
-      roomCount,
-      squareMeters,
-      landSquareMeters,
-      balconyCount,
-      buildingStatus,
-      adaNumber,
-      parcelNumber,
-      squareMetersGross,
-      ram,
-      cpu,
-      hdd,
-      displayCard,
-      screenSize,
-      resolution,
-      situation,
-      carBrand,
-      carSeries,
-      carYear,
-      carFuel,
-      carGear,
-      carKM,
-      caseType,
+    axios({
+      method: `post`,
+      url: `http://localhost:4000/api/ads`,
+      data: {
+        title,
+        description,
+        address,
+        price,
+        category,
+        roomCount,
+        squareMeters,
+        landSquareMeters,
+        balconyCount,
+        buildingStatus,
+        adaNumber,
+        parcelNumber,
+        squareMetersGross,
+        ram,
+        cpu,
+        hdd,
+        displayCard,
+        screenSize,
+        resolution,
+        situation,
+        carBrand,
+        carSeries,
+        carYear,
+        carFuel,
+        carGear,
+        carKM,
+        caseType,
+  
+        motorBrand,
+        motorSeries,
+        motorYear,
+        motorFuel,
+        motorGear,
+        motorKM,
+        motorType,
+  
+        operatingSystem,
+        internalMemory,
+        phoneScreenSize,
+      }
+    }) 
+     
+    .then(response => {
+      console.log("Başarılı istek:", response.data);
 
-      motorBrand,
-      motorSeries,
-      motorYear,
-      motorFuel,
-      motorGear,
-      motorKM,
-      motorType,
-
-      operatingSystem,
-      internalMemory,
-      phoneScreenSize,
+    })
+    .catch(error => {
+      console.error("İstek hatası:", error);
     });
 
     console.log("Yüklenen Fotoğraflar:", photos);
