@@ -13,23 +13,22 @@ function Home() {
   return (
     <div className="homeContainer container">
       <div className="lefSide">
+
         <div className="emlak">
           <div className="emlakArea">
             <HomeIcon />
             <h4 style={{color:'#394399'}} >Emlak</h4>
           </div>
-
           <ul>
             <li>Konut</li>
             <li>Arsa</li>
           </ul>
-
-          <hr/>
-
-
         </div>
-        <div className="Vasıta">
-          <div className="vasıtaArea">
+        
+        <hr/>
+
+        <div className="vasita">
+          <div className="vasitaArea">
             <DirectionsCarIcon />
             <h4 style={{color:'#394399'}} >Vasıta</h4>
           </div>
@@ -46,20 +45,15 @@ function Home() {
           <ComputerIcon />
             <h4 style={{color:'#394399'}} >Elektronik</h4>
           </div>
-
           <ul>
             <li>Bilgisayar</li>
             <li>Telefon</li>
           </ul>
-
-
-
         </div>
 
       </div>
       <div className="rightSidee">
         <Link to='/ilan' >Geçiş</Link>
-       
       </div>
     </div>
   );
