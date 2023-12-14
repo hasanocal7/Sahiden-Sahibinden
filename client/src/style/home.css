@@ -1,59 +1,55 @@
 .homeContainer {
-    display: flex;
-    margin-left: 60px;
-    margin-top: 30px;
-  }
-  
-  /* hr {
+  display: flex;
+  margin-left: 60px;
+  margin-top: 30px;
+}
+
+.propertyArea,
+.vehicleArea,
+.electronicArea {
+  display: flex;
+  font-size: 14px;
+  cursor: pointer;
+}
+.property ul,
+.vehicle ul,
+.electronic ul {
+  list-style: none;
+  width: 32px;
+  cursor: pointer;
+}
+.property li,
+.vehicle li,
+.electronic li {
+  margin-top: 10px;
+}
+.categoryLink:hover,
+h4:hover {
+  text-decoration: underline;
+}
+
+/* hr {
     width: 175px;
   } */
-  
-  /* .leftSide {
+
+/* .leftSide {
     flex: 2;
     height: 100vh;
   } */
-  
-  /* .rightSide {
+
+/* .rightSide {
     flex: 5;
     height: 100vh;
   } */
-  
-  /* .categoryLink {
+
+/* .categoryLink {
     text-decoration: none;
     color: inherit;
   } */
-  
-  .emlakArea,
-  .vasitaArea,
-  .elektronikArea {
-    display: flex;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  /* .emlakArea svg,
-  .vasitaArea svg,
-  .elektronikArea svg {
+/* .propertyArea svg,
+  .vehicleArea svg,
+  .electronicArea svg {
     margin-top: 15px;
     margin-right: 6px;
   }
    */
-
-  .emlak ul,
-  .vasita ul,
-  .elektronik ul {
-    list-style: none;
-    width: 32px;
-    cursor: pointer;
-  }
-  
-  .emlak li,
-  .vasita li,
-  .elektronik li {
-    margin-top: 10px;
-  }
-  
-  .categoryLink:hover,
-  h4:hover {
-    text-decoration: underline;
-  }

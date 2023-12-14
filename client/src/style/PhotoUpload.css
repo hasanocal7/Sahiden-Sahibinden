@@ -1,7 +1,5 @@
-/* PhotoUpload.css */
-
 .photo-upload-container {
-    max-width: 400px; /* İstediğiniz genişliği ayarlayabilirsiniz */
+    max-width: 400px; 
     margin: 0 auto;
   }
   
@@ -22,8 +20,8 @@
   }
   
   .uploaded-photo {
-    max-width: 100px; /* İstediğiniz genişliği ayarlayabilirsiniz */
-    max-height: 100px; /* İstediğiniz yüksekliği ayarlayabilirsiniz */
+    max-width: 100px; 
+    max-height: 100px; 
     margin-right: 10px;
     margin-bottom: 10px;
   }

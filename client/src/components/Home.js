@@ -19,8 +19,8 @@ function Home() {
     <div className="homeContainer container">
       <div className="lefSide">
 
-        <div className="emlak">
-          <div className="emlakArea">
+        <div className="property">
+          <div className="propertyArea">
             <HomeIcon />
             <h4 style={{color:'#394399'}} >Emlak</h4>
           </div>

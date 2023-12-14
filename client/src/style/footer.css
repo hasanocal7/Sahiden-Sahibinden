@@ -1,4 +1,4 @@
-.kapsayıcı {
+.inclusive {
   display: flex;
   flex-wrap: wrap; 
   background-color: #f9f9f9;
@@ -27,14 +27,14 @@
   background-color: #f9f9f9;
 }
 
-.bir, .iki, .üç {
+.one, .two, .three {
   flex: 1;
   display: flex;
   gap: 12px;
   margin: 10px;
 }
 
-.kapsam {
+.scope {
   border: 1px solid #dfdfdf;
   padding: 10px;
   overflow-x: hidden;
@@ -46,7 +46,7 @@
 }
 
 @media (max-width: 768px) {
-  .kapsam {
+  .scope {
     overflow-x: hidden;
   }
 }

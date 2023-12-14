@@ -17,8 +17,8 @@ function Footer() {
   };
 
   return (
-    <div className="kapsam mt-5">
-      <div className="kapsayıcı">
+    <div className="scope mt-5">
+      <div className="inclusive">
         <div className="first">
           <h4>Kurumsal</h4>
           <ul className="iconFooterList">
@@ -60,21 +60,21 @@ function Footer() {
         </div>
       </div>
       <div className="bottomArea">
-        <div className="bir">
+        <div className="one">
           <LocalPhoneIcon />
           <div className="bot">
             <p>7/24 Müşteri Hizmetleri</p>
             <p>05373555007</p>
           </div>
         </div>
-        <div className="iki">
+        <div className="two">
           <QuestionAnswerIcon />
           <div className="help">
             <p>Yardım Merkezi</p>
             <p>yardim.sahibinden.com</p>
           </div>
         </div>
-        <div className="üç">
+        <div className="three">
           <FormControl fullWidth>
             <InputLabel id="language-select-label">Dil</InputLabel>
             <Select

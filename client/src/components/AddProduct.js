@@ -1308,7 +1308,7 @@ const AddProduct = () => {
               >
                 Sıfırla
               </button>
-              <button type="submit" className="btn urunYukleButton">
+              <button type="submit" className="btn productUploadButton">
                 Ürün Yükle
               </button>
             </div>
