@@ -1,13 +1,35 @@
 
 .loginContainer {
   width: 50%;
+  height: auto;
   
 }
 
 .loginButton{
   background-color: #3f475f ;
-  color: white;
+  color: rgb(0, 0, 0);
+  width: auto;
+  height: auto;
+  font-size: 25px;
+  display: inline-block;
+  margin:auto;
+  margin-top: 150px;
+  
+}
+
+
+.loginButton:hover {
+  background-color: yellow;
+
 }
 .loginİnputs{
   font-size: 22px;
 }
+
+.forgotPasswordLink{
+  width: auto;
+  height: auto;
+  margin-top: -50px;
+  
+}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
