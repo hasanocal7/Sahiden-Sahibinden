@@ -1,13 +1,10 @@
-body{
-  background-color: whitesmoke;
-}
-
 
 
 .loginContainer {
   width: 50%;
   height: auto;
- 
+  border: 1px solid black;
+  border-radius: 10px 10px;
 }
 
 .form-control{
@@ -18,19 +15,19 @@ body{
 .form-title{
   color: yellow;
   background-color: #3f475f ;
-
+  padding: 10px;
 }
 
 
 .loginButton{
   background-color: #3f475f ;
-  color: rgb(0, 0, 0);
+  color: white;
   width: auto;
   height: auto;
-  font-size: 25px;
+  font-size: 20px;
   display: inline-block;
   margin:auto;
-  margin-left: 35%; 
+  margin-left: 40%; 
   margin-top: 2em;
   
 }
@@ -41,7 +38,7 @@ body{
 
 }
 .loginİnputs{
-  font-size: 22px;
+  font-size: 1px;
 }
 
 .forgotPasswordLink {
@@ -49,13 +46,27 @@ body{
   height: auto;
   margin-left: 40%; 
   margin-top: 2em; 
-  font-size: 20px;
+  font-size: 15px;
+  color: black;
+}
+.forgotPasswordLink:hover{
+  color:blue;
 }
 
 .signupLink{
-  font-size: 20px;
-  margin-left: 15%; 
+  font-size: 15px;
+  margin-left: 25%; 
   margin-top: 2em;
-
+  color: black;
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+.signupLink:hover{
+  color: blue;
+}
+     
+@media (min-width: 768px) {
+  .loginContainer {
+    width: 50%;
+  }
+}

@@ -4,8 +4,9 @@ import "../style/home.css";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ComputerIcon from '@mui/icons-material/Computer';
 import { Link } from "react-router-dom";
-import axios from 'axios'
-import {useState,useEffect} from 'react'
+
+// import axios from 'axios'
+// import {useState,useEffect} from 'react'
 function Home() {
 
   // const [data, setData] = useState([])
@@ -16,6 +17,7 @@ function Home() {
   
 
   return (
+    
     <div className="homeContainer container">
       <div className="lefSide">
 
