@@ -1,13 +1,61 @@
+body{
+  background-color: whitesmoke;
+}
+
+
 
 .loginContainer {
   width: 50%;
-  
+  height: auto;
+ 
 }
+
+.form-control{
+  font-size: 25px;
+}
+
+
+.form-title{
+  color: yellow;
+  background-color: #3f475f ;
+
+}
+
 
 .loginButton{
   background-color: #3f475f ;
-  color: white;
+  color: rgb(0, 0, 0);
+  width: auto;
+  height: auto;
+  font-size: 25px;
+  display: inline-block;
+  margin:auto;
+  margin-left: 35%; 
+  margin-top: 2em;
+  
+}
+
+
+.loginButton:hover {
+  background-color: yellow;
+
 }
 .loginİnputs{
   font-size: 22px;
 }
+
+.forgotPasswordLink {
+  width: auto;
+  height: auto;
+  margin-left: 40%; 
+  margin-top: 2em; 
+  font-size: 20px;
+}
+
+.signupLink{
+  font-size: 20px;
+  margin-left: 15%; 
+  margin-top: 2em;
+
+}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

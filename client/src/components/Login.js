@@ -1,3 +1,4 @@
+// Login.js
 import React from "react";
 import { useFormik } from "formik";
 import { basicSchema } from "../schemas";
@@ -22,16 +23,11 @@ function Login() {
   });
 
   return (
-    <div
-      className="loginContainer container mt-5 d-flex flex-column align-items-center"
-      style={{ height: "70vh" }}
-    >
-      <h1 className="form-title mb-4">Giriş Yap</h1>
+    <div className="loginContainer container mt-5 d-flex flex-column align-items-center">
+      <h1 className="form-title mb-4">Sahiden</h1>
       <form onSubmit={handleSubmit} className="w-50">
-        <div className="loginİnputs mb-3">
-          <label htmlFor="email" className="form-label">
-           
-          </label>
+        <div className="loginInputs mb-3">
+          <label htmlFor="email" className="form-label"></label>
           <input
             type="email"
             id="email"
@@ -42,9 +38,7 @@ function Login() {
           />
           {errors.email && <p className="invalid-feedback">{errors.email}</p>}
 
-          <label htmlFor="password" className="form-label">
-           
-          </label>
+          <label htmlFor="password" className="form-label"></label>
           <input
             type="password"
             id="password"
@@ -58,9 +52,22 @@ function Login() {
           )}
         </div>
 
-        <button type="submit" className="loginButton btn ">
-          Giriş Yap
-        </button>
+        <div className="forgotPasswordLink">
+          <a href="/forgot-password" className="forgotPasswordLink">
+            Şifremi Unuttum
+          </a>
+        </div>
+
+        <div>
+          <button type="submit" className="loginButton btn">
+            Giriş Yap
+          </button>
+        </div>
+
+        <div className="signupLink">
+          <p>Hesabın yok mu? <a href="/signup">Hemen kaydol!</a></p>
+        </div>
+
       </form>
     </div>
   );
