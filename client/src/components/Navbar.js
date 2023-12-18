@@ -40,14 +40,14 @@ function Navbar() {
                 Hesap Aç
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className="nav-item mb-3">
               <NavLink
                 exact
                 to="/ilanyukle"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClose} 
-                id="ilan"
+                id="ad"
               >
                 Ücretsiz İlan Ver
               </NavLink>
