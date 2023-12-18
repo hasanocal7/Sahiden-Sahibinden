@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Register.style.css';
+import '../style/Register.css';
 
 
 
