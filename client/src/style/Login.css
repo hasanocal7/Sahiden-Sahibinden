@@ -24,7 +24,7 @@ body{
 
 .loginButton{
   background-color: #3f475f ;
-  color: rgb(0, 0, 0);
+  color: white;
   width: auto;
   height: auto;
   font-size: 25px;
@@ -50,12 +50,22 @@ body{
   margin-left: 40%; 
   margin-top: 2em; 
   font-size: 20px;
+  color: black;
+}
+.forgotPasswordLink:hover{
+  color:blue;
 }
 
 .signupLink{
   font-size: 20px;
   margin-left: 15%; 
   margin-top: 2em;
+  color: black;
 
+}
+
+
+.signupLink:hover{
+  color: blue;
 }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
