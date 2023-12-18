@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import './style.css';
+import '../style/Register.css';
 
 
 
@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function Register() {
   return (
     <div className="container mt-5">
-      <h2 className="">Kaydol</h2>
+      <h2 className="register-heading">Kaydol</h2>
       <form>
         <div className="mb-3">
           <label htmlFor="fullName" className="form-label">Ad Soyad</label>
