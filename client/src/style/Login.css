@@ -1,13 +1,10 @@
-body{
-  background-color: whitesmoke;
-}
-
 
 
 .loginContainer {
   width: 50%;
   height: auto;
- 
+  border: 1px solid black;
+  border-radius: 10px 10px;
 }
 
 .form-control{
@@ -18,7 +15,7 @@ body{
 .form-title{
   color: yellow;
   background-color: #3f475f ;
-
+  padding: 10px;
 }
 
 
@@ -41,7 +38,7 @@ body{
 
 }
 .loginİnputs{
-  font-size: 22px;
+  font-size: 1px;
 }
 
 .forgotPasswordLink {
@@ -60,13 +57,16 @@ body{
   font-size: 15px;
   margin-left: 25%; 
   margin-top: 2em;
-  color: black;                                                           
- 
-
+  color: black;
 }
 
 
 .signupLink:hover{
   color: blue;
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+     
+@media (min-width: 768px) {
+  .loginContainer {
+    width: 50%;
+  }
+}
