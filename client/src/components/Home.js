@@ -5,15 +5,15 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ComputerIcon from '@mui/icons-material/Computer';
 import { Link } from "react-router-dom";
 
-// import axios from 'axios'
-// import {useState,useEffect} from 'react'
+import axios from 'axios'
+import {useState,useEffect} from 'react'
 function Home() {
 
-  // const [data, setData] = useState([])
-  // useEffect(() => {
-  // axios.get('http://localhost:5000')
-  // .then(response=>setData(response.data.results))
-  // }, [])
+  const [data, setData] = useState([])
+  useEffect(() => {
+  axios.get('http://localhost:5000')
+  .then(response=>setData(response.data.results))
+  }, [])
   
 
   return (

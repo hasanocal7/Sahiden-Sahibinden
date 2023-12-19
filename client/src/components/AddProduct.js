@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PhotoUpload from "./PhotoUpload";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddProduct = () => {
   const [title, setTitle] = useState("");
@@ -52,6 +53,8 @@ const AddProduct = () => {
   const [internalMemory, setInternalMemory] = useState("");
   const [phoneScreenSize, setPhoneScreenSize] = useState("");
 
+  const notify = () => toast("Ürün Yüklendi");
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!category) {
@@ -1308,9 +1311,16 @@ const AddProduct = () => {
               >
                 Sıfırla
               </button>
-              <button type="submit" className="btn productUploadButton">
+
+              <button
+                type="submit"
+                className="btn productUploadButton"
+                onClick={notify}
+              >
                 Ürün Yükle
+                <Toaster />
               </button>
+              
             </div>
           </form>
         </div>
