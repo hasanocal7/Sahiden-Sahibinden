@@ -9,11 +9,11 @@ import axios from 'axios'
 import {useState,useEffect} from 'react'
 function Home() {
 
-  const [data, setData] = useState([])
-  useEffect(() => {
-  axios.get('http://localhost:5000')
-  .then(response=>setData(response.data.results))
-  }, [])
+  // const [data, setData] = useState([])
+  // useEffect(() => {
+  // axios.get('http://localhost:5000')
+  // .then(response=>setData(response.data.results))
+  // }, [])
   
 
   return (
