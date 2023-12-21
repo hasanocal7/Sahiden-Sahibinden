@@ -1,0 +1,52 @@
+.kapsayıcı {
+  display: flex;
+  flex-wrap: wrap; 
+  background-color: #f9f9f9;
+  max-height: 100%; 
+}
+
+.first, .second, .third {
+  flex: 1;
+  margin: 10px;
+}
+
+.third .ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.third .li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.bottomArea {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f9f9f9;
+}
+
+.bir, .iki, .üç {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  margin: 10px;
+}
+
+.kapsam {
+  border: 1px solid #dfdfdf;
+  padding: 10px;
+  overflow-x: hidden;
+}
+
+.iconFooterList {
+  list-style: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .kapsam {
+    overflow-x: hidden;
+  }
+}
