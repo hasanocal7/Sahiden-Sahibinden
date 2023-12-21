@@ -3,7 +3,12 @@
   margin-left: 60px;
   margin-top: 30px;
 }
-
+.vasitaArea {
+  display: flex;
+}
+.vasitaArea svg{
+  margin-right: 12px;
+}
 .propertyArea,
 .vehicleArea,
 .electronicArea {
@@ -11,10 +16,19 @@
   font-size: 14px;
   cursor: pointer;
 }
+.electronicArea svg{
+  margin-right: 12px;
+}
+.propertyArea svg{
+  margin-right: 12px
+}
+.elektronikArea{
+  display: flex;
+}
 .property ul,
 .vehicle ul,
 .electronic ul {
-  list-style: none;
+  /* list-style: none; */
   width: 32px;
   cursor: pointer;
 }
