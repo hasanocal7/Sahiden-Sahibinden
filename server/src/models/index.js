@@ -13,12 +13,14 @@ let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(
-    config.database,
-    config.username,
-    process.env.MYSQL_ROOT_PASSWORD || config.password,
-    config
-  );
+  sequelize = new Sequelize({
+    username: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
+    dialect: "mysql",
+    port: process.env.MYSQLPORT,
+    host: process.env.MYSQLHOST,
+  });
 }
 
 fs.readdirSync(__dirname)
