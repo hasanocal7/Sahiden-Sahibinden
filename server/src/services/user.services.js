@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const cryptor = require("../utils/cryptor");
 const { sendingMail } = require("../utils/mailer");
 const crypto = require("crypto");
-const multer = require("multer");
 
 const createUser = async (email, first_name, last_name, password) => {
   const existingUser = await User.findOne({ email: email });

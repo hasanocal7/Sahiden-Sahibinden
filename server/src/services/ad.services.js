@@ -127,6 +127,12 @@ const categoryFilter = async (category) => {
   return ads;
 };
 
+const subCategoryFilter = async (sub_category) => {
+  const filter = sub_category ? { sub_category } : {};
+  const ads = await Ad.findAll({ where: filter });
+  return ads;
+};
+
 const updateAd = async (id, adData, info) => {
   const ad = await Ad.findOne({ where: { id: id } });
   if (!ad) {
@@ -191,6 +197,7 @@ module.exports = {
   getAllAds,
   getAd,
   categoryFilter,
+  subCategoryFilter,
   updateAd,
   deleteAd,
 };

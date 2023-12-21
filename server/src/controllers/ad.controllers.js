@@ -11,6 +11,12 @@ const createAd = async (req, res, next) => {
     delete adData.distcrict;
     delete adData.neighborhood;
     address = address.join(" / ");
+    const location = {
+      type: "Point",
+      coordinates: [longitude, latitude],
+    };
+    delete adData.longitude;
+    delete adData.latitude;
     const subCategoryData = {};
 
     let foundSubCat = false;
@@ -28,6 +34,7 @@ const createAd = async (req, res, next) => {
     }
     adData = {
       ...adData,
+      location: location,
       address: address,
       image: images,
       UserId: userID,
@@ -83,6 +90,24 @@ const categoryFilter = async (req, res, next) => {
   try {
     const category = req.params.category;
     const ads = await services.adServices.categoryFilter(category);
+    if (!ads) {
+      throw new Error("Ads not found");
+    }
+    res.status(200).json({
+      ads: ads,
+    });
+  } catch (error) {
+    res.status(404);
+    return next(new Error(error.message));
+  }
+};
+
+const subCategoryFilter = async (req, res, next) => {
+  try {
+    const sub_category = req.params.sub_category;
+    const ads = await services.adServices.categoryFilter.subCategoryFilter(
+      sub_category
+    );
     if (!ads) {
       throw new Error("Ads not found");
     }
@@ -175,6 +200,7 @@ module.exports = {
   getAllAds,
   getAd,
   categoryFilter,
+  subCategoryFilter,
   updateAd,
   deleteAd,
 };
