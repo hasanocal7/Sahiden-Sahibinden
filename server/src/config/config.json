@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "123456",
-    "database": "sahidendb_development",
-    "host": "mysqlserver",
-    "dialect": "mysql"
+    "username": "",
+    "password": "",
+    "database": "",
+    "host": "",
+    "dialect": ""
   }
 }
