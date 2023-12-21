@@ -13,6 +13,7 @@ exports.getUser = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   try {
+    console.log(req.body);
     const { email, first_name, last_name, password } = req.body;
     const hashedPassword = await cryptor.hash(password);
     const user = await User.create({
