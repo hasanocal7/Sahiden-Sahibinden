@@ -5,12 +5,11 @@ const { sendingMail } = require("../utils/mailer");
 const crypto = require("crypto");
 
 const createUser = async (email, first_name, last_name, password) => {
-  console.log(email, first_name, last_name, password);
   const existingUser = await User.findOne({ email: email });
   if (!existingUser) {
     const hashedPassword = await cryptor.hash(password);
     const user = await User.create({
-      email,
+      email: email,
       first_name: first_name.charAt(0).toUpperCase() + first_name.slice(1),
       last_name: last_name.charAt(0).toUpperCase() + last_name.slice(1),
       password: hashedPassword,
