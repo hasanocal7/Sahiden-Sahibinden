@@ -63,7 +63,7 @@ const AddProduct = () => {
     }
     axios({
       method: `post`,
-      url: `http://localhost:4000/api/ads`,
+      url: `https://sahiden-sahibinden-production.up.railway.app/api/ads`,
       data: {
         title,
         description,
