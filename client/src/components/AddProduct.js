@@ -107,6 +107,7 @@ const AddProduct = () => {
         operatingSystem,
         internalMemory,
         phoneScreenSize,
+        photos,
       },
     })
       .then((response) => {
