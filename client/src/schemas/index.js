@@ -4,8 +4,8 @@ const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 export const basicSchema = yup.object().shape({
   email: yup
     .string()
-    .email("Geçerli bir email giriniz")
-    .required("Email girmek zorunludur"),
+    .email("Geçerli bir e-posta  giriniz")
+    .required("E-posta girmek zorunludur"),
 
   password: yup
     .string()

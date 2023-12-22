@@ -23,25 +23,25 @@ function Login() {
 
   return (
     <div className="loginContainer container mt-5 d-flex flex-column align-items-center">
-      <h1 className="form-title mb-4">Sahiden</h1>
+      <h1 className="loginFormTitle form-title mb-4">Sahiden</h1>
       <form onSubmit={handleSubmit} className="w-50">
         <div className="loginInputs mb-3">
           <label htmlFor="email" className="form-label"></label>
           <input
             type="email"
             id="email"
-            className={`form-control ${errors.email ? "is-invalid" : ""}`}
+            className={`loginFormControl form-control ${errors.email ? "is-invalid" : ""}`}
             placeholder="E-posta giriniz"
             value={values.email}
             onChange={handleChange}
           />
-          {errors.email && <p className="invalid-feedback">{errors.email}</p>}
+          {errors.email && <p className="invalid-feedback ">{errors.email}</p>}
 
           <label htmlFor="password" className="form-label"></label>
           <input
             type="password"
             id="password"
-            className={`form-control ${errors.password ? "is-invalid" : ""}`}
+            className={`loginFormControl form-control ${errors.password ? "is-invalid" : ""}`}
             placeholder="Şifre giriniz"
             value={values.password}
             onChange={handleChange}
