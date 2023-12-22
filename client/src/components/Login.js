@@ -35,7 +35,10 @@ const Login = () => {
       const response = await axios.post('https://sahiden-sahibinden-production.up.railway.app/api/signin', formData);
 
       // Sunucudan dönen yanıtı kullanma
-      console.log(response.data);
+      const { token } = response.data;
+
+      // Token'i örneğin localStorage veya sessionStorage'e kaydedebilirsiniz
+      localStorage.setItem('token', token);
 
       // İsteğin başarılı olduğunu varsayalım, burada başka işlemler yapabilirsiniz.
     } catch (error) {

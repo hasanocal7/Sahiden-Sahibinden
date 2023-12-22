@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';  // react-icons/io paketini ekledik
 import axios from 'axios';
 import '../style/Register.css';
 
 function Register() {
+  const [token, setToken] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: '',
@@ -14,20 +18,19 @@ function Register() {
     },
     onSubmit: async (values, actions) => {
       try {
-        // API endpoint'inize POST isteği gönderin
         const response = await axios.post('https://sahiden-sahibinden-production.up.railway.app/api/signup', values);
-
-        // Yanıtı gerektiği gibi işleyin
-        console.log('Yanıt:', response.data);
-
-        // Başarılı bir gönderimden sonra formu sıfırlayın
+        setToken(response.data.token);
+        console.log('Kullanıcı Hesabı Açıldı:', response.data);
         actions.resetForm();
       } catch (error) {
-        // Hataları işleyin
         console.error('Hata:', error);
       }
     },
   });
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div className="registerContainer container mt-5 d-flex flex-column align-items-center ">
@@ -72,22 +75,34 @@ function Register() {
           />
         </div>
 
-        <div className="mb-3">
+        <div className="mb-3 password-container">
           <label htmlFor="password" className="password"></label>
-          <input
-            type="password"
-            className="registerFormControl form-control"
-            id="password"
-            placeholder="Şifreniz"
-            value={values.password}
-            onChange={handleChange}
-          />
+          <div className="input-group">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="registerFormControl form-control"
+              id="password"
+              placeholder="Şifreniz"
+              value={values.password}
+              onChange={handleChange}
+            />
+            <button
+              type="button"
+              className="password-toggle-btn btn btn-outline-secondary"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
+            </button>
+          </div>
         </div>
 
         <button type="submit" className="registerButton btn btn-primary">
           Hesap Aç
         </button>
       </form>
+
+      {token && <p>Oturum açıldı. Token: {token}</p>}
+
     </div>
   );
 }
