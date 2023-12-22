@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import GoogleMaps from "./GoogleMaps"; 
-import "../style/ilan.css";
+import "../style/Ad.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Ilan() {
@@ -11,7 +11,7 @@ function Ilan() {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="adContainer container mt-4">
       <div className="row">
         <div className="col-md-6">
           <div className="fotograf bg-secondary text-light p-4">

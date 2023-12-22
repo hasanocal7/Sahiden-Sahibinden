@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { IoMdEye, IoMdEyeOff } from 'react-icons/io';  // react-icons/io paketini ekledik
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import axios from 'axios';
 import '../style/Register.css';
 
 function Register() {
-  const [token, setToken] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const { values, handleChange, handleSubmit } = useFormik({
@@ -19,7 +18,7 @@ function Register() {
     onSubmit: async (values, actions) => {
       try {
         const response = await axios.post('https://sahiden-sahibinden-production.up.railway.app/api/signup', values);
-        setToken(response.data.token);
+       
         console.log('Kullanıcı Hesabı Açıldı:', response.data);
         actions.resetForm();
       } catch (error) {
@@ -101,7 +100,7 @@ function Register() {
         </button>
       </form>
 
-      {token && <p>Oturum açıldı. Token: {token}</p>}
+      
 
     </div>
   );

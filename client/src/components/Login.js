@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { IoMdEye, IoMdEyeOff } from 'react-icons/io';  // react-icons/io paketini ekledik
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/Login.css";
 import axios from 'axios';
+
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +25,7 @@ const Login = () => {
       [e.target.id]: e.target.value,
     });
 
-    // Her değişiklikte hataları temizle
+
     setErrors({
       email: "",
       password: "",
@@ -38,29 +40,28 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      // Axios ile sunucuya istek gönderme
       const response = await axios.post('https://sahiden-sahibinden-production.up.railway.app/api/signin', formData);
 
       // Sunucudan dönen yanıtı kullanma
-      const { token } = response.data;
+      const  token = response.data.accessToken;
 
-      // Token'i örneğin localStorage veya sessionStorage'e kaydedebilirsiniz
+      // Token localStorage kayıt etme
       localStorage.setItem('token', token);
 
-      // İsteğin başarılı olduğunu varsayalım, burada başka işlemler yapabilirsiniz.
+      
     } catch (error) {
-      // Hata durumunda burada işlemler yapabilirsiniz.
       console.error('Hata:', error);
 
-      // Hataları işleyerek state'i güncelleyin
       setErrors({
-        email: "Hata mesajı",
-        password: "Hata mesajı",
+        email: "",
+        password: "",
       });
     }
   };
+ 
 
   return (
+    
     <div className="loginContainer container mt-5 d-flex flex-column align-items-center">
       <h1 className="loginFormTitle form-title mb-4">Sahiden</h1>
       <form onSubmit={handleSubmit} className="w-50">
@@ -112,9 +113,10 @@ const Login = () => {
         </div>
 
         <div className="signupLink">
-          <p>Hesabın yok mu? <a href="/signup">Hemen kaydol!</a></p>
+          <p>Hesabın yok mu? <a href="/register">Hemen kaydol!</a></p>
         </div>
       </form>
+      
     </div>
   );
 };
