@@ -4,50 +4,47 @@ import "../style/PhotoUpload.css";
 
 const PhotoUpload = ({ photos, setPhotos }) => {
   const [errorMessage, setErrorMessage] = useState("");
-  const [deletedIndex, setDeletedIndex] = useState(null); // Silinen görselin index'ini takip etmek için
+  const [deletedIndex, setDeletedIndex] = useState(null); 
 
   const onDrop = (acceptedFiles) => {
-    // Dosya türü ve boyut kontrolü yapılıyor
     const filteredFiles = acceptedFiles.filter((file) => {
       const isImage =
         file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png";
-      const isSizeValid = file.size <= 20 * 1024 * 1024; // 20 MB'a kadar olan dosyalar
-
+      const isSizeValid = file.size <= 20 * 1024 * 1024; 
+  
       if (!isImage) {
+        console.log("Geçersiz dosya türü:", file.type);
         setErrorMessage("Yalnızca jpg, jpeg ve png uzantılı dosyaları kabul ediyoruz.");
       } else if (!isSizeValid) {
         setErrorMessage("Dosya boyutu 20 MB'ı geçemez.");
       } else {
-        setErrorMessage(""); // Hata yoksa hata mesajını temizle
+        setErrorMessage("");
       }
-
+  
       return isImage && isSizeValid;
     });
 
     if (deletedIndex !== null) {
-      // Eğer bir görsel silinmişse, silinenin yerine yeni görseli ekle
       const updatedPhotos = [...photos];
       updatedPhotos[deletedIndex] = filteredFiles[0];
       setPhotos(updatedPhotos);
-      setDeletedIndex(null); // Silinen index'i temizle
+      setDeletedIndex(null);
     } else {
-      // Yeni görsel ekleyin
       setPhotos([...photos, ...filteredFiles]);
     }
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    maxSize: 20 * 1024 * 1024, // 20 MB'a kadar olan dosyaları kabul et
-    accept: "image/jpeg, image/jpg, image/png", // Sadece belirtilen uzantılardaki dosyaları kabul et
+    maxSize: 20 * 1024 * 1024, 
+    accept: "image/jpeg, image/jpg, image/png", 
   });
 
   const deletePhoto = (index) => {
-    // Görseli sil
     const updatedPhotos = [...photos];
     updatedPhotos.splice(index, 1);
     setPhotos(updatedPhotos);
-    setDeletedIndex(index); // Silinen görselin index'ini güncelle
+    setDeletedIndex(index); 
   };
 
   return (

@@ -1,13 +1,77 @@
 
+
 .loginContainer {
-  width: 50%;
-  
+  width: 40%;
+  height: 10%;
+  border: 1px solid black;
+  border-radius: 10px 10px;
 }
+
+
+.loginFormControl{
+  font-size: 15px;
+}
+
+
+.loginFormTitle {
+  color: yellow;
+  background-color: #3f475f ;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
 
 .loginButton{
   background-color: #3f475f ;
   color: white;
+  width: auto;
+  height: auto;
+  font-size: 20px;
+  display: inline-block;
+  margin:auto;
+  margin-left: 32%; 
+  margin-top: 2em;
+  
+}
+
+
+.loginButton:hover {
+  background-color: yellow;
+
 }
 .loginİnputs{
-  font-size: 22px;
+  font-size: 1px;
+  padding: 1px;
+  }
+
+
+.forgotPasswordLink {
+  width: auto;
+  height: auto;
+  margin-left: 30%; 
+  margin-top: 2em; 
+  font-size: 15px;
+  color: black;
+}
+.forgotPasswordLink:hover{
+  color:blue;
+}
+
+.signupLink{
+  font-size: 15px;
+  margin-left: 15%; 
+  margin-top: 2em;
+  color: black;
+}
+
+
+.signupLink:hover{
+  color: blue;
+}
+     
+@media (min-width: 768px) {
+  .loginContainer {
+    width: 50%;
+  }
 }

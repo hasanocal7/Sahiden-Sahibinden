@@ -4,18 +4,25 @@ import "../style/home.css";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ComputerIcon from '@mui/icons-material/Computer';
 import { Link } from "react-router-dom";
+
 import axios from 'axios'
 import {useState,useEffect} from 'react'
 function Home() {
+
   // const [data, setData] = useState([])
+  // useEffect(() => {
   // axios.get('http://localhost:5000')
   // .then(response=>setData(response.data.results))
+  // }, [])
+  
+
   return (
+    
     <div className="homeContainer container">
       <div className="lefSide">
 
-        <div className="emlak">
-          <div className="emlakArea">
+        <div className="property">
+          <div className="propertyArea">
             <HomeIcon />
             <h4 style={{color:'#394399'}} >Emlak</h4>
           </div>
@@ -53,7 +60,7 @@ function Home() {
 
       </div>
       <div className="rightSidee">
-        <Link to='/ilan' >Geçiş</Link>
+        <Link to='/ilan' exact={true}>Geçiş</Link>
       </div>
     </div>
   );

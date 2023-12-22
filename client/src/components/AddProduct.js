@@ -3,11 +3,15 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PhotoUpload from "./PhotoUpload";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddProduct = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
+  const [province, setProvince] = useState("");
+  const [district, setDistrict] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
@@ -46,9 +50,11 @@ const AddProduct = () => {
   const [motorType, setMotorType] = useState("");
 
   const [operatingSystem, setOperatingSystem] = useState("");
-  const [internalMemory, setInternalMemory ] = useState("");
+  const [internalMemory, setInternalMemory] = useState("");
   const [phoneScreenSize, setPhoneScreenSize] = useState("");
 
+  const notify = () => toast("Ürün Yüklendi");
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!category) {
@@ -62,6 +68,9 @@ const AddProduct = () => {
         title,
         description,
         address,
+        province,
+        district,
+        neighborhood,
         price,
         category,
         roomCount,
@@ -86,7 +95,7 @@ const AddProduct = () => {
         carGear,
         carKM,
         caseType,
-  
+
         motorBrand,
         motorSeries,
         motorYear,
@@ -94,20 +103,19 @@ const AddProduct = () => {
         motorGear,
         motorKM,
         motorType,
-  
+
         operatingSystem,
         internalMemory,
         phoneScreenSize,
-      }
-    }) 
-     
-    .then(response => {
-      console.log("Başarılı istek:", response.data);
-
+        photos,
+      },
     })
-    .catch(error => {
-      console.error("İstek hatası:", error);
-    });
+      .then((response) => {
+        console.log("Başarılı istek:", response.data);
+      })
+      .catch((error) => {
+        console.error("İstek hatası:", error);
+      });
 
     console.log("Yüklenen Fotoğraflar:", photos);
     setPhotos([]);
@@ -119,6 +127,9 @@ const AddProduct = () => {
     setTitle("");
     setDescription("");
     setAddress("");
+    setProvince("");
+    setDistrict("");
+    setNeighborhood("");
     setPrice("");
     setCategory("");
     setSubCategory("");
@@ -155,7 +166,7 @@ const AddProduct = () => {
     setMotorType("");
 
     setInternalMemory("");
-setOperatingSystem("");
+    setOperatingSystem("");
     setPhoneScreenSize("");
 
     setPhotos([]);
@@ -169,14 +180,14 @@ setOperatingSystem("");
     setSubCategory("");
 
     switch (selectedCategory) {
-      case "emlak":
+      case "property":
         setSubCategories(["Konut", "Arsa"]);
         break;
-      case "vasita":
-        setSubCategories(["Araba", "Motorsiklet"]);
+      case "vehicle":
+        setSubCategories(["Car", "Motorcycle"]);
         break;
-      case "elektronik":
-        setSubCategories(["Bilgisayar", "Telefon"]);
+      case "electronic":
+        setSubCategories(["Computer", "Telephone"]);
         break;
       default:
         setSubCategories([]);
@@ -229,6 +240,43 @@ setOperatingSystem("");
               />
             </div>
             <div className="mb-3">
+              <label htmlFor="province" className="form-label">
+                İl:
+              </label>
+              <textarea
+                id="province"
+                className="form-control"
+                value={province}
+                onChange={(e) => setProvince(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="district" className="form-label">
+                İlçe:
+              </label>
+              <textarea
+                id="district"
+                className="form-control"
+                value={district}
+                onChange={(e) => setDistrict(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="neighborhood" className="form-label">
+                Mahalle:
+              </label>
+              <textarea
+                id="neighborhood"
+                className="form-control"
+                value={neighborhood}
+                onChange={(e) => setNeighborhood(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
               <label htmlFor="price" className="form-label">
                 Fiyat:
               </label>
@@ -256,13 +304,13 @@ setOperatingSystem("");
                 <option value="" disabled>
                   Kategori Seçiniz:
                 </option>
-                <option value="emlak">Emlak</option>
-                <option value="vasita">Vasıta</option>
-                <option value="elektronik">Elektronik</option>
+                <option value="property">Emlak</option>
+                <option value="vehicle">Vasıta</option>
+                <option value="electronic">Elektronik</option>
               </select>
             </div>
 
-            {category === "vasita" && (
+            {category === "vehicle" && (
               <div className="mb-3">
                 <div className="mb-3">
                   <label htmlFor="subCategory" className="form-label">
@@ -278,12 +326,12 @@ setOperatingSystem("");
                     <option value="" disabled>
                       Alt Kategori Seçiniz:
                     </option>
-                    <option value="Araba">Araba</option>
-                    <option value="Motorsiklet">Motorsiklet</option>
+                    <option value="Car">Araba</option>
+                    <option value="Motorcycle">Motorsiklet</option>
                   </select>
                 </div>
 
-                {subCategory === "Araba" && (
+                {subCategory === "Car" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="carBrand" className="form-label">
@@ -319,12 +367,12 @@ setOperatingSystem("");
                             <option value="" disabled>
                               Seri Seçiniz:
                             </option>
-                            <option value="S-Serisi">S-Serisi</option>
-                            <option value="C-Serisi">C-Serisi</option>
-                            <option value="E-Serisi">E-Serisi</option>
+                            <option value="S-Series">S-Serisi</option>
+                            <option value="C-Series">C-Serisi</option>
+                            <option value="E-Series">E-Serisi</option>
                           </select>
                         </div>
-                        
+
                         <div className="mb-3">
                           <label htmlFor="carYear" className="form-label">
                             Yıl Seçiniz:
@@ -361,9 +409,9 @@ setOperatingSystem("");
                             <option value="" disabled>
                               Yakıt Tipi Seçiniz:
                             </option>
-                            <option value="carBenzin">Benzin</option>
-                            <option value="carDizel">Dizel</option>
-                            <option value="carElektrik">Elektrik</option>
+                            <option value="carGasoline">Benzin</option>
+                            <option value="carDiesel">Diesel</option>
+                            <option value="carElectricity">Electricity</option>
                             <option value="carLPG">LPG</option>
                           </select>
                         </div>
@@ -382,8 +430,8 @@ setOperatingSystem("");
                             <option value="" disabled>
                               Vites Seçiniz:
                             </option>
-                            <option value="manuelVites">Manuel</option>
-                            <option value="otomatikVites">Otomatik</option>
+                            <option value="manualGear">Manuel</option>
+                            <option value="autoGear">Otomatik</option>
                           </select>
                         </div>
 
@@ -477,9 +525,9 @@ setOperatingSystem("");
                             <option value="" disabled>
                               Yakıt Tipi Seçiniz:
                             </option>
-                            <option value="carBenzin">Benzin</option>
-                            <option value="carDizel">Dizel</option>
-                            <option value="carElektrik">Elektrik</option>
+                            <option value="carGasoline">Gasoline</option>
+                            <option value="carDiesel">Dizel</option>
+                            <option value="carElectricity">Elektrik</option>
                             <option value="carLPG">LPG</option>
                           </select>
                         </div>
@@ -497,8 +545,8 @@ setOperatingSystem("");
                             <option value="" disabled>
                               Vites Seçiniz:
                             </option>
-                            <option value="manuelVites">Manuel</option>
-                            <option value="otomatikVites">Otomatik</option>
+                            <option value="manualGear">Manuel</option>
+                            <option value="autoGear">Otomatik</option>
                           </select>
                         </div>
                         <div className="mb-3">
@@ -538,7 +586,7 @@ setOperatingSystem("");
                   </div>
                 )}
 
-                {subCategory === "Motorsiklet" && (
+                {subCategory === "Motorcycle" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="motorBrand" className="form-label">
@@ -558,12 +606,12 @@ setOperatingSystem("");
                         <option value="Yamaha">Yamaha</option>
                       </select>
                     </div>
-                    
+
                     {motorBrand === "Honda" && (
                       <div className="mb-3">
                         <div className="mb-3">
                           <label htmlFor="motorSeries" className="form-label">
-                          Honda Seri Seçiniz:
+                            Honda Seri Seçiniz:
                           </label>
                           <select
                             id="motorSeries"
@@ -573,10 +621,12 @@ setOperatingSystem("");
                             required
                           >
                             <option value="" disabled>
-                            Honda Seri Seçiniz:
+                              Honda Seri Seçiniz:
                             </option>
                             <option value="CBR650R">CBR650R</option>
-                            <option value="CBR1000RR-RFirebladeSP">CBR1000RR-R Fireblade SP</option>
+                            <option value="CBR1000RR-RFirebladeSP">
+                              CBR1000RR-R Fireblade SP
+                            </option>
                           </select>
                         </div>
                         <div className="mb-3">
@@ -615,8 +665,8 @@ setOperatingSystem("");
                             <option value="" disabled>
                               Yakıt Tipi Seçiniz:
                             </option>
-                            <option value="motorBenzin">Benzin</option>
-                            <option value="motorDizel">Dizel</option>
+                            <option value="motorGasoline">Gasoline</option>
+                            <option value="motorDiesel">Diesel</option>
                           </select>
                         </div>
 
@@ -634,8 +684,10 @@ setOperatingSystem("");
                             <option value="" disabled>
                               Vites Seçiniz:
                             </option>
-                            <option value="manuelSanziman">Manuel</option>
-                            <option value="otomatikSanziman">Otomatik</option>
+                            <option value="manualTransmission">Manuel</option>
+                            <option value="automaticTransmission">
+                              Otomatik
+                            </option>
                           </select>
                         </div>
 
@@ -664,134 +716,143 @@ setOperatingSystem("");
                             required
                           >
                             <option value="" disabled>
-                            Kasa Tipi Seçiniz:
+                              Kasa Tipi Seçiniz:
                             </option>
-                            <option value="motorSupersport">Süpersport Motosiklet</option>
-                            <option value="motorScooter">Scooter Motosiklet</option>
+                            <option value="motorSupersport">
+                              Süpersport Motosiklet
+                            </option>
+                            <option value="motorScooter">
+                              Scooter Motosiklet
+                            </option>
                           </select>
                         </div>
                       </div>
                     )}
                     {motorBrand === "Yamaha" && (
                       <div className="mb-3">
-                      <div className="mb-3">
-                        <label htmlFor="carSeries" className="form-label">
-                        Yamaha Seri Seçiniz:
-                        </label>
-                        <select
-                          id="carSeries"
-                          className="form-select"
-                          value={carSeries}
-                          onChange={(e) => setCarSeries(e.target.value)}
-                          required
-                        >
-                          <option value="" disabled>
-                          Yamaha Seri Seçiniz:
-                          </option>
-                          <option value="XSR900GP">XSR900 GP</option>
-                          <option value="XSR900">XSR900</option>
-                        </select>
-                      </div>
-                      <div className="mb-3">
-                        <label htmlFor="motorYear" className="form-label">
-                          Yıl Seçiniz:
-                        </label>
-                        <select
-                          id="motorYear"
-                          className="form-select"
-                          value={motorYear}
-                          onChange={(e) => setMotorYear(e.target.value)}
-                          required
-                        >
-                          <option value="" disabled>
+                        <div className="mb-3">
+                          <label htmlFor="carSeries" className="form-label">
+                            Yamaha Seri Seçiniz:
+                          </label>
+                          <select
+                            id="carSeries"
+                            className="form-select"
+                            value={carSeries}
+                            onChange={(e) => setCarSeries(e.target.value)}
+                            required
+                          >
+                            <option value="" disabled>
+                              Yamaha Seri Seçiniz:
+                            </option>
+                            <option value="XSR900GP">XSR900 GP</option>
+                            <option value="XSR900">XSR900</option>
+                          </select>
+                        </div>
+                        <div className="mb-3">
+                          <label htmlFor="motorYear" className="form-label">
                             Yıl Seçiniz:
-                          </option>
-                          <option value="motor2023">2023</option>
-                          <option value="motor2022">2022</option>
-                          <option value="motor2021">2021</option>
-                          <option value="motor2020">2020</option>
-                          <option value="motor2019">2019</option>
-                          <option value="motor2018">2018</option>
-                        </select>
-                      </div>
-                      <div className="mb-3">
-                        <label htmlFor="motorFuel" className="form-label">
-                          Yakıt Tipi Seçiniz:
-                        </label>
-                        <select
-                          id="motorFuel"
-                          className="form-select"
-                          value={motorFuel}
-                          onChange={(e) => setMotorFuel(e.target.value)}
-                          required
-                        >
-                          <option value="" disabled>
+                          </label>
+                          <select
+                            id="motorYear"
+                            className="form-select"
+                            value={motorYear}
+                            onChange={(e) => setMotorYear(e.target.value)}
+                            required
+                          >
+                            <option value="" disabled>
+                              Yıl Seçiniz:
+                            </option>
+                            <option value="motor2023">2023</option>
+                            <option value="motor2022">2022</option>
+                            <option value="motor2021">2021</option>
+                            <option value="motor2020">2020</option>
+                            <option value="motor2019">2019</option>
+                            <option value="motor2018">2018</option>
+                          </select>
+                        </div>
+                        <div className="mb-3">
+                          <label htmlFor="motorFuel" className="form-label">
                             Yakıt Tipi Seçiniz:
-                          </option>
-                          <option value="motorBenzin">Benzin</option>
-                          <option value="motorDizel">Dizel</option>
-                        </select>
-                      </div>
+                          </label>
+                          <select
+                            id="motorFuel"
+                            className="form-select"
+                            value={motorFuel}
+                            onChange={(e) => setMotorFuel(e.target.value)}
+                            required
+                          >
+                            <option value="" disabled>
+                              Yakıt Tipi Seçiniz:
+                            </option>
+                            <option value="motorGasoline">Gasoline</option>
+                            <option value="motorDiesel">Diesel</option>
+                          </select>
+                        </div>
 
-                      <div className="mb-3">
-                        <label htmlFor="motorGear" className="form-label">
-                          Vites Seçiniz:
-                        </label>
-                        <select
-                          id="motorGear"
-                          className="form-select"
-                          value={motorGear}
-                          onChange={(e) => setMotorGear(e.target.value)}
-                          required
-                        >
-                          <option value="" disabled>
+                        <div className="mb-3">
+                          <label htmlFor="motorGear" className="form-label">
                             Vites Seçiniz:
-                          </option>
-                          <option value="manuelSanziman">Manuel</option>
-                          <option value="otomatikSanziman">Otomatik</option>
-                        </select>
-                      </div>
+                          </label>
+                          <select
+                            id="motorGear"
+                            className="form-select"
+                            value={motorGear}
+                            onChange={(e) => setMotorGear(e.target.value)}
+                            required
+                          >
+                            <option value="" disabled>
+                              Vites Seçiniz:
+                            </option>
+                            <option value="manualTransmission">Manuel</option>
+                            <option value="automaticTransmission">
+                              Otomatik
+                            </option>
+                          </select>
+                        </div>
 
-                      <div className="mb-3">
-                        <label htmlFor="motorKM" className="form-label">
-                          KM Giriniz:
-                        </label>
-                        <input
-                          type="number"
-                          id="motorKM"
-                          className="form-control"
-                          value={motorKM}
-                          onChange={(e) => setMotorKM(e.target.value)}
-                          required
-                        ></input>
+                        <div className="mb-3">
+                          <label htmlFor="motorKM" className="form-label">
+                            KM Giriniz:
+                          </label>
+                          <input
+                            type="number"
+                            id="motorKM"
+                            className="form-control"
+                            value={motorKM}
+                            onChange={(e) => setMotorKM(e.target.value)}
+                            required
+                          ></input>
+                        </div>
+                        <div className="mb-3">
+                          <label htmlFor="motorType" className="form-label">
+                            Kasa Tipi Seçiniz:
+                          </label>
+                          <select
+                            id="motorType"
+                            className="form-select"
+                            value={motorType}
+                            onChange={(e) => setMotorType(e.target.value)}
+                            required
+                          >
+                            <option value="" disabled>
+                              Kasa Tipi Seçiniz:
+                            </option>
+                            <option value="motorSupersport">
+                              Süpersport Motosiklet
+                            </option>
+                            <option value="motorScooter">
+                              Scooter Motosiklet
+                            </option>
+                          </select>
+                        </div>
                       </div>
-                      <div className="mb-3">
-                        <label htmlFor="motorType" className="form-label">
-                          Kasa Tipi Seçiniz:
-                        </label>
-                        <select
-                          id="motorType"
-                          className="form-select"
-                          value={motorType}
-                          onChange={(e) => setMotorType(e.target.value)}
-                          required
-                        >
-                          <option value="" disabled>
-                          Kasa Tipi Seçiniz:
-                          </option>
-                          <option value="motorSupersport">Süpersport Motosiklet</option>
-                          <option value="motorScooter">Scooter Motosiklet</option>
-                        </select>
-                      </div>
-                    </div>
                     )}
                   </div>
-                  
                 )}
               </div>
             )}
 
-            {category === "elektronik" && (
+            {category === "electronic" && (
               <div>
                 <div className="mb-3">
                   <label htmlFor="subCategory" className="form-label">
@@ -807,12 +868,12 @@ setOperatingSystem("");
                     <option value="" disabled>
                       Alt Kategori Seçiniz:
                     </option>
-                    <option value="Bilgisayar">Bilgisayar</option>
-                    <option value="Telefon">Telefon</option>
+                    <option value="Computer">Bilgisayar</option>
+                    <option value="Telephone">Telefon</option>
                   </select>
                 </div>
 
-                {subCategory === "Bilgisayar" && (
+                {subCategory === "Computer" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="ram" className="form-label">
@@ -868,11 +929,11 @@ setOperatingSystem("");
                         <option value="" disabled>
                           Hard Disk Seçiniz:
                         </option>
-                        <option value="300 GB">300 GB</option>
-                        <option value="500 GB">500 GB</option>
-                        <option value="1 TB">1 TB</option>
-                        <option value="2 TB">2 TB</option>
-                        <option value="8 TB">8 TB</option>
+                        <option value="300GB">300 GB</option>
+                        <option value="500GB">500 GB</option>
+                        <option value="1TB">1 TB</option>
+                        <option value="2TB">2 TB</option>
+                        <option value="8TB">8 TB</option>
                       </select>
                     </div>
 
@@ -890,42 +951,40 @@ setOperatingSystem("");
                         <option value="" disabled>
                           Ekran Kartı Seçiniz:
                         </option>
-                        <option value="MSI GeForce RTX 4070 Ti">
-                          MSI GeForce RTX 4070 Ti
+                        <option value="GeForce_RTX_4070Ti">
+                          GeForce RTX 4070 Ti
                         </option>
-                        <option value="MSI GeForce RTX 4070">
-                          MSI GeForce RTX 4070
+                        <option value="MSI_GeForce_RTX_4070">
+                          GeForce RTX 4070
                         </option>
-                        <option value="MSI GeForce RTX 4060 Ti">
-                          MSI GeForce RTX 4060 Ti
+                        <option value="GeForce_RTX_4060Ti">
+                          GeForce RTX 4060 Ti
                         </option>
-                        <option value="MSI GeForce RTX 4060">
-                          MSI GeForce RTX 4060
+                        <option value="GeForce_RTX_4060">
+                          GeForce RTX 4060
                         </option>
-                        <option value="MSI GeForce RTX 3070">
-                          MSI GeForce RTX 3070
+                        <option value="GeForce_RTX_3070">
+                          GeForce RTX 3070
                         </option>
-                        <option value="MSI GeForce RTX 3060 Ti">
-                          MSI GeForce RTX 3060 Ti
+                        <option value="GeForce_RTX_3060Ti">
+                          GeForce RTX 3060 Ti
                         </option>
-                        <option value="MSI GeForce RTX 3060">
-                          MSI GeForce RTX 3060
+                        <option value="GeForce_RTX_3060">
+                          GeForce RTX 3060
                         </option>
-                        <option value="MSI GeForce RTX 3050">
-                          MSI GeForce RTX 3050
+                        <option value="GeForce_RTX_3050">
+                          GeForce RTX 3050
                         </option>
-                        <option value="MSI GeForce GTX 1650">
-                          MSI GeForce GTX 1650
+                        <option value="GeForce_GTX_1650">
+                          GeForce GTX 1650
                         </option>
-                        <option value="MSI GeForce GTX 1630">
-                          MSI GeForce GTX 1630
+                        <option value="GeForce_GTX_1630">
+                          GeForce GTX 1630
                         </option>
-                        <option value="MSI GeForce GTX 1050 Ti">
-                          MSI GeForce GTX 1050 Ti
+                        <option value="GeForce_GTX_1050Ti">
+                          GeForce GTX 1050 Ti
                         </option>
-                        <option value="MSI GeForce GT 1030">
-                          MSI GeForce GT 1030
-                        </option>
+                        <option value="GeForce_GT_030">GeForce GT 030</option>
                       </select>
                     </div>
 
@@ -963,14 +1022,14 @@ setOperatingSystem("");
                         <option value="" disabled>
                           Durumu
                         </option>
-                        <option value="Sıfır">Sıfır</option>
-                        <option value="Kullanılabilir">Kullanılabilir</option>
+                        <option value="Zero">Sıfır</option>
+                        <option value="availableForUse">Kullanılabilir</option>
                       </select>
                     </div>
                   </div>
                 )}
 
-{subCategory === "Telefon" && (
+                {subCategory === "Telephone" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="ram" className="form-label">
@@ -1005,7 +1064,7 @@ setOperatingSystem("");
                         required
                       >
                         <option value="" disabled>
-                        İşletim Sistemi:
+                          İşletim Sistemi:
                         </option>
                         <option value="IOS">iOS</option>
                         <option value="Android">Android</option>
@@ -1024,7 +1083,7 @@ setOperatingSystem("");
                         required
                       >
                         <option value="" disabled>
-                        Dahilli Hafıza
+                          Dahilli Hafıza
                         </option>
                         <option value="16GB">16 GB</option>
                         <option value="32GB">32 GB</option>
@@ -1048,11 +1107,11 @@ setOperatingSystem("");
                         <option value="" disabled>
                           Ekran Boyutu Seçiniz:
                         </option>
-                        <option value="4.7inç">4.7 inç</option>
-                        <option value="6.1inç">6.1 inç</option>
-                        <option value="6.7inç">6.7 inç</option>
-                        <option value="6.8inç">6.8 inç</option>
-                        <option value="6.9inç">6.9 inç</option>
+                        <option value="4.7inc">4.7 inç</option>
+                        <option value="6.1inc">6.1 inç</option>
+                        <option value="6.7inc">6.7 inç</option>
+                        <option value="6.8inc">6.8 inç</option>
+                        <option value="6.9inc">6.9 inç</option>
                       </select>
                     </div>
 
@@ -1070,8 +1129,8 @@ setOperatingSystem("");
                         <option value="" disabled>
                           Durumu
                         </option>
-                        <option value="Sıfır">Sıfır</option>
-                        <option value="Kullanılabilir">Kullanılabilir</option>
+                        <option value="Zero">Zero</option>
+                        <option value="availableForUse">availableForUse</option>
                       </select>
                     </div>
                   </div>
@@ -1079,7 +1138,7 @@ setOperatingSystem("");
               </div>
             )}
 
-            {category === "emlak" && subCategories.length > 0 && (
+            {category === "property" && subCategories.length > 0 && (
               <>
                 <div className="mb-3">
                   <label htmlFor="subCategory" className="form-label">
@@ -1209,7 +1268,7 @@ setOperatingSystem("");
                           İmar Durumu Seçiniz:
                         </option>
                         <option value="Ada">Ada</option>
-                        <option value="Konut">Konut</option>
+                        <option value="Housing">Konut</option>
                         <option value="Tarla">Tarla</option>
                         <option value="Zeytinlik">Zeytinlik</option>
                       </select>
@@ -1253,9 +1312,16 @@ setOperatingSystem("");
               >
                 Sıfırla
               </button>
-              <button type="submit" className="btn urunYukleButton">
+
+              <button
+                type="submit"
+                className="btn productUploadButton"
+                onClick={notify}
+              >
                 Ürün Yükle
+                <Toaster />
               </button>
+              
             </div>
           </form>
         </div>
