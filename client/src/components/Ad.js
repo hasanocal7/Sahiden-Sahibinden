@@ -6,7 +6,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function Ilan() {
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  // Konum seçildiğinde bu fonksiyon çağrılacak
   const handleLocationSelect = (location) => {
     setSelectedLocation(location);
   };
@@ -36,7 +35,6 @@ function Ilan() {
             Slider
             <hr/>
             <div className="icon mt-4">
-              {/* GoogleMaps bileşenini kullanarak haritayı gösteriyoruz */}
               <GoogleMaps onSelect={handleLocationSelect} />
             </div>
           </div>
@@ -45,7 +43,6 @@ function Ilan() {
       <div className="row mt-4">
         <div className="col-md-12">
           <div className="selected-location bg-info text-light p-4">
-            {/* Seçilen konumu gösteriyoruz */}
             {selectedLocation && (
               <p>Seçilen Konum: Lat: {selectedLocation.lat}, Lng: {selectedLocation.lng}</p>
             )}

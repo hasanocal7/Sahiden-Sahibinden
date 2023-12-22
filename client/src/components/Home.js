@@ -9,11 +9,11 @@ import axios from 'axios'
 import {useState,useEffect} from 'react'
 function Home() {
 
-  const [data, setData] = useState([])
-  useEffect(() => {
-  axios.get('https://sahiden-sahibinden-production.up.railway.app/api/ads')
-  .then(response=>setData(response.data.results))
-  }, [])
+  // const [data, setData] = useState([])
+  // useEffect(() => {
+  // axios.get('https://sahiden-sahibinden-production.up.railway.app/api/ads')
+  // .then(response=>setData(response.data.results))
+  // }, [])
   
 
   return (
