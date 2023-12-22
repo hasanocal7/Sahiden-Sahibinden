@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';  // react-icons/io paketini ekledik
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/Login.css";
 import axios from 'axios';
@@ -14,6 +15,8 @@ const Login = () => {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -25,6 +28,10 @@ const Login = () => {
       email: "",
       password: "",
     });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = async (e) => {
@@ -70,14 +77,23 @@ const Login = () => {
           {errors.email && <p className="invalid-feedback ">{errors.email}</p>}
 
           <label htmlFor="password" className="form-label"></label>
-          <input
-            type="password"
-            id="password"
-            className={`loginFormControl form-control ${errors.password ? "is-invalid" : ""}`}
-            placeholder="Şifre giriniz"
-            value={formData.password}
-            onChange={handleChange}
-          />
+          <div className="password-container input-group">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              className={`loginFormControl form-control ${errors.password ? "is-invalid" : ""}`}
+              placeholder="Şifre giriniz"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <button
+              type="button"
+              className="password-toggle-btn btn btn-outline-secondary"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
+            </button>
+          </div>
           {errors.password && (
             <p className="invalid-feedback">{errors.password}</p>
           )}
