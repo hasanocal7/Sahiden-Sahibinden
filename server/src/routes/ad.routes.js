@@ -8,7 +8,7 @@ router.use(authentication.checkUser);
 router.use(authentication.authenticationToken);
 router
   .route("/")
-  .post(upload.array("image", 10), beforeAd, controller.adController.createAd);
+  .post(upload.array("image", 10), controller.adController.createAd);
 router.route("/").get(controller.adController.getAllAds);
 router.route("/:slug/detay").get(controller.adController.getAd);
 router.route("/category/:category").get(controller.adController.categoryFilter);

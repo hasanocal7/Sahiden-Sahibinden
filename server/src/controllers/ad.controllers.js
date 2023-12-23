@@ -4,74 +4,44 @@ const { Ad } = require("../models");
 const createAd = async (req, res, next) => {
   try {
     const userID = res.locals.user.id;
-    let advertisementData = req.body;
-    let address = [
-      advertisementData.province,
-      advertisementData.distcrict,
-      advertisementData.neighborhood,
-    ];
-    delete advertisementData.province;
-    delete advertisementData.distcrict;
-    delete advertisementData.neighborhood;
-    address = address.join(" / ");
+    const allData = req.body;
+    const mainData = {
+      title: req.body.title,
+      description: req.body.title,
+      price: req.body.price,
+      address: `${req.body.province}/${req.body.distcrict}/${req.body.neighborhood}`,
+      image: req.files.map((image) => image.path),
+      UserID: userID,
+      category: req.body.category,
+      sub_category: req.body.sub_category,
+    };
 
-    if (req.files) {
-      var images = req.files.map((image) => image.path);
-      advertisementData = {
-        ...advertisementData,
-        image: images,
-      };
-    }
-
-    if (advertisementData.latitude && advertisementData.longitude) {
-      var location = {
-        type: "Point",
-        coordinates: [advertisementData.longitude, advertisementData.latitude],
-      };
-      delete advertisementData.longitude;
-      delete advertisementData.latitude;
-      advertisementData = {
-        ...advertisementData,
-        location: location,
-      };
-    }
-
-    const additionalData = {};
+    let subCategoryData = {};
 
     let foundSubCat = false;
 
-    for (const key in advertisementData) {
+    for (const key in allData) {
       if (key === "sub_category") {
         foundSubCat = true;
         continue;
       }
 
       if (foundSubCat) {
-        additionalData[key] = advertisementData[key];
-        delete advertisementData[key];
+        subCategoryData[key] = allData[key];
       }
     }
-
-    advertisementData = {
-      ...advertisementData,
-      address: address,
-      UserId: userID,
-    };
-
-    const ad = await services.adServices.createAd(
-      advertisementData,
-      additionalData
-    );
-    res.status(201).json({
+    console.log(mainData);
+    console.log(subCategoryData);
+    const ad = await services.adServices.createAd(mainData, subCategoryData);
+    res.status(201);
+    res.json({
       success: true,
-      message: "Ad created successfully",
+      message: "Ad created successfuly",
       ad: ad,
     });
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(400);
+    return next(new Error(error.message));
   }
 };
 
