@@ -4,51 +4,74 @@ const { Ad } = require("../models");
 const createAd = async (req, res, next) => {
   try {
     const userID = res.locals.user.id;
-    let adData = req.body;
-    const images = req.files.map((image) => image.path);
-    let address = [adData.province, adData.distcrict, adData.neighborhood];
-    delete adData.province;
-    delete adData.distcrict;
-    delete adData.neighborhood;
+    let advertisementData = req.body;
+    let address = [
+      advertisementData.province,
+      advertisementData.distcrict,
+      advertisementData.neighborhood,
+    ];
+    delete advertisementData.province;
+    delete advertisementData.distcrict;
+    delete advertisementData.neighborhood;
     address = address.join(" / ");
-    const location = {
-      type: "Point",
-      coordinates: [longitude, latitude],
-    };
-    delete adData.longitude;
-    delete adData.latitude;
-    const subCategoryData = {};
+
+    if (req.files) {
+      var images = req.files.map((image) => image.path);
+      advertisementData = {
+        ...advertisementData,
+        image: images,
+      };
+    }
+
+    if (advertisementData.latitude && advertisementData.longitude) {
+      var location = {
+        type: "Point",
+        coordinates: [advertisementData.longitude, advertisementData.latitude],
+      };
+      delete advertisementData.longitude;
+      delete advertisementData.latitude;
+      advertisementData = {
+        ...advertisementData,
+        location: location,
+      };
+    }
+
+    const additionalData = {};
 
     let foundSubCat = false;
 
-    for (const key in adData) {
+    for (const key in advertisementData) {
       if (key === "sub_category") {
         foundSubCat = true;
         continue;
       }
 
       if (foundSubCat) {
-        subCategoryData[key] = adData[key];
-        delete adData[key];
+        additionalData[key] = advertisementData[key];
+        delete advertisementData[key];
       }
     }
-    adData = {
-      ...adData,
-      location: location,
+
+    advertisementData = {
+      ...advertisementData,
       address: address,
-      image: images,
       UserId: userID,
     };
-    const ad = await services.adServices.createAd(adData, subCategoryData);
-    res.status(201);
-    res.json({
+
+    const ad = await services.adServices.createAd(
+      advertisementData,
+      additionalData
+    );
+    res.status(201).json({
       success: true,
-      message: "Ad created successfuly",
+      message: "Ad created successfully",
       ad: ad,
     });
   } catch (error) {
-    res.status(400);
-    return next(new Error(error.message));
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -60,7 +83,7 @@ const getAllAds = async (req, res, next) => {
       throw new Error("Ad not found");
     }
     res.status(200).json({
-      ilanlar: ads,
+      ads: ads,
     });
   } catch (error) {
     res.status(404);

@@ -64,7 +64,7 @@ const forgotPassword = async (email) => {
       to: email,
       subject: "Forgot Password",
       text: `Hello! Please click on this link to change your password:
-            http://localhost:${process.env.PORT}/api/forgot-password/${user.id}/${token} `,
+      sahiden-sahibinden.railway.internal/api/forgot-password/${user.id}/${token} `,
     });
     return maskedEmail;
   }
