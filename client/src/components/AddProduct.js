@@ -55,68 +55,82 @@ const AddProduct = () => {
 
   const notify = () => toast("Ürün Yüklendi");
   
-  const handleSubmit = (e) => {
+  
+
+  const token = localStorage.getItem("token")
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!category) {
       alert("Lütfen bir kategori seçin.");
       return;
     }
-    axios({
-      method: `post`,
-      url: `https://sahiden-sahibinden-production.up.railway.app/api/ads`,
-      data: {
-        title,
-        description,
-        address,
-        province,
-        district,
-        neighborhood,
-        price,
-        category,
-        roomCount,
-        squareMeters,
-        landSquareMeters,
-        balconyCount,
-        buildingStatus,
-        adaNumber,
-        parcelNumber,
-        squareMetersGross,
-        ram,
-        cpu,
-        hdd,
-        displayCard,
-        screenSize,
-        resolution,
-        situation,
-        carBrand,
-        carSeries,
-        carYear,
-        carFuel,
-        carGear,
-        carKM,
-        caseType,
+    try {
+  
 
-        motorBrand,
-        motorSeries,
-        motorYear,
-        motorFuel,
-        motorGear,
-        motorKM,
-        motorType,
+      const response = await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+        {
+          title,
+          description,
+          address,
+          province,
+          district,
+          neighborhood,
+          price,
+          category,
+          roomCount,
+          squareMeters,
+          landSquareMeters,
+          balconyCount,
+          buildingStatus,
+          adaNumber,
+          parcelNumber,
+          squareMetersGross,
+          ram,
+          cpu,
+          hdd,
+          displayCard,
+          screenSize,
+          resolution,
+          situation,
+          carBrand,
+          carSeries,
+          carYear,
+          carFuel,
+          carGear,
+          carKM,
+          caseType,
+  
+          motorBrand,
+          motorSeries,
+          motorYear,
+          motorFuel,
+          motorGear,
+          motorKM,
+          motorType,
+  
+          operatingSystem,
+          internalMemory,
+          phoneScreenSize,
+          photos,
 
-        operatingSystem,
-        internalMemory,
-        phoneScreenSize,
-        photos,
-      },
-    })
-      .then((response) => {
-        console.log("Başarılı istek:", response.data);
-      })
-      .catch((error) => {
-        console.error("İstek hatası:", error);
-      });
-
+          
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Başarılı istek:", response.data);
+      notify(); // Kullanıcıyı bilgilendirmek için bildirim gönder
+  
+    } catch (error) {
+      console.error("İstek hatası:", error);
+    }
+  
     console.log("Yüklenen Fotoğraflar:", photos);
     setPhotos([]);
 
