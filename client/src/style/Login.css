@@ -11,6 +11,8 @@
   font-size: 15px;
   border: 1px solid black;
   border-radius: 10px 10px;
+  /* width: 20%;
+  height: 20%; */
 }
 
 
@@ -43,10 +45,6 @@
   background-color: yellow;
 
 }
-.loginİnputs{
-  font-size: 1px;
-  padding: 1px;
-  }
 
 
 .forgotPasswordLink {
