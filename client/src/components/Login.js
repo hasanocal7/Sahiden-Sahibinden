@@ -63,7 +63,7 @@ const Login = () => {
   return (
     
     <div className="loginContainer container mt-5 d-flex flex-column align-items-center">
-      <h1 className="loginFormTitle form-title mb-4">Sahiden</h1>
+      <h1 className="loginFormTitle form-title mb-4">DEHA</h1>
       <form onSubmit={handleSubmit} className="w-50">
         <div className="loginInputs mb-3">
           <label htmlFor="email" className="form-label"></label>
