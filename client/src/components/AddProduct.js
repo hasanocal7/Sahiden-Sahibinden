@@ -13,8 +13,8 @@ const AddProduct = () => {
   const [distcrict, setDistcrict] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [subCategory, setSubCategory] = useState("");
+  const [category, setCategory] = useState(""); 
+  const [sub_category, setSub_Category] = useState("");
   const [subCategories, setSubCategories] = useState([]);
   const [roomCount, setRoomCount] = useState("");
   const [squareMeters, setSquareMeters] = useState("");
@@ -64,6 +64,57 @@ const AddProduct = () => {
       return;
     }
     try {
+      console.log("Gönderilen Veriler:", {
+        title,
+        description,
+        address,
+        province,
+        distcrict,
+        neighborhood,
+        price,
+        category,
+        sub_category,
+        
+        roomCount,
+        squareMeters,
+        landSquareMeters,
+        balconyCount,
+        buildingStatus,
+        adaNumber,
+        parcelNumber,
+        squareMetersGross,
+
+        ram,
+        cpu,
+        hdd,
+        displayCard,
+        screenSize,
+        resolution,
+        situation,
+
+        carBrand,
+        carSeries,
+        carYear,
+        carFuel,
+        carGear,
+        carKM,
+        caseType,
+
+        motorBrand,
+        motorSeries,
+        motorYear,
+        motorFuel,
+        motorGear,
+        motorKM,
+        motorType,
+
+        operatingSystem,
+        internalMemory,
+        phoneScreenSize,
+
+        photos,
+      });
+   
       const response = await axios.post(
         "https://sahiden-sahibinden-production.up.railway.app/api/ads",
         {
@@ -75,6 +126,8 @@ const AddProduct = () => {
           neighborhood,
           price,
           category,
+          sub_category,
+
           roomCount,
           squareMeters,
           landSquareMeters,
@@ -83,6 +136,7 @@ const AddProduct = () => {
           adaNumber,
           parcelNumber,
           squareMetersGross,
+
           ram,
           cpu,
           hdd,
@@ -90,6 +144,7 @@ const AddProduct = () => {
           screenSize,
           resolution,
           situation,
+
           carBrand,
           carSeries,
           carYear,
@@ -109,6 +164,7 @@ const AddProduct = () => {
           operatingSystem,
           internalMemory,
           phoneScreenSize,
+
           photos,
         },
        
@@ -182,7 +238,7 @@ const AddProduct = () => {
     setNeighborhood("");
     setPrice("");
     setCategory("");
-    setSubCategory("");
+    setSub_Category("");
     setSubCategories([]);
     setRoomCount("");
     setSquareMeters("");
@@ -227,7 +283,7 @@ const AddProduct = () => {
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
     setCategory(selectedCategory);
-    setSubCategory("");
+    setSub_Category("");
 
     switch (selectedCategory) {
       case "property":
@@ -374,14 +430,14 @@ const AddProduct = () => {
             {category === "vehicle" && (
               <div className="mb-3">
                 <div className="mb-3">
-                  <label htmlFor="subCategory" className="form-label">
+                  <label htmlFor="sub_category" className="form-label">
                     Alt Kategori:
                   </label>
                   <select
-                    id="subCategory"
+                    id="sub_category"
                     className="form-select"
-                    value={subCategory}
-                    onChange={(e) => setSubCategory(e.target.value)}
+                    value={sub_category}
+                    onChange={(e) => setSub_Category(e.target.value)}
                     required
                   >
                     <option value="" disabled>
@@ -392,7 +448,7 @@ const AddProduct = () => {
                   </select>
                 </div>
 
-                {subCategory === "Car" && (
+                {sub_category === "Car" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="carBrand" className="form-label">
@@ -647,7 +703,7 @@ const AddProduct = () => {
                   </div>
                 )}
 
-                {subCategory === "Motorcycle" && (
+                {sub_category === "Motorcycle" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="motorBrand" className="form-label">
@@ -916,14 +972,14 @@ const AddProduct = () => {
             {category === "electronic" && (
               <div>
                 <div className="mb-3">
-                  <label htmlFor="subCategory" className="form-label">
+                  <label htmlFor="sub_category" className="form-label">
                     Alt Kategori:
                   </label>
                   <select
-                    id="subCategory"
+                    id="sub_category"
                     className="form-select"
-                    value={subCategory}
-                    onChange={(e) => setSubCategory(e.target.value)}
+                    value={sub_category}
+                    onChange={(e) => setSub_Category(e.target.value)}
                     required
                   >
                     <option value="" disabled>
@@ -934,7 +990,7 @@ const AddProduct = () => {
                   </select>
                 </div>
 
-                {subCategory === "Computer" && (
+                {sub_category === "Computer" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="ram" className="form-label">
@@ -1090,7 +1146,7 @@ const AddProduct = () => {
                   </div>
                 )}
 
-                {subCategory === "Telephone" && (
+                {sub_category === "Telephone" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="ram" className="form-label">
@@ -1202,14 +1258,14 @@ const AddProduct = () => {
             {category === "property" && subCategories.length > 0 && (
               <>
                 <div className="mb-3">
-                  <label htmlFor="subCategory" className="form-label">
+                  <label htmlFor="sub_category" className="form-label">
                     Alt Kategori:
                   </label>
                   <select
-                    id="subCategory"
+                    id="sub_category"
                     className="form-select"
-                    value={subCategory}
-                    onChange={(e) => setSubCategory(e.target.value)}
+                    value={sub_category}
+                    onChange={(e) => setSub_Category(e.target.value)}
                     required
                   >
                     <option value="" disabled>
@@ -1223,7 +1279,7 @@ const AddProduct = () => {
                   </select>
                 </div>
 
-                {subCategory === "Konut" && (
+                {sub_category === "Konut" && (
                   <>
                     <div className="mb-3">
                       <label htmlFor="roomCount" className="form-label">
@@ -1296,7 +1352,7 @@ const AddProduct = () => {
                   </>
                 )}
 
-                {subCategory === "Arsa" && (
+                {sub_category === "Arsa" && (
                   <>
                     <div className="mb-3">
                       <div className="mb-3">
