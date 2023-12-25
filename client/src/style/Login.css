@@ -3,7 +3,7 @@
   height: 10%;
   border: 1px solid black;
   border-radius: 10px 10px;
-  background-color: #f8f9fa;
+  background-color: #39555e;
 }
 
 
@@ -14,13 +14,13 @@
   /* width: 20%;
   height: 20%; */
 }
-
+ 
 
 .loginFormTitle {
-  color: yellow;
-  background-color: #3f475f ;
+  color: black;
+  font-weight: bold;
   padding: 10px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Brush Script MT', cursive;
   margin-top: 30px;
   border-radius: 5px;
  
@@ -28,8 +28,8 @@
 
 
 .loginButton{
-  background-color: #3f475f ;
-  color: white;
+  background-color: #c9e4ca ;
+  color: black;
   width: auto;
   height: auto;
   font-size: 20px;
@@ -42,7 +42,7 @@
 
 
 .loginButton:hover {
-  background-color: yellow;
+  background-color: #87bba2;
 
 }
 
@@ -57,7 +57,7 @@
 }
 
 .forgotPasswordLink:hover{
-  color:blue;
+  color:rgb(0, 0, 0);
 }
 
 .signupLink{
@@ -69,7 +69,7 @@
 
 
 .signupLink:hover{
-  color: blue;
+  color: rgb(0, 0, 0);
 }
      
 @media (min-width: 768px) {

@@ -7,7 +7,7 @@
   border: 1px solid black;
   border-radius: 10px;
   overflow: hidden;
-  background-color: #f8f9fa;
+  background-color: #39555e;
 }
 
 .registerFormControl {
@@ -27,16 +27,17 @@
   margin-left: 1%;
   margin-top: 0.75em;
   /* font-family: Arial, Helvetica, sans-serif; */
-  color: yellow;
-  background-color: #3f475f;
+  color: black;
+  font-family: 'Brush Script MT', cursive;
   font-size: 40px;
+  font-weight: bold;
   padding: 10px;
   border-radius: 5px;
 }
 
 .registerButton {
-  background-color: #3f475f;
-  color: white;
+  background-color: #c9e4ca;
+  color: black;
   width: auto;
   height: auto;
   font-size: 20px;
@@ -47,7 +48,7 @@
 }
 
 .btn:hover {
-  background-color: yellow;
+  background-color: #87bba2;
   color: black;
 }
 
@@ -61,7 +62,6 @@
   border-bottom-left-radius: 0;
   height: calc(1.8em + 0.75rem);
   padding: 0.375rem 0.75rem;
-  width: 50%;
 }
 
 @media (min-width: 768px) {
