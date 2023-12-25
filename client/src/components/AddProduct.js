@@ -10,7 +10,7 @@ const AddProduct = () => {
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [province, setProvince] = useState("");
-  const [district, setDistrict] = useState("");
+  const [distcrict, setDistcrict] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -54,22 +54,75 @@ const AddProduct = () => {
   const [phoneScreenSize, setPhoneScreenSize] = useState("");
 
   const notify = () => toast("Ürün Yüklendi");
-  
-  const handleSubmit = (e) => {
+
+  const token = localStorage.getItem("token");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!category) {
       alert("Lütfen bir kategori seçin.");
       return;
     }
-    axios({
-      method: `post`,
-      url: `http://localhost:4000/api/ads`,
-      data: {
-        title,
+    try {
+      const response = await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+        {
+          title,
+          description,
+          address,
+          province,
+          distcrict,
+          neighborhood,
+          price,
+          category,
+          roomCount,
+          squareMeters,
+          landSquareMeters,
+          balconyCount,
+          buildingStatus,
+          adaNumber,
+          parcelNumber,
+          squareMetersGross,
+          ram,
+          cpu,
+          hdd,
+          displayCard,
+          screenSize,
+          resolution,
+          situation,
+          carBrand,
+          carSeries,
+          carYear,
+          carFuel,
+          carGear,
+          carKM,
+          caseType,
+
+          motorBrand,
+          motorSeries,
+          motorYear,
+          motorFuel,
+          motorGear,
+          motorKM,
+          motorType,
+
+          operatingSystem,
+          internalMemory,
+          phoneScreenSize,
+          photos,
+        },
+       
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(title,
         description,
         address,
         province,
-        district,
+        distcrict,
         neighborhood,
         price,
         category,
@@ -107,15 +160,12 @@ const AddProduct = () => {
         operatingSystem,
         internalMemory,
         phoneScreenSize,
-        photos,
-      },
-    })
-      .then((response) => {
-        console.log("Başarılı istek:", response.data);
-      })
-      .catch((error) => {
-        console.error("İstek hatası:", error);
-      });
+        photos,);
+      console.log("Başarılı istek:", response.data);
+      notify(); // Kullanıcıyı bilgilendirmek için bildirim gönder
+    } catch (error) {
+      console.error("İstek hatası:", error);
+    }
 
     console.log("Yüklenen Fotoğraflar:", photos);
     setPhotos([]);
@@ -128,7 +178,7 @@ const AddProduct = () => {
     setDescription("");
     setAddress("");
     setProvince("");
-    setDistrict("");
+    setDistcrict("");
     setNeighborhood("");
     setPrice("");
     setCategory("");
@@ -194,13 +244,14 @@ const AddProduct = () => {
     }
   };
   return (
-    <div className="container mt-5">
+    <div className="addProductContainer container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-3">
           <h2 className="mb-4 text-center">Ücretsiz Ürün Yükle</h2>
           <form onSubmit={handleSubmit}>
-            <PhotoUpload photos={photos} setPhotos={setPhotos} />
+          <PhotoUpload photos={photos} setPhotos={setPhotos} />
 
+            {/* Title */}
             <div className="mb-2">
               <label htmlFor="title" className="form-label">
                 Ürün Başlığı:
@@ -214,6 +265,7 @@ const AddProduct = () => {
                 required
               />
             </div>
+            {/* description */}
             <div className="mb-3">
               <label htmlFor="description" className="form-label">
                 Ürün Detayı:
@@ -227,7 +279,24 @@ const AddProduct = () => {
                 required
               />
             </div>
+
+            {/* price  */}
             <div className="mb-3">
+              <label htmlFor="price" className="form-label">
+                Fiyat:
+              </label>
+              <input
+                type="number"
+                id="price"
+                className="form-control"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* adres kısmı suanlik yorum satırı il ilce mahalle kısmı olucak*/}
+            {/* <div className="mb-3">
               <label htmlFor="address" className="form-label">
                 Adres:
               </label>
@@ -238,7 +307,9 @@ const AddProduct = () => {
                 onChange={(e) => setAddress(e.target.value)}
                 required
               />
-            </div>
+            </div> */}
+
+            {/* İl  */}
             <div className="mb-3">
               <label htmlFor="province" className="form-label">
                 İl:
@@ -251,18 +322,22 @@ const AddProduct = () => {
                 required
               />
             </div>
+
+            {/* İlçe  */}
             <div className="mb-3">
-              <label htmlFor="district" className="form-label">
+              <label htmlFor="distcrict" className="form-label">
                 İlçe:
               </label>
               <textarea
-                id="district"
+                id="distcrict"
                 className="form-control"
-                value={district}
-                onChange={(e) => setDistrict(e.target.value)}
+                value={distcrict}
+                onChange={(e) => setDistcrict(e.target.value)}
                 required
               />
             </div>
+
+            {/* neighborhood */}
             <div className="mb-3">
               <label htmlFor="neighborhood" className="form-label">
                 Mahalle:
@@ -272,20 +347,6 @@ const AddProduct = () => {
                 className="form-control"
                 value={neighborhood}
                 onChange={(e) => setNeighborhood(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="price" className="form-label">
-                Fiyat:
-              </label>
-              <input
-                type="number"
-                id="price"
-                className="form-control"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
                 required
               />
             </div>
@@ -1321,7 +1382,6 @@ const AddProduct = () => {
                 Ürün Yükle
                 <Toaster />
               </button>
-              
             </div>
           </form>
         </div>

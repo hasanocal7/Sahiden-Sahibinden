@@ -2,6 +2,8 @@
   display: flex;
   margin-left: 60px;
   margin-top: 30px;
+  background-color: #f8f9fa;
+  padding: 25px;
 }
 .vasitaArea {
   display: flex;

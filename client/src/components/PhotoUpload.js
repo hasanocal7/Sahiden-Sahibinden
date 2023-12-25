@@ -1,3 +1,5 @@
+//İnput fileden görsel yollama denenecek
+
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import "../style/PhotoUpload.css"; 

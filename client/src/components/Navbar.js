@@ -20,9 +20,9 @@ function Navbar() {
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <NavLink
-                exact
+                exact="true"
                 to="/login"
-                activeClassName="active"
+                activeclassname="active"
                 className="nav-links"
                 onClick={handleClose} 
               >
@@ -31,9 +31,9 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact
+                exact="true"
                 to="/register"
-                activeClassName="active"
+                activeclassname="active"
                 className="nav-links"
                 onClick={handleClose} 
               >
@@ -42,9 +42,9 @@ function Navbar() {
             </li>
             <li className="nav-item mb-3">
               <NavLink
-                exact
+                eexact="true"
                 to="/ilanyukle"
-                activeClassName="active"
+                activeclassname="active"
                 className="nav-links"
                 onClick={handleClose} 
                 id="ad"

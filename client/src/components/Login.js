@@ -1,27 +1,67 @@
-import React from "react";
-import { useFormik } from "formik";
-import { basicSchema } from "../schemas";
+import React, { useState } from "react";
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/Login.css";
+import axios from 'axios';
 
-const onSubmit = async (values, actions) => {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 1000);
+
+
+const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
   });
-  actions.resetForm();
-};
 
-function Login() {
-  const { values, errors, handleChange, handleSubmit } = useFormik({
-    initialValues: {
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+
+
+    setErrors({
       email: "",
       password: "",
-    },
-    validationSchema: basicSchema,
-    onSubmit,
-  });
+    });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('https://sahiden-sahibinden-production.up.railway.app/api/signin', formData);
+
+      // Sunucudan dönen yanıtı kullanma
+      const  token = response.data.accessToken;
+
+      // Token localStorage kayıt etme
+      localStorage.setItem('token', token);
+
+      
+    } catch (error) {
+      console.error('Hata:', error);
+
+      setErrors({
+        email: "",
+        password: "",
+      });
+    }
+  };
+ 
 
   return (
+    
     <div className="loginContainer container mt-5 d-flex flex-column align-items-center">
       <h1 className="loginFormTitle form-title mb-4">Sahiden</h1>
       <form onSubmit={handleSubmit} className="w-50">
@@ -32,20 +72,29 @@ function Login() {
             id="email"
             className={`loginFormControl form-control ${errors.email ? "is-invalid" : ""}`}
             placeholder="E-posta giriniz"
-            value={values.email}
+            value={formData.email}
             onChange={handleChange}
           />
           {errors.email && <p className="invalid-feedback ">{errors.email}</p>}
 
           <label htmlFor="password" className="form-label"></label>
-          <input
-            type="password"
-            id="password"
-            className={`loginFormControl form-control ${errors.password ? "is-invalid" : ""}`}
-            placeholder="Şifre giriniz"
-            value={values.password}
-            onChange={handleChange}
-          />
+          <div className="password-container input-group">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              className={`loginFormControl form-control ${errors.password ? "is-invalid" : ""}`}
+              placeholder="Şifre giriniz"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <button
+              type="button"
+              className="password-toggle-btn btn btn-outline-secondary"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
+            </button>
+          </div>
           {errors.password && (
             <p className="invalid-feedback">{errors.password}</p>
           )}
@@ -64,12 +113,12 @@ function Login() {
         </div>
 
         <div className="signupLink">
-          <p>Hesabın yok mu? <a href="/signup">Hemen kaydol!</a></p>
+          <p>Hesabın yok mu? <a href="/register">Hemen kaydol!</a></p>
         </div>
-
       </form>
+      
     </div>
   );
-}
+};
 
 export default Login;
