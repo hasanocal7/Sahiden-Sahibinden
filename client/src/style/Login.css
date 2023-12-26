@@ -11,11 +11,9 @@
   font-size: 15px;
   border: 1px solid black;
   border-radius: 10px 10px;
-  /* width: 20%;
-  height: 20%; */
+
 }
  
-
 .loginFormTitle {
   color: black;
   font-weight: bold;
@@ -30,9 +28,6 @@
     background-blend-mode: screen;
 }
  
-
-
-
 .loginButton{
   background-color: #c9e4ca ;
   color: black;
@@ -49,9 +44,7 @@
 
 .loginButton:hover {
   background-color: #87bba2;
-
 }
-
 
 .forgotPasswordLink {
   width: auto;
