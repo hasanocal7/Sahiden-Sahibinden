@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import "../style/PhotoUpload.css";
 
-const PhotoUpload = ({ photos, setPhotos }) => {
+const PhotoUpload = ({ image, setImage }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [deletedIndex, setDeletedIndex] = useState(null);
 
   const uploadPhotos = (updatedPhotos) => {
-    setPhotos(updatedPhotos);
+    setImage(updatedPhotos);
   };
 
   const onDrop = (acceptedFiles) => {
@@ -33,26 +33,25 @@ const PhotoUpload = ({ photos, setPhotos }) => {
     });
 
     if (deletedIndex !== null) {
-      const updatedPhotos = [...photos];
+      const updatedPhotos = [...image];
       updatedPhotos[deletedIndex] = filteredFiles[0];
-      setPhotos(updatedPhotos);
       uploadPhotos(updatedPhotos);
       setDeletedIndex(null);
     } else {
-      setPhotos([...photos, ...filteredFiles]);
+      uploadPhotos([...image, ...filteredFiles]);
     }
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: (files) => onDrop(files),
+    onDrop,
     maxSize: 20 * 1024 * 1024,
     accept: "image/jpeg, image/jpg, image/png",
   });
 
   const deletePhoto = (index) => {
-    const updatedPhotos = [...photos];
+    const updatedPhotos = [...image];
     updatedPhotos.splice(index, 1);
-    setPhotos(updatedPhotos);
+    uploadPhotos(updatedPhotos);
     setDeletedIndex(index);
   };
 
@@ -78,7 +77,7 @@ const PhotoUpload = ({ photos, setPhotos }) => {
       <div className="uploaded-photos">
         <h4>Yüklenen Fotoğraflar:</h4>
         <ul>
-          {photos.map((photo, index) => (
+          {image.map((photo, index) => (
             <li key={index}>
               <img
                 src={URL.createObjectURL(photo)}
