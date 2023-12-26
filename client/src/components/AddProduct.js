@@ -15,7 +15,7 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState(""); 
   const [sub_category, setSub_Category] = useState("");
-  const [subCategories, setSubCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState(['Elektronik', 'Ev Aletleri', 'Kıyafet']);
   const [roomCount, setRoomCount] = useState("");
   const [squareMeters, setSquareMeters] = useState("");
   const [landSquareMeters, setLanSquareMeters] = useState("");
@@ -104,6 +104,7 @@ const AddProduct = () => {
         motorSeries,
         motorYear,
         motorFuel,
+        
         motorGear,
         motorKM,
         motorType,
@@ -115,6 +116,7 @@ const AddProduct = () => {
         photos,
       });
    
+      
       const response = await axios.post(
         "https://sahiden-sahibinden-production.up.railway.app/api/ads",
         {
@@ -174,6 +176,7 @@ const AddProduct = () => {
           },
         }
       );
+      
       console.log(title,
         description,
         address,
@@ -217,6 +220,7 @@ const AddProduct = () => {
         internalMemory,
         phoneScreenSize,
         photos,);
+
       console.log("Başarılı istek:", response.data);
       notify(); // Kullanıcıyı bilgilendirmek için bildirim gönder
     } catch (error) {
@@ -278,7 +282,6 @@ const AddProduct = () => {
     setPhotos([]);
   };
 
-  const [photos, setPhotos] = useState([]);
 
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
@@ -299,13 +302,18 @@ const AddProduct = () => {
         setSubCategories([]);
     }
   };
+
+  const [photos, setPhotos] = useState([]);
+  const uploadPhotos = (photos) => {
+      setPhotos(photos)
+  }
   return (
     <div className="addProductContainer container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-3">
           <h2 className="mb-4 text-center">Ücretsiz Ürün Yükle</h2>
           <form onSubmit={handleSubmit}>
-          <PhotoUpload photos={photos} setPhotos={setPhotos} />
+          <PhotoUpload photos={photos} uploadPhotos={uploadPhotos} />
 
             {/* Title */}
             <div className="mb-2">
