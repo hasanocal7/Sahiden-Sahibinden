@@ -36,7 +36,7 @@ function Navbar() {
       <nav className="navbar">
         <div className="nav-container">
           <NavLink exact to="/" className="nav-logo">
-            <span>DEHA</span>
+            <p>DEHA</p>
           </NavLink>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
