@@ -1,52 +1,58 @@
-//İnput fileden görsel yollama denenecek
-
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import "../style/PhotoUpload.css"; 
+import "../style/PhotoUpload.css";
 
-const PhotoUpload = ({ photos, setPhotos }) => {
+const PhotoUpload = ({ image, setImage }) => {
   const [errorMessage, setErrorMessage] = useState("");
-  const [deletedIndex, setDeletedIndex] = useState(null); 
+  const [deletedIndex, setDeletedIndex] = useState(null);
+
+  const uploadPhotos = (updatedPhotos) => {
+    setImage(updatedPhotos);
+  };
 
   const onDrop = (acceptedFiles) => {
     const filteredFiles = acceptedFiles.filter((file) => {
       const isImage =
-        file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png";
-      const isSizeValid = file.size <= 20 * 1024 * 1024; 
-  
+        file.type === "image/jpeg" ||
+        file.type === "image/jpg" ||
+        file.type === "image/png";
+      const isSizeValid = file.size <= 20 * 1024 * 1024;
+
       if (!isImage) {
         console.log("Geçersiz dosya türü:", file.type);
-        setErrorMessage("Yalnızca jpg, jpeg ve png uzantılı dosyaları kabul ediyoruz.");
+        setErrorMessage(
+          "Yalnızca jpg, jpeg ve png uzantılı dosyaları kabul ediyoruz."
+        );
       } else if (!isSizeValid) {
         setErrorMessage("Dosya boyutu 20 MB'ı geçemez.");
       } else {
         setErrorMessage("");
       }
-  
+
       return isImage && isSizeValid;
     });
 
     if (deletedIndex !== null) {
-      const updatedPhotos = [...photos];
+      const updatedPhotos = [...image];
       updatedPhotos[deletedIndex] = filteredFiles[0];
-      setPhotos(updatedPhotos);
+      uploadPhotos(updatedPhotos);
       setDeletedIndex(null);
     } else {
-      setPhotos([...photos, ...filteredFiles]);
+      uploadPhotos([...image, ...filteredFiles]);
     }
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    maxSize: 20 * 1024 * 1024, 
-    accept: "image/jpeg, image/jpg, image/png", 
+    maxSize: 20 * 1024 * 1024,
+    accept: "image/jpeg, image/jpg, image/png",
   });
 
   const deletePhoto = (index) => {
-    const updatedPhotos = [...photos];
+    const updatedPhotos = [...image];
     updatedPhotos.splice(index, 1);
-    setPhotos(updatedPhotos);
-    setDeletedIndex(index); 
+    uploadPhotos(updatedPhotos);
+    setDeletedIndex(index);
   };
 
   return (
@@ -60,22 +66,28 @@ const PhotoUpload = ({ photos, setPhotos }) => {
         <p>
           Fotoğrafları sürükleyip bırakın veya buraya tıklayarak dosya seçin.
         </p>
-        <p style={{ fontSize: '12px', color: '#888' }}>
-          (Maksimum dosya boyutu: 20 MB, sadece jpg, jpeg ve png uzantılı dosyalar)
+        <p style={{ fontSize: "12px", color: "#888" }}>
+          (Maksimum dosya boyutu: 20 MB, sadece jpg, jpeg ve png uzantılı
+          dosyalar)
         </p>
-        {errorMessage && <p style={{ color: 'red', fontSize: '12px' }}>{errorMessage}</p>}
+        {errorMessage && (
+          <p style={{ color: "red", fontSize: "12px" }}>{errorMessage}</p>
+        )}
       </div>
       <div className="uploaded-photos">
         <h4>Yüklenen Fotoğraflar:</h4>
         <ul>
-          {photos.map((photo, index) => (
+          {image.map((photo, index) => (
             <li key={index}>
               <img
                 src={URL.createObjectURL(photo)}
                 alt={`Uploaded ${index}`}
                 className="uploaded-photo"
               />
-              <button onClick={() => deletePhoto(index)} className="delete-button">
+              <button
+                onClick={() => deletePhoto(index)}
+                className="delete-button"
+              >
                 <span role="img" aria-label="Trash Can">
                   🗑️
                 </span>

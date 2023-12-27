@@ -14,8 +14,12 @@ const AddProduct = () => {
   const [neighborhood, setNeighborhood] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [subCategory, setSubCategory] = useState("");
-  const [subCategories, setSubCategories] = useState([]);
+  const [sub_category, setSub_Category] = useState("");
+  const [subCategories, setSubCategories] = useState([
+    "Elektronik",
+    "Ev Aletleri",
+    "Kıyafet",
+  ]);
   const [roomCount, setRoomCount] = useState("");
   const [squareMeters, setSquareMeters] = useState("");
   const [landSquareMeters, setLanSquareMeters] = useState("");
@@ -53,6 +57,7 @@ const AddProduct = () => {
   const [internalMemory, setInternalMemory] = useState("");
   const [phoneScreenSize, setPhoneScreenSize] = useState("");
 
+  const [image, setImage] = useState([]);
   const notify = () => toast("Ürün Yüklendi");
 
   const token = localStorage.getItem("token");
@@ -63,7 +68,64 @@ const AddProduct = () => {
       alert("Lütfen bir kategori seçin.");
       return;
     }
-    try {
+    
+
+      try {
+        // Diğer veri alanlarını ve dosyaları FormData'ya ekle
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("address", address);
+        formData.append("province", province);
+        formData.append("distcrict", distcrict);
+        formData.append("neighborhood", neighborhood);
+        formData.append("price", price );
+        formData.append("category", category);
+        formData.append("sub_category", sub_category);
+
+        formData.append("image", image);
+
+        formData.append("roomCount", roomCount);
+        formData.append("squareMeters", squareMeters);
+        formData.append("landSquareMeters", landSquareMeters);
+        formData.append("balconyCount", balconyCount);
+        formData.append("buildingStatus", buildingStatus);
+        formData.append("adaNumber", adaNumber);
+        formData.append("parcelNumber", parcelNumber);
+        formData.append("squareMetersGross", squareMetersGross);
+        
+        formData.append("ram", ram);
+        formData.append("cpu", cpu);
+        formData.append("hdd", hdd);
+        formData.append("displayCard", displayCard);
+        formData.append("screenSize", screenSize);
+        formData.append("resolution", resolution);
+        formData.append("situation", situation);
+        
+        formData.append("carBrand",carBrand );
+        formData.append("carSeries", carSeries);
+        formData.append("carYear",carYear );
+        formData.append("carFuel",carFuel );
+        formData.append("carGear", carGear);
+        formData.append("carKM", carKM);
+        formData.append("caseType", caseType);
+        
+        formData.append("motorBrand", motorBrand);
+        formData.append("motorSeries", motorSeries);
+        formData.append("motorYear", motorYear);
+        formData.append("motorFuel", motorFuel);
+        formData.append("motorGear", motorGear);
+        formData.append("motorKM", motorKM);
+        formData.append("motorType", motorType);
+
+        formData.append("operatingSystem", operatingSystem);
+        formData.append("internalMemory", internalMemory);
+        formData.append("phoneScreenSize", phoneScreenSize);
+
+        image.forEach((image, index) => {
+          formData.append(`image${index + 1}`, image);
+        });
+
       const response = await axios.post(
         "https://sahiden-sahibinden-production.up.railway.app/api/ads",
         {
@@ -75,6 +137,9 @@ const AddProduct = () => {
           neighborhood,
           price,
           category,
+          sub_category,
+          image : image ,
+
           roomCount,
           squareMeters,
           landSquareMeters,
@@ -83,6 +148,7 @@ const AddProduct = () => {
           adaNumber,
           parcelNumber,
           squareMetersGross,
+
           ram,
           cpu,
           hdd,
@@ -90,6 +156,7 @@ const AddProduct = () => {
           screenSize,
           resolution,
           situation,
+
           carBrand,
           carSeries,
           carYear,
@@ -109,16 +176,18 @@ const AddProduct = () => {
           operatingSystem,
           internalMemory,
           phoneScreenSize,
-          photos,
         },
-       
+
         {
           headers: {
             Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
           },
         }
       );
-      console.log(title,
+
+      console.log(
+        title,
         description,
         address,
         province,
@@ -160,15 +229,17 @@ const AddProduct = () => {
         operatingSystem,
         internalMemory,
         phoneScreenSize,
-        photos,);
+        image 
+      );
+
       console.log("Başarılı istek:", response.data);
       notify(); // Kullanıcıyı bilgilendirmek için bildirim gönder
     } catch (error) {
       console.error("İstek hatası:", error);
     }
 
-    console.log("Yüklenen Fotoğraflar:", photos);
-    setPhotos([]);
+    console.log("Yüklenen Fotoğraflar:", image );
+    setImage([]);
 
     resetForm();
   };
@@ -182,7 +253,7 @@ const AddProduct = () => {
     setNeighborhood("");
     setPrice("");
     setCategory("");
-    setSubCategory("");
+    setSub_Category("");
     setSubCategories([]);
     setRoomCount("");
     setSquareMeters("");
@@ -219,15 +290,13 @@ const AddProduct = () => {
     setOperatingSystem("");
     setPhoneScreenSize("");
 
-    setPhotos([]);
+    setImage([]);
   };
-
-  const [photos, setPhotos] = useState([]);
 
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
     setCategory(selectedCategory);
-    setSubCategory("");
+    setSub_Category("");
 
     switch (selectedCategory) {
       case "property":
@@ -243,14 +312,14 @@ const AddProduct = () => {
         setSubCategories([]);
     }
   };
+
   return (
     <div className="addProductContainer container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-3">
           <h2 className="mb-4 text-center">Ücretsiz Ürün Yükle</h2>
           <form onSubmit={handleSubmit}>
-          <PhotoUpload photos={photos} setPhotos={setPhotos} />
-
+            <PhotoUpload image ={image } setImage={setImage} />
             {/* Title */}
             <div className="mb-2">
               <label htmlFor="title" className="form-label">
@@ -374,14 +443,14 @@ const AddProduct = () => {
             {category === "vehicle" && (
               <div className="mb-3">
                 <div className="mb-3">
-                  <label htmlFor="subCategory" className="form-label">
+                  <label htmlFor="sub_category" className="form-label">
                     Alt Kategori:
                   </label>
                   <select
-                    id="subCategory"
+                    id="sub_category"
                     className="form-select"
-                    value={subCategory}
-                    onChange={(e) => setSubCategory(e.target.value)}
+                    value={sub_category}
+                    onChange={(e) => setSub_Category(e.target.value)}
                     required
                   >
                     <option value="" disabled>
@@ -392,7 +461,7 @@ const AddProduct = () => {
                   </select>
                 </div>
 
-                {subCategory === "Car" && (
+                {sub_category === "Car" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="carBrand" className="form-label">
@@ -647,7 +716,7 @@ const AddProduct = () => {
                   </div>
                 )}
 
-                {subCategory === "Motorcycle" && (
+                {sub_category === "Motorcycle" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="motorBrand" className="form-label">
@@ -916,14 +985,14 @@ const AddProduct = () => {
             {category === "electronic" && (
               <div>
                 <div className="mb-3">
-                  <label htmlFor="subCategory" className="form-label">
+                  <label htmlFor="sub_category" className="form-label">
                     Alt Kategori:
                   </label>
                   <select
-                    id="subCategory"
+                    id="sub_category"
                     className="form-select"
-                    value={subCategory}
-                    onChange={(e) => setSubCategory(e.target.value)}
+                    value={sub_category}
+                    onChange={(e) => setSub_Category(e.target.value)}
                     required
                   >
                     <option value="" disabled>
@@ -934,7 +1003,7 @@ const AddProduct = () => {
                   </select>
                 </div>
 
-                {subCategory === "Computer" && (
+                {sub_category === "Computer" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="ram" className="form-label">
@@ -1090,7 +1159,7 @@ const AddProduct = () => {
                   </div>
                 )}
 
-                {subCategory === "Telephone" && (
+                {sub_category === "Telephone" && (
                   <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="ram" className="form-label">
@@ -1202,14 +1271,14 @@ const AddProduct = () => {
             {category === "property" && subCategories.length > 0 && (
               <>
                 <div className="mb-3">
-                  <label htmlFor="subCategory" className="form-label">
+                  <label htmlFor="sub_category" className="form-label">
                     Alt Kategori:
                   </label>
                   <select
-                    id="subCategory"
+                    id="sub_category"
                     className="form-select"
-                    value={subCategory}
-                    onChange={(e) => setSubCategory(e.target.value)}
+                    value={sub_category}
+                    onChange={(e) => setSub_Category(e.target.value)}
                     required
                   >
                     <option value="" disabled>
@@ -1223,7 +1292,7 @@ const AddProduct = () => {
                   </select>
                 </div>
 
-                {subCategory === "Konut" && (
+                {sub_category === "Konut" && (
                   <>
                     <div className="mb-3">
                       <label htmlFor="roomCount" className="form-label">
@@ -1296,7 +1365,7 @@ const AddProduct = () => {
                   </>
                 )}
 
-                {subCategory === "Arsa" && (
+                {sub_category === "Arsa" && (
                   <>
                     <div className="mb-3">
                       <div className="mb-3">

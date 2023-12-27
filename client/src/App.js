@@ -16,7 +16,7 @@ function App() {
      <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} exact="true" />
-        <Route path="/" element={<Home />} exact="true" />
+        <Route path="/" element={<Home />} exact="true" /> 
         <Route path="/register" element={<Register exact="true" />} />
         <Route path="/ilan" element={<Ad />} exact="true" />
         <Route path="/ilanyukle" element={<AddProduct />} exact="true" />
@@ -28,3 +28,6 @@ function App() {
 }
 
 export default App;
+
+
+// Giriş yapmak için route'lar bakılacak

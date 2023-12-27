@@ -1,12 +1,14 @@
+// Login.js
 import React, { useState } from "react";
-import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/Login.css";
-import axios from 'axios';
-
-
+import axios from "axios";
 
 const Login = () => {
+  const navigate = useNavigate(); // Replace useHistory with useNavigate
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,7 +27,6 @@ const Login = () => {
       [e.target.id]: e.target.value,
     });
 
-
     setErrors({
       email: "",
       password: "",
@@ -40,17 +41,21 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://sahiden-sahibinden-production.up.railway.app/api/signin', formData);
+      const response = await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/signin",
+        formData
+      );
 
       // Sunucudan dönen yanıtı kullanma
-      const  token = response.data.accessToken;
+      const token = response.data.accessToken;
 
       // Token localStorage kayıt etme
-      localStorage.setItem('token', token);
+      localStorage.setItem("token", token);
 
-      
+      // Başarılı giriş sonrasında anasayfaya yönlendirme
+      navigate("/");
     } catch (error) {
-      console.error('Hata:', error);
+      console.error("Hata:", error);
 
       setErrors({
         email: "",
@@ -58,19 +63,20 @@ const Login = () => {
       });
     }
   };
- 
 
   return (
-    
     <div className="loginContainer container mt-5 d-flex flex-column align-items-center">
-      <h1 className="loginFormTitle form-title mb-4">Sahiden</h1>
-      <form onSubmit={handleSubmit} className="w-50">
+      <h1 className="loginFormTitle form-title mb-4">DEHA</h1>
+     
+<form onSubmit={handleSubmit} className="w-50">
         <div className="loginInputs mb-3">
           <label htmlFor="email" className="form-label"></label>
           <input
             type="email"
             id="email"
-            className={`loginFormControl form-control ${errors.email ? "is-invalid" : ""}`}
+            className={`loginFormControl form-control ${
+              errors.email ? "is-invalid" : ""
+            }`}
             placeholder="E-posta giriniz"
             value={formData.email}
             onChange={handleChange}
@@ -82,7 +88,9 @@ const Login = () => {
             <input
               type={showPassword ? "text" : "password"}
               id="password"
-              className={`loginFormControl form-control ${errors.password ? "is-invalid" : ""}`}
+              className={`loginFormControl form-control ${
+                errors.password ? "is-invalid" : ""
+              }`}
               placeholder="Şifre giriniz"
               value={formData.password}
               onChange={handleChange}
@@ -94,7 +102,8 @@ const Login = () => {
             >
               {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
             </button>
-          </div>
+          </div> 
+
           {errors.password && (
             <p className="invalid-feedback">{errors.password}</p>
           )}
@@ -113,10 +122,11 @@ const Login = () => {
         </div>
 
         <div className="signupLink">
-          <p>Hesabın yok mu? <a href="/register">Hemen kaydol!</a></p>
+          <p>
+            Hesabın yok mu? <a href="/register">Hemen kaydol!</a>
+          </p>
         </div>
       </form>
-      
     </div>
   );
 };
