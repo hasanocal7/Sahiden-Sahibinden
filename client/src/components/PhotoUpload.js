@@ -28,8 +28,9 @@ const PhotoUpload = ({ image, setImage }) => {
       } else {
         setErrorMessage("");
       }
-
+      console.log(file);
       return isImage && isSizeValid;
+     
     });
 
     if (deletedIndex !== null) {

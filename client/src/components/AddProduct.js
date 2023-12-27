@@ -4,22 +4,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import PhotoUpload from "./PhotoUpload";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+// import ImageUpload from "./ImageUpload";
 
 const AddProduct = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [address, setAddress] = useState("");
   const [province, setProvince] = useState("");
   const [distcrict, setDistcrict] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [sub_category, setSub_Category] = useState("");
-  const [subCategories, setSubCategories] = useState([
-    "Elektronik",
-    "Ev Aletleri",
-    "Kıyafet",
-  ]);
+  const [subCategories, setSubCategories] = useState([]);
   const [roomCount, setRoomCount] = useState("");
   const [squareMeters, setSquareMeters] = useState("");
   const [landSquareMeters, setLanSquareMeters] = useState("");
@@ -62,6 +58,11 @@ const AddProduct = () => {
 
   const token = localStorage.getItem("token");
 
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "multipart/form-data",
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!category) {
@@ -71,75 +72,21 @@ const AddProduct = () => {
     
 
       try {
-        // Diğer veri alanlarını ve dosyaları FormData'ya ekle
         const formData = new FormData();
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("address", address);
-        formData.append("province", province);
-        formData.append("distcrict", distcrict);
-        formData.append("neighborhood", neighborhood);
-        formData.append("price", price );
-        formData.append("category", category);
-        formData.append("sub_category", sub_category);
 
-        formData.append("image", image);
-
-        formData.append("roomCount", roomCount);
-        formData.append("squareMeters", squareMeters);
-        formData.append("landSquareMeters", landSquareMeters);
-        formData.append("balconyCount", balconyCount);
-        formData.append("buildingStatus", buildingStatus);
-        formData.append("adaNumber", adaNumber);
-        formData.append("parcelNumber", parcelNumber);
-        formData.append("squareMetersGross", squareMetersGross);
-        
-        formData.append("ram", ram);
-        formData.append("cpu", cpu);
-        formData.append("hdd", hdd);
-        formData.append("displayCard", displayCard);
-        formData.append("screenSize", screenSize);
-        formData.append("resolution", resolution);
-        formData.append("situation", situation);
-        
-        formData.append("carBrand",carBrand );
-        formData.append("carSeries", carSeries);
-        formData.append("carYear",carYear );
-        formData.append("carFuel",carFuel );
-        formData.append("carGear", carGear);
-        formData.append("carKM", carKM);
-        formData.append("caseType", caseType);
-        
-        formData.append("motorBrand", motorBrand);
-        formData.append("motorSeries", motorSeries);
-        formData.append("motorYear", motorYear);
-        formData.append("motorFuel", motorFuel);
-        formData.append("motorGear", motorGear);
-        formData.append("motorKM", motorKM);
-        formData.append("motorType", motorType);
-
-        formData.append("operatingSystem", operatingSystem);
-        formData.append("internalMemory", internalMemory);
-        formData.append("phoneScreenSize", phoneScreenSize);
-
-        image.forEach((image, index) => {
-          formData.append(`image${index + 1}`, image);
-        });
-
-      const response = await axios.post(
-        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
-        {
+        const mainData = {
           title,
           description,
-          address,
           province,
           distcrict,
           neighborhood,
           price,
           category,
           sub_category,
-          image : image ,
-
+          image,
+        }
+  
+        const propertyData = {
           roomCount,
           squareMeters,
           landSquareMeters,
@@ -148,7 +95,11 @@ const AddProduct = () => {
           adaNumber,
           parcelNumber,
           squareMetersGross,
-
+      
+          
+        };
+        
+        const electronicData = {
           ram,
           cpu,
           hdd,
@@ -156,7 +107,11 @@ const AddProduct = () => {
           screenSize,
           resolution,
           situation,
-
+      
+         
+        };
+        
+        const vehicleData = {
           carBrand,
           carSeries,
           carYear,
@@ -164,76 +119,52 @@ const AddProduct = () => {
           carGear,
           carKM,
           caseType,
-
+        
+        };
+        
+        const motoVehicleData = {
           motorBrand,
           motorSeries,
+          motorYear,
           motorYear,
           motorFuel,
           motorGear,
           motorKM,
           motorType,
-
+        };
+        
+        const phoneData = {
           operatingSystem,
           internalMemory,
           phoneScreenSize,
-        },
+        };
 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+        image.forEach((image, index) => {
+          formData.append(`image${index + 1}`, image);
+        });
 
-      console.log(
-        title,
-        description,
-        address,
-        province,
-        distcrict,
-        neighborhood,
-        price,
-        category,
-        roomCount,
-        squareMeters,
-        landSquareMeters,
-        balconyCount,
-        buildingStatus,
-        adaNumber,
-        parcelNumber,
-        squareMetersGross,
-        ram,
-        cpu,
-        hdd,
-        displayCard,
-        screenSize,
-        resolution,
-        situation,
-        carBrand,
-        carSeries,
-        carYear,
-        carFuel,
-        carGear,
-        carKM,
-        caseType,
+      const response = await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/ads", formData, { headers });
+        // mainData,
+        // propertyData,
+        // electronicData,
+        // vehicleData,
+        // motoVehicleData,
+        // phoneData,
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //     "Content-Type": "multipart/form-data",
+        //   },
+         
+        // },
+     
 
-        motorBrand,
-        motorSeries,
-        motorYear,
-        motorFuel,
-        motorGear,
-        motorKM,
-        motorType,
-
-        operatingSystem,
-        internalMemory,
-        phoneScreenSize,
-        image 
-      );
+     
 
       console.log("Başarılı istek:", response.data);
-      notify(); // Kullanıcıyı bilgilendirmek için bildirim gönder
+      notify();
+
     } catch (error) {
       console.error("İstek hatası:", error);
     }
@@ -247,7 +178,6 @@ const AddProduct = () => {
   const resetForm = () => {
     setTitle("");
     setDescription("");
-    setAddress("");
     setProvince("");
     setDistcrict("");
     setNeighborhood("");
@@ -318,8 +248,18 @@ const AddProduct = () => {
       <div className="row justify-content-center">
         <div className="col-md-3">
           <h2 className="mb-4 text-center">Ücretsiz Ürün Yükle</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
             <PhotoUpload image ={image } setImage={setImage} />
+            {/* <ImageUpload image={image} setImage={setImage} />  */}
+
+            {/* <label>Ürün Fotoğrafı Ekleyin:</label>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={(e) => setImage([...e.target.files])}
+            /> */}
+
             {/* Title */}
             <div className="mb-2">
               <label htmlFor="title" className="form-label">
@@ -363,20 +303,6 @@ const AddProduct = () => {
                 required
               />
             </div>
-
-            {/* adres kısmı suanlik yorum satırı il ilce mahalle kısmı olucak*/}
-            {/* <div className="mb-3">
-              <label htmlFor="address" className="form-label">
-                Adres:
-              </label>
-              <textarea
-                id="address"
-                className="form-control"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
-            </div> */}
 
             {/* İl  */}
             <div className="mb-3">
