@@ -5,6 +5,7 @@ const createAd = async (req, res, next) => {
   try {
     const userID = res.locals.user.id;
     const allData = req.body;
+    console.log(allData);
     const mainData = {
       title: req.body.title,
       description: req.body.title,
