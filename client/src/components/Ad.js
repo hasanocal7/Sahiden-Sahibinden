@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function Ilan() {
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [title, setTitle] = useState(""); // Yeni eklenen ürün başlığı
 
   const handleLocationSelect = (location) => {
     setSelectedLocation(location);
@@ -15,7 +16,10 @@ function Ilan() {
       <div className="row">
         <div className="col-md-6">
           <div className="fotograf bg-secondary text-light p-4">
-            Fotoğraf
+            {/* Fotoğraf altına eklenen alan: Ürün Başlığı */}
+            <h2>{title}</h2> 
+            {/* Örnek bir img URL */}
+            <img src="https://example.com/your-image.jpg" alt="Ürün Fotoğrafı" />
           </div>
         </div>
         <div className="col-md-6">
