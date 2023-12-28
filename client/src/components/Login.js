@@ -7,7 +7,7 @@ import "../style/Login.css";
 import axios from "axios";
 
 const Login = () => {
-  const navigate = useNavigate(); // Replace useHistory with useNavigate
+  const navigate = useNavigate(); 
 
   const [formData, setFormData] = useState({
     email: "",

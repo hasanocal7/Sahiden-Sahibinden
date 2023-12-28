@@ -58,10 +58,6 @@ const AddProduct = () => {
 
   const token = localStorage.getItem("token");
 
-  const headers = {
-    Authorization: `Bearer ${token}`,
-    "Content-Type": "multipart/form-data",
-  };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -126,7 +122,6 @@ const AddProduct = () => {
           motorBrand,
           motorSeries,
           motorYear,
-          motorYear,
           motorFuel,
           motorGear,
           motorKM,
@@ -144,21 +139,21 @@ const AddProduct = () => {
         });
 
       const response = await axios.post(
-        "https://sahiden-sahibinden-production.up.railway.app/api/ads", formData, { headers });
-        // mainData,
-        // propertyData,
-        // electronicData,
-        // vehicleData,
-        // motoVehicleData,
-        // phoneData,
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`,
-        //     "Content-Type": "multipart/form-data",
-        //   },
+        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+        mainData,
+        propertyData,
+        electronicData,
+        vehicleData,
+        motoVehicleData,
+        phoneData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
          
-        // },
-     
+        },
+      );
 
      
 
