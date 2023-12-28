@@ -10,6 +10,7 @@ import {useState,useEffect} from 'react'
 function Home() {
   const token = localStorage.getItem("token")
   const [data, setData] = useState([])
+  
   useEffect(() => {
   axios.get('https://sahiden-sahibinden-production.up.railway.app/api/ads' ,
   {

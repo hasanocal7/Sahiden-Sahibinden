@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import AddProduct from "./components/AddProduct";
 import ForgotPassword from "./components/ForgotPassword";
+import ConfirmPassword from "./components/ConfirmPassword";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/ilan" element={<Ad />} exact="true" />
         <Route path="/ilanyukle" element={<AddProduct />} exact="true" />
         <Route path="/forgot-password" element={<ForgotPassword />} exact="true" />
+        <Route path="/confirm-password" element={<ConfirmPassword />} />
       </Routes>
       <Footer />
     </div>
