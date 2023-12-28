@@ -1,11 +1,27 @@
-import React, { useState } from "react";
-import GoogleMaps from "./GoogleMaps"; 
+import React, { useState, useEffect } from "react";
+import GoogleMaps from "./GoogleMaps";
+import axios from "axios";
 import "../style/Ad.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Ilan() {
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [title, setTitle] = useState(""); // Yeni eklenen ürün başlığı
+  const [title, setTitle] = useState("");
+  const [imageUrls, setImageUrls] = useState([]);
+
+  useEffect(() => {
+    // Axios kullanarak sunucudan görsel URL'lerini al
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get("your_backend_api_endpoint");
+        setImageUrls(response.data);
+      } catch (error) {
+        console.error("Görseller alınırken hata oluştu:", error);
+      }
+    };
+
+    fetchImages();
+  }, []); // Boş bağımlılık dizisi, etkinin sadece bir kez bileşen yüklenirken çalışmasını sağlar.
 
   const handleLocationSelect = (location) => {
     setSelectedLocation(location);
@@ -16,10 +32,13 @@ function Ilan() {
       <div className="row">
         <div className="col-md-6">
           <div className="fotograf bg-secondary text-light p-4">
-            {/* Fotoğraf altına eklenen alan: Ürün Başlığı */}
-            <h2>{title}</h2> 
-            {/* Örnek bir img URL */}
-            <img src="https://example.com/your-image.jpg" alt="Ürün Fotoğrafı" />
+            <h2>{title}</h2>
+            {imageUrls.map((imageUrl, index) => (
+              <div key={index} className="fotograf bg-secondary text-light p-4">
+                <h2>{title}</h2>
+                <img className="smallImage" src={imageUrl} alt={`Ürün Fotoğrafı ${index + 1}`} />
+              </div>
+            ))}
           </div>
         </div>
         <div className="col-md-6">
@@ -27,7 +46,7 @@ function Ilan() {
             <p>Fiyat kısmı</p>
             <div className="property">
               <hr />
-              <p>Özellikler Kısmı</p>
+              <p>Özellikler Kısmı</p> 
               <hr />
             </div>
           </div>
