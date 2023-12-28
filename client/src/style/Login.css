@@ -4,16 +4,15 @@
   border: 1px solid black;
   border-radius: 10px 10px;
   background-color: #39555e;
+  margin: 0 auto;
 }
 
-
-.loginFormControl{
+.loginFormControl {
   font-size: 15px;
   border: 1px solid black;
   border-radius: 10px 10px;
-
 }
- 
+
 .loginFormTitle {
   color: black;
   font-weight: bold;
@@ -21,26 +20,23 @@
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 30px;
   border-radius: 5px;
-  background:
-        linear-gradient(white, transparent),
-        linear-gradient(to top left, black, transparent),
-        linear-gradient(to top right,#c9e4ca, transparent);
-    background-blend-mode: screen;
+  background: linear-gradient(white, transparent),
+    linear-gradient(to top left, black, transparent),
+    linear-gradient(to top right, #c9e4ca, transparent);
+  background-blend-mode: screen;
 }
- 
-.loginButton{
-  background-color: #c9e4ca ;
+
+.loginButton {
+  background-color: #c9e4ca;
   color: black;
   width: auto;
   height: auto;
   font-size: 20px;
   display: inline-block;
-  margin:auto;
-  margin-left: 35%; 
+  margin: auto;
+  margin-left: 35%;
   margin-top: 2em;
-  
 }
-
 
 .loginButton:hover {
   background-color: #87bba2;
@@ -49,30 +45,48 @@
 .forgotPasswordLink {
   width: auto;
   height: auto;
-  margin-left: 40%; 
-  margin-top: 1em; 
+  margin-left: 40%;
+  margin-top: 1em;
   font-size: 15px;
   color: white;
 }
 
-.forgotPasswordLink:hover{
-  color:rgb(0, 0, 0);
+.forgotPasswordLink:hover {
+  color: rgb(0, 0, 0);
 }
 
-.signupLink{
+.signupLink {
   font-size: 17px;
-  margin-left: 15%; 
+  margin-left: 15%;
   margin-top: 2em;
   color: white;
 }
 
-
-.signupLink:hover{
+.signupLink:hover {
   color: white;
 }
-     
+.loginError {
+  color: white; 
+  font-size: 14px; 
+  margin-top: 5px;
+}
+@media (max-width: 960px) {
+  .loginContainer {
+    width: 70%;
+  }
+}
+
 @media (min-width: 768px) {
   .loginContainer {
     width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .loginContainer {
+    width: 90%;
+  }
+  .loginButton {
+    margin-left: 25%;
   }
 }
