@@ -1,0 +1,46 @@
+.formMainDiv {
+    display: grid;
+    flex-direction: column;
+    background-color: #F3F3F3;
+    margin: 0 auto;
+    width: 50%;
+    align-items: center;
+    text-align: left;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .baslik {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #baslikBackground {
+    background-color: #ffff00;
+    width: 250px;
+    padding: 0 5px;
+    margin-bottom: 1px;
+    color: #3F475F;
+    text-align: center; 
+    margin: auto; 
+  }
+  
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .btn {
+    width: 50%;
+    margin: 5px;
+  }
+  
+  .row label {
+    margin-bottom: 5px;
+  }
+  .mb-3 .row .gap-1{
+    display: flex;
+    flex-direction: row;
+  }

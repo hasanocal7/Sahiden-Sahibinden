@@ -41,10 +41,10 @@ function ConfirmPassword() {
 
   return (
     <div className="container confirm-password-container mt-5 d-flex flex-column align-items-center">
-      <h2 className="confirm-password-heading">Yeni Şifre Oluştur</h2>
+      <h2 className="confirm-password-heading">DEHA</h2>
 
-      <label htmlFor="password" className="confirm-password-label">
-        Yeni Şifre
+      <label htmlFor="password" className="confirm-password-label mt-3">
+        
       </label>
       <input
         type="password"
@@ -58,8 +58,8 @@ function ConfirmPassword() {
         }}
       />
 
-      <label htmlFor="confirmPassword" className="confirm-password-label">
-        Yeni Şifre Tekrar
+      <label htmlFor="confirmPassword" className="confirm-password-label mt-3">
+        
       </label>
       <input
         type="password"
