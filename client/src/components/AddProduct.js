@@ -149,6 +149,7 @@ const AddProduct = () => {
           },
         }
       );
+// Görseli backend nasıl gidiyor. Bodyde mi gidiyor? 
 
       const CarData = new FormData();
 

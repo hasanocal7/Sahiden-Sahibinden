@@ -1,7 +1,6 @@
-  // Login.js
   import React, { useState } from "react";
   import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-  import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
+  import { useNavigate } from "react-router-dom"; 
   import "bootstrap/dist/css/bootstrap.min.css";
   import "../style/Login.css";
   import axios from "axios";
@@ -136,3 +135,6 @@
   };
 
   export default Login;
+
+
+  // Password kontrolü düzeltilecek birebir karşılaştırma aynısı olmalı.

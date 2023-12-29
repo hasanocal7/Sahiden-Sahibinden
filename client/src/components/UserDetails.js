@@ -7,8 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Axios from "axios";
 
 function UserDetails() {
+  // ! Kullanıcı adı kaldırılacak
   const [editMode, setEditMode] = useState(false);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(""); 
   const [first_name, setFirst_Name] = useState("");
   const [last_name, setLast_Name] = useState("");
   const [birthDate, setBirthDate] = useState(null);

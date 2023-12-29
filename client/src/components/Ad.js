@@ -5,6 +5,7 @@ import "../style/Ad.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Ilan() {
+  // Veriler backendden gelecek sol tarafındaki değerleri ben yazacağım
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [title, setTitle] = useState("");
   const [imageUrls, setImageUrls] = useState([]);
