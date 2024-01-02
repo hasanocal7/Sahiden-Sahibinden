@@ -1,71 +1,63 @@
 .homeContainer {
   display: flex;
-  margin-left: 60px;
+  flex-wrap: wrap;
+  margin-left: 10px;
   margin-top: 30px;
   background-color: #f8f9fa;
-  padding: 25px;
+  padding: 15px;
 }
-.vasitaArea {
+
+.leftSide {
+  flex: 1;
+  margin-right: 20px; 
+}
+
+.rightSide {
+  flex: 1;
+  margin-top: 20px;
+}
+
+.property, .vasita, .elektronik {
+  margin-bottom: 20px;
+}
+
+.propertyArea, .vehicleArea, .electronicArea {
   display: flex;
+  align-items: center;
 }
-.vasitaArea svg{
+
+.propertyArea svg, .vehicleArea svg, .electronicArea svg {
   margin-right: 12px;
 }
-.propertyArea,
-.vehicleArea,
-.electronicArea {
-  display: flex;
-  font-size: 14px;
-  cursor: pointer;
-}
-.electronicArea svg{
-  margin-right: 12px;
-}
-.propertyArea svg{
-  margin-right: 12px
-}
-.elektronikArea{
-  display: flex;
-}
-.property ul,
-.vehicle ul,
-.electronic ul {
-  /* list-style: none; */
+
+.property ul, .vehicle ul, .electronic ul {
   width: 32px;
   cursor: pointer;
 }
-.property li,
-.vehicle li,
-.electronic li {
+
+.property li, .vehicle li, .electronic li {
   margin-top: 10px;
 }
-.categoryLink:hover,
-h4:hover {
+
+.categoryLink:hover, h4:hover {
   text-decoration: underline;
 }
 
-/* hr {
-    width: 175px;
-  } */
 
-/* .leftSide {
-    flex: 2;
-    height: 100vh;
-  } */
-
-/* .rightSide {
-    flex: 5;
-    height: 100vh;
-  } */
-
-/* .categoryLink {
-    text-decoration: none;
-    color: inherit;
-  } */
-/* .propertyArea svg,
-  .vehicleArea svg,
-  .electronicArea svg {
-    margin-top: 15px;
-    margin-right: 6px;
+@media (max-width: 768px) {
+  .homeContainer {
+    margin-left: 0;
+    padding: 10px;
   }
-   */
+
+  .leftSide, .rightSide {
+    flex: 1;
+    margin: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .propertyArea svg, .vehicleArea svg, .electronicArea svg {
+    margin-right: 8px;
+  }
+}

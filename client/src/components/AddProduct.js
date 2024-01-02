@@ -6,28 +6,27 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 const AddProduct = () => {
+  const token = localStorage.getItem("token");
+  
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [address, setAddress] = useState("");
   const [province, setProvince] = useState("");
   const [distcrict, setDistcrict] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [sub_category, setSub_Category] = useState("");
-  const [subCategories, setSubCategories] = useState([
-    "Elektronik",
-    "Ev Aletleri",
-    "Kıyafet",
-  ]);
+  const [subCategories, setSubCategories] = useState([]);
+
   const [roomCount, setRoomCount] = useState("");
   const [squareMeters, setSquareMeters] = useState("");
   const [landSquareMeters, setLanSquareMeters] = useState("");
   const [balconyCount, setBalconyCount] = useState("");
-  const [buildingStatus, setBuildingStatus] = useState("");
-  const [adaNumber, setAdaNumber] = useState("");
-  const [parcelNumber, setParcelNumber] = useState("");
-  const [squareMetersGross, setSquareMetersGross] = useState("");
+  
+  const [zoning_status, setZoning_Status] = useState("");
+  const [parcel_no, setParcel_No] = useState("");
+  const [island_no, setIsland_No] = useState("");
+  const [m2, set_M2] = useState("");
 
   const [ram, setRam] = useState("");
   const [cpu, setCpu] = useState("");
@@ -52,16 +51,17 @@ const AddProduct = () => {
   const [motorGear, setMotorGear] = useState("");
   const [motorKM, setMotorKM] = useState("");
   const [motorType, setMotorType] = useState("");
-
-  const [operatingSystem, setOperatingSystem] = useState("");
-  const [internalMemory, setInternalMemory] = useState("");
+  
+  const [operating_system, setOperating_System] = useState("");
+  const [internal_memory, setInternal_Memory] = useState("");
   const [phoneScreenSize, setPhoneScreenSize] = useState("");
 
   const [image, setImage] = useState([]);
   const notify = () => toast("Ürün Yüklendi");
 
-  const token = localStorage.getItem("token");
+  
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!category) {
@@ -70,184 +70,174 @@ const AddProduct = () => {
     }
     
 
-      try {
-        // Diğer veri alanlarını ve dosyaları FormData'ya ekle
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("address", address);
-        formData.append("province", province);
-        formData.append("distcrict", distcrict);
-        formData.append("neighborhood", neighborhood);
-        formData.append("price", price );
-        formData.append("category", category);
-        formData.append("sub_category", sub_category);
+    try {
 
-        formData.append("image", image);
-
-        formData.append("roomCount", roomCount);
-        formData.append("squareMeters", squareMeters);
-        formData.append("landSquareMeters", landSquareMeters);
-        formData.append("balconyCount", balconyCount);
-        formData.append("buildingStatus", buildingStatus);
-        formData.append("adaNumber", adaNumber);
-        formData.append("parcelNumber", parcelNumber);
-        formData.append("squareMetersGross", squareMetersGross);
-        
-        formData.append("ram", ram);
-        formData.append("cpu", cpu);
-        formData.append("hdd", hdd);
-        formData.append("displayCard", displayCard);
-        formData.append("screenSize", screenSize);
-        formData.append("resolution", resolution);
-        formData.append("situation", situation);
-        
-        formData.append("carBrand",carBrand );
-        formData.append("carSeries", carSeries);
-        formData.append("carYear",carYear );
-        formData.append("carFuel",carFuel );
-        formData.append("carGear", carGear);
-        formData.append("carKM", carKM);
-        formData.append("caseType", caseType);
-        
-        formData.append("motorBrand", motorBrand);
-        formData.append("motorSeries", motorSeries);
-        formData.append("motorYear", motorYear);
-        formData.append("motorFuel", motorFuel);
-        formData.append("motorGear", motorGear);
-        formData.append("motorKM", motorKM);
-        formData.append("motorType", motorType);
-
-        formData.append("operatingSystem", operatingSystem);
-        formData.append("internalMemory", internalMemory);
-        formData.append("phoneScreenSize", phoneScreenSize);
-
-        image.forEach((image, index) => {
-          formData.append(`image${index + 1}`, image);
-        });
-
-      const response = await axios.post(
+      const formData = new FormData();
+  
+      
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("province", province);
+      formData.append("distcrict", distcrict);
+      formData.append("neighborhood", neighborhood);
+      formData.append("price", price);
+      formData.append("category", category);
+      formData.append("sub_category", sub_category);
+      
+      await axios.post(
         "https://sahiden-sahibinden-production.up.railway.app/api/ads",
-        {
-          title,
-          description,
-          address,
-          province,
-          distcrict,
-          neighborhood,
-          price,
-          category,
-          sub_category,
-          image : image ,
-
-          roomCount,
-          squareMeters,
-          landSquareMeters,
-          balconyCount,
-          buildingStatus,
-          adaNumber,
-          parcelNumber,
-          squareMetersGross,
-
-          ram,
-          cpu,
-          hdd,
-          displayCard,
-          screenSize,
-          resolution,
-          situation,
-
-          carBrand,
-          carSeries,
-          carYear,
-          carFuel,
-          carGear,
-          carKM,
-          caseType,
-
-          motorBrand,
-          motorSeries,
-          motorYear,
-          motorFuel,
-          motorGear,
-          motorKM,
-          motorType,
-
-          operatingSystem,
-          internalMemory,
-          phoneScreenSize,
-        },
-
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      // await axios.post(
+      //   "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+      //   formData,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   }
+      // );
+
+      const HousingData = new FormData();
+
+      HousingData.append("roomCount", roomCount);
+      HousingData.append("squareMeters", squareMeters);
+      HousingData.append("landSquareMeters", landSquareMeters);
+      HousingData.append("balconyCount", balconyCount);
+      HousingData.append("zoning_status", zoning_status);
+      HousingData.append("parcel_no", parcel_no);
+      HousingData.append("island_no", island_no);
+      HousingData.append("m2", m2);
+      
+      await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+        formData,
+        HousingData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
 
-      console.log(
-        title,
-        description,
-        address,
-        province,
-        distcrict,
-        neighborhood,
-        price,
-        category,
-        roomCount,
-        squareMeters,
-        landSquareMeters,
-        balconyCount,
-        buildingStatus,
-        adaNumber,
-        parcelNumber,
-        squareMetersGross,
-        ram,
-        cpu,
-        hdd,
-        displayCard,
-        screenSize,
-        resolution,
-        situation,
-        carBrand,
-        carSeries,
-        carYear,
-        carFuel,
-        carGear,
-        carKM,
-        caseType,
+      const ComputerData = new FormData();
 
-        motorBrand,
-        motorSeries,
-        motorYear,
-        motorFuel,
-        motorGear,
-        motorKM,
-        motorType,
+      ComputerData.append("ram", ram);
+      ComputerData.append("cpu", cpu);
+      ComputerData.append("hdd", hdd);
+      ComputerData.append("displayCard", displayCard);
+      ComputerData.append("screenSize", screenSize);
+      ComputerData.append("resolution", resolution);
+      ComputerData.append("situation", situation);
+      
+      await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+        formData,
+        ComputerData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+// Görseli backend nasıl gidiyor. Bodyde mi gidiyor? 
 
-        operatingSystem,
-        internalMemory,
-        phoneScreenSize,
-        image 
+      const CarData = new FormData();
+
+      CarData.append("carBrand", carBrand);
+      CarData.append("carSeries", carSeries);
+      CarData.append("carYear", carYear);
+      CarData.append("carFuel", carFuel);
+      CarData.append("carGear", carGear);
+      CarData.append("carKM", carKM);
+      CarData.append("caseType", caseType);
+      
+      await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+        formData,
+        CarData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
+     const MotorData = new FormData();
+
+      MotorData.append("motorBrand", motorBrand);
+      MotorData.append("motorSeries", motorSeries);
+      MotorData.append("motorYear", motorYear);
+      MotorData.append("motorFuel", motorFuel);
+      MotorData.append("motorGear", motorGear);
+      MotorData.append("motorKM", motorKM);
+      MotorData.append("motorType", motorType);
+      
+      await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+        formData,
+        MotorData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const PhoneData = new FormData();
+
+      PhoneData.append("operating_system", operating_system);
+      PhoneData.append("internal_memory", internal_memory);
+      PhoneData.append("phoneScreenSize", phoneScreenSize);
+  
+      await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+        formData,
+        PhoneData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const response = await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
       console.log("Başarılı istek:", response.data);
-      notify(); // Kullanıcıyı bilgilendirmek için bildirim gönder
+      notify();
     } catch (error) {
       console.error("İstek hatası:", error);
     }
-
-    console.log("Yüklenen Fotoğraflar:", image );
+  
+    console.log("Yüklenen Fotoğraflar:", image);
     setImage([]);
-
+  
     resetForm();
   };
 
   const resetForm = () => {
     setTitle("");
     setDescription("");
-    setAddress("");
     setProvince("");
     setDistcrict("");
     setNeighborhood("");
@@ -258,11 +248,11 @@ const AddProduct = () => {
     setRoomCount("");
     setSquareMeters("");
     setBalconyCount("");
-    setBuildingStatus("");
-    setAdaNumber("");
-    setParcelNumber("");
+    setZoning_Status("");
+    setParcel_No("");
+    setIsland_No("");
     setLanSquareMeters("");
-    setSquareMetersGross("");
+    set_M2("");
     setRam("");
     setCpu("");
     setHdd("");
@@ -286,8 +276,8 @@ const AddProduct = () => {
     setMotorKM("");
     setMotorType("");
 
-    setInternalMemory("");
-    setOperatingSystem("");
+    setInternal_Memory("");
+    setOperating_System("");
     setPhoneScreenSize("");
 
     setImage([]);
@@ -300,7 +290,7 @@ const AddProduct = () => {
 
     switch (selectedCategory) {
       case "property":
-        setSubCategories(["Konut", "Arsa"]);
+        setSubCategories(["Konut", "Land"]);
         break;
       case "vehicle":
         setSubCategories(["Car", "Motorcycle"]);
@@ -318,8 +308,10 @@ const AddProduct = () => {
       <div className="row justify-content-center">
         <div className="col-md-3">
           <h2 className="mb-4 text-center">Ücretsiz Ürün Yükle</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
             <PhotoUpload image ={image } setImage={setImage} />
+            
+
             {/* Title */}
             <div className="mb-2">
               <label htmlFor="title" className="form-label">
@@ -363,20 +355,6 @@ const AddProduct = () => {
                 required
               />
             </div>
-
-            {/* adres kısmı suanlik yorum satırı il ilce mahalle kısmı olucak*/}
-            {/* <div className="mb-3">
-              <label htmlFor="address" className="form-label">
-                Adres:
-              </label>
-              <textarea
-                id="address"
-                className="form-control"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
-            </div> */}
 
             {/* İl  */}
             <div className="mb-3">
@@ -1183,14 +1161,14 @@ const AddProduct = () => {
                       </select>
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="operatingSystem" className="form-label">
+                      <label htmlFor="operating_system" className="form-label">
                         İşletim Sistemi:
                       </label>
                       <select
-                        id="operatingSystem"
+                        id="operating_system"
                         className="form-select"
-                        value={operatingSystem}
-                        onChange={(e) => setOperatingSystem(e.target.value)}
+                        value={operating_system}
+                        onChange={(e) => setOperating_System(e.target.value)}
                         required
                       >
                         <option value="" disabled>
@@ -1202,14 +1180,14 @@ const AddProduct = () => {
                     </div>
 
                     <div className="mb-3">
-                      <label htmlFor="internalMemory" className="form-label">
+                      <label htmlFor="internal_memory" className="form-label">
                         Dahilli Hafıza
                       </label>
                       <select
-                        id="internalMemory"
+                        id="internal_memory"
                         className="form-select"
-                        value={internalMemory}
-                        onChange={(e) => setInternalMemory(e.target.value)}
+                        value={internal_memory}
+                        onChange={(e) => setInternal_Memory(e.target.value)}
                         required
                       >
                         <option value="" disabled>
@@ -1328,15 +1306,15 @@ const AddProduct = () => {
                       />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="squareMetersGross" className="form-label">
+                      <label htmlFor="m2" className="form-label">
                         Metrekare Brüt (m²):
                       </label>
                       <input
                         type="number"
-                        id="squareMetersGross"
+                        id="m2"
                         className="form-control"
-                        value={squareMetersGross}
-                        onChange={(e) => setSquareMetersGross(e.target.value)}
+                        value={m2}
+                        onChange={(e) => set_M2(e.target.value)}
                         required
                       />
                     </div>
@@ -1365,7 +1343,7 @@ const AddProduct = () => {
                   </>
                 )}
 
-                {sub_category === "Arsa" && (
+                {sub_category === "Land" && (
                   <>
                     <div className="mb-3">
                       <div className="mb-3">
@@ -1384,14 +1362,14 @@ const AddProduct = () => {
                           required
                         />
                       </div>
-                      <label htmlFor="buildingStatus" className="form-label">
+                      <label htmlFor="zoning_status" className="form-label">
                         İmar Durumu:
                       </label>
                       <select
-                        id="buildingStatus"
+                        id="zoning_status"
                         className="form-select"
-                        value={buildingStatus}
-                        onChange={(e) => setBuildingStatus(e.target.value)}
+                        value={zoning_status}
+                        onChange={(e) => setZoning_Status(e.target.value)}
                         required
                       >
                         <option value="" disabled>
@@ -1404,28 +1382,28 @@ const AddProduct = () => {
                       </select>
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="adaNumber" className="form-label">
+                      <label htmlFor="parcel_no" className="form-label">
                         Ada Numarası:
                       </label>
                       <input
                         type="number"
-                        id="adaNumber"
+                        id="parcel_no"
                         className="form-control"
-                        value={adaNumber}
-                        onChange={(e) => setAdaNumber(e.target.value)}
+                        value={parcel_no}
+                        onChange={(e) => setParcel_No(e.target.value)}
                         required
                       />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="parcelNumber" className="form-label">
+                      <label htmlFor="island_no" className="form-label">
                         Parsel Numarası:
                       </label>
                       <input
                         type="number"
-                        id="parcelNumber"
+                        id="island_no"
                         className="form-control"
-                        value={parcelNumber}
-                        onChange={(e) => setParcelNumber(e.target.value)}
+                        value={island_no}
+                        onChange={(e) => setIsland_No(e.target.value)}
                         required
                       />
                     </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import { useFormik } from 'formik';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
@@ -7,6 +8,7 @@ import '../style/Register.css';
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -21,6 +23,7 @@ function Register() {
        
         console.log('Kullanıcı Hesabı Açıldı:', response.data);
         actions.resetForm();
+        navigate('/login');
       } catch (error) {
         console.error('Hata:', error);
       }
@@ -99,9 +102,6 @@ function Register() {
           Hesap Aç
         </button>
       </form>
-
-      
-
     </div>
   );
 }

@@ -1,13 +1,12 @@
-// Login.js
 import React, { useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/Login.css";
 import axios from "axios";
 
 const Login = () => {
-  const navigate = useNavigate(); // Replace useHistory with useNavigate
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -24,7 +23,7 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value,
+      [e.target.id]: e.target.id === "password" ? e.target.value.trim() : e.target.value,
     });
 
     setErrors({
@@ -55,11 +54,11 @@ const Login = () => {
       // Başarılı giriş sonrasında anasayfaya yönlendirme
       navigate("/");
     } catch (error) {
-      console.error("Hata:", error);
+   console.error("Hata:", error);
 
       setErrors({
-        email: "",
-        password: "",
+        email: "E-posta adresinizi doğru girdiğinizden emin olunuz.",
+        password: "Şifrenizi giriniz.",
       });
     }
   };
@@ -68,46 +67,47 @@ const Login = () => {
     <div className="loginContainer container mt-5 d-flex flex-column align-items-center">
       <h1 className="loginFormTitle form-title mb-4">DEHA</h1>
      
-<form onSubmit={handleSubmit} className="w-50">
-        <div className="loginInputs mb-3">
-          <label htmlFor="email" className="form-label"></label>
-          <input
-            type="email"
-            id="email"
-            className={`loginFormControl form-control ${
-              errors.email ? "is-invalid" : ""
-            }`}
-            placeholder="E-posta giriniz"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <p className="invalid-feedback ">{errors.email}</p>}
-
-          <label htmlFor="password" className="form-label"></label>
-          <div className="password-container input-group">
+      <form onSubmit={handleSubmit} className="w-50">
+      <div className="loginInputs mb-3">
+            <label htmlFor="email" className="form-label"></label>
+            
             <input
-              type={showPassword ? "text" : "password"}
-              id="password"
+              type="email"
+              id="email"
               className={`loginFormControl form-control ${
-                errors.password ? "is-invalid" : ""
+                errors.email ? "is-invalid" : ""
               }`}
-              placeholder="Şifre giriniz"
-              value={formData.password}
+              placeholder="E-posta giriniz"
+              value={formData.email}
               onChange={handleChange}
             />
-            <button
-              type="button"
-              className="password-toggle-btn btn btn-outline-secondary"
-              onClick={togglePasswordVisibility}
-            >
-              {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
-            </button>
-          </div> 
+            {errors.email && <p className="loginError invalid-feedback ">{errors.email}</p>}
+            
 
-          {errors.password && (
-            <p className="invalid-feedback">{errors.password}</p>
-          )}
-        </div>
+            <label htmlFor="password" className="form-label"></label>
+            <div className="password-container input-group">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                className={`loginFormControl form-control ${
+                  errors.password ? "is-invalid" : ""
+                }`}
+                placeholder="Şifre giriniz"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                className="password-toggle-btn btn btn-outline-secondary"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
+              </button>
+            </div>
+            {errors.password && (
+              <p className="invalid-feedback">{errors.password}</p>
+            )}
+          </div>
 
         <div className="forgotPasswordLink">
           <a href="/forgot-password" className="forgotPasswordLink">

@@ -1,4 +1,10 @@
 .adContainer{
     background-color: #f8f9fa;
     padding: 10px;
+ 
+}
+.smallImage{
+    
+    max-width: 100%;
+    height: 200%;
 }
