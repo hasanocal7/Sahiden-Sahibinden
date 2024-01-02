@@ -139,11 +139,11 @@ function UserDetails() {
           </div>
         </div>
         {editMode ? (
-          <button className="btn" type="button" onClick={handleSaveClick}>
+          <button className="userDetailsButton btn" type="button" onClick={handleSaveClick}>
             Kaydet
           </button>
         ) : (
-          <button className="btn " type="button" onClick={handleEditClick}>
+          <button className="userDetailsButton btn " type="button" onClick={handleEditClick}>
             Düzenle
           </button>
         )}
