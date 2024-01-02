@@ -24,7 +24,6 @@ function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-
     navigate("/login");
   };
 
@@ -67,9 +66,13 @@ function Navbar() {
             {isLoggedIn && (
               <>
                 <li className="nav-item">
-                <Link to="/user-details" className="nav-links" onClick={handleClose}>
-  Kullanıcı Bilgileri
-</Link>
+                  <Link
+                    to="/user-details"
+                    className="nav-links"
+                    onClick={handleClose}
+                  >
+                    Kullanıcı Bilgileri
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <NavLink
@@ -84,9 +87,9 @@ function Navbar() {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <button onClick={handleLogout} className="bg-dark nav-links">
+                  <Link to="/" className="bg-dark nav-links" onClick={handleLogout}>
                     Çıkış Yap
-                  </button>
+                  </Link>
                 </li>
               </>
             )}
