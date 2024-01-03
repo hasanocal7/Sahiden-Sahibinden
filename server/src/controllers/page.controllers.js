@@ -22,14 +22,14 @@ const createUser = async (req, res, next) => {
 
 const loginUser = async (req, res, next) => {
   try {
-    const { email } = req.body;
-    const accessToken = await services.userServices.loginUser(email);
+    const { email, password } = req.body;
+    const accessToken = await services.userServices.loginUser(email, password);
     res.status(200).json({
       success: true,
       accessToken: accessToken,
     });
   } catch (error) {
-    res.status(500);
+    res.status(400);
     return next(new Error(error.message));
   }
 };
@@ -42,7 +42,7 @@ const forgotPassword = async (req, res, next) => {
       message: `We have sent an email to your ${maskedEmail} address. You can change your password by clicking on the link in this email.`,
     });
   } catch (error) {
-    res.status(500);
+    res.status(400);
     return next(new Error(error.message));
   }
 };
@@ -58,7 +58,7 @@ const changePassword = async (req, res, next) => {
       user: user,
     });
   } catch (error) {
-    res.status(500);
+    res.status(400);
     return next(new Error(error.message));
   }
 };

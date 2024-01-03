@@ -2,8 +2,7 @@ const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const cryptor = require("../utils/cryptor");
 const { sendingMail } = require("../utils/mailer");
-const crypto = require("crypto");
-
+require("dotenv").config();
 const createUser = async (email, first_name, last_name, password) => {
   const existingUser = await User.findOne({ where: { email: email } });
   if (!existingUser) {
@@ -38,10 +37,17 @@ const getUser = async (id) => {
   }
 };
 
-const loginUser = async (email) => {
-  const user = await User.findOne({ where: { email: email } });
+const loginUser = async (email, password) => {
+  const user = await User.findOne({
+    where: { email: email },
+  });
   if (!user) {
     throw new Error("Invalid email address or password.");
+  } else {
+    const comparedPassword = await cryptor.compare(password, user.password);
+    if (!comparedPassword) {
+      throw new Error("Invalid email address or password.");
+    }
   }
   const userID = user.id;
   const accessToken = jwt.sign({ userID }, process.env.ACCESSTOKEN_SECRET_KEY, {
@@ -51,7 +57,6 @@ const loginUser = async (email) => {
 };
 
 const forgotPassword = async (email) => {
-  const token = crypto.randomBytes(32).toString("hex");
   const user = await User.findOne({ where: { email: email } });
   if (!user) {
     throw new Error(
@@ -60,11 +65,11 @@ const forgotPassword = async (email) => {
   } else {
     const maskedEmail = `${email[0]}***@${email.split("@")[1]}`;
     sendingMail({
-      from: "no-reply@example.com",
+      from: process.env.TRANSPORTER_USER,
       to: email,
       subject: "Forgot Password",
       text: `Hello! Please click on this link to change your password:
-      sahiden-sahibinden.railway.internal/api/forgot-password/${user.id}/${token} `,
+      http://localhost:3000/confirm-password/${user.id}`,
     });
     return maskedEmail;
   }

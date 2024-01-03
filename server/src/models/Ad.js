@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     sub_category: { type: DataTypes.STRING, allowNull: false },
     address: { type: DataTypes.TEXT, allowNull: false },
     location: { type: DataTypes.GEOMETRY, allowNull: true },
-    image: { type: DataTypes.JSON, allowNull: false },
+    image: { type: DataTypes.JSON, allowNull: true },
     slug: { type: DataTypes.TEXT, allowNull: true },
   });
 

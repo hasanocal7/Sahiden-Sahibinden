@@ -8,10 +8,10 @@ const createAd = async (req, res, next) => {
     console.log(allData);
     const mainData = {
       title: req.body.title,
-      description: req.body.title,
+      description: req.body.description,
       price: req.body.price,
       address: `${req.body.province}/${req.body.distcrict}/${req.body.neighborhood}`,
-      image: req.files.map((image) => image.path),
+      ...(req.files ? { image: req.files.map((image) => image.path) } : {}),
       UserID: userID,
       category: req.body.category,
       sub_category: req.body.sub_category,
