@@ -17,7 +17,7 @@ const PhotoUpload = ({ image, setImage }) => {
         file.type === "image/jpg" ||
         file.type === "image/png";
       const isSizeValid = file.size <= 20 * 1024 * 1024;
-
+  
       if (!isImage) {
         console.log("Geçersiz dosya türü:", file.type);
         setErrorMessage(
@@ -28,9 +28,8 @@ const PhotoUpload = ({ image, setImage }) => {
       } else {
         setErrorMessage("");
       }
-      console.log(file);
+  
       return isImage && isSizeValid;
-     
     });
 
     if (deletedIndex !== null) {
@@ -46,7 +45,8 @@ const PhotoUpload = ({ image, setImage }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     maxSize: 20 * 1024 * 1024,
-    accept: "image/jpeg, image/jpg, image/png",
+    // accept: "image/jpeg, image/jpg, image/png",
+    accept: "*/*",
   });
 
   const deletePhoto = (index) => {
