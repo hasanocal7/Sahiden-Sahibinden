@@ -10,10 +10,12 @@ const {
 const slugify = require("slugify");
 const { Op } = require("sequelize");
 const fs = require("fs");
+const db = require("../models");
 
 const createAd = async (adData, subCategoryData) => {
   try {
-    const ad = await Ad.create(adData);
+    const t = await db.sequelize.transaction();
+    const ad = await Ad.create(adData, { transaction: t });
     let subModel;
     switch (ad.sub_category) {
       case "Housing":
@@ -41,12 +43,16 @@ const createAd = async (adData, subCategoryData) => {
       {
         slug: slugify(`${ad.category} ${ad.sub_category} ${ad.title} ${ad.id}`),
       },
-      { where: { id: ad.id } }
+      { where: { id: ad.id }, transaction: t }
     );
-    await subModel.create({ ...subCategoryData, AdId: ad.id });
-
+    await subModel.create(
+      { ...subCategoryData, AdId: ad.id },
+      { transaction: t }
+    );
+    await t.commit();
     return ad;
   } catch (error) {
+    await t.rollback();
     throw new Error("Error creating ad");
   }
 };
