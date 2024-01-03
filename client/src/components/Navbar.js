@@ -71,7 +71,7 @@ function Navbar() {
                     className="nav-links"
                     onClick={handleClose}
                   >
-                    Kullanıcı Bilgileri
+                    Profilim
                   </Link>
                 </li>
                 <li className="nav-item">
