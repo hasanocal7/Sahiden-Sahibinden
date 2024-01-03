@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../style/navbar.css";
 import { HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
 import UserDetails from "../components/UserDetails";
@@ -31,15 +31,15 @@ function Navbar() {
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <NavLink exact to="/" className="nav-logo">
-            <p>DEHA</p>
-          </NavLink>
+          <Link exact to="/" className="nav-logo">
+            <span>DEHA</span>
+          </Link>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             {!isLoggedIn && (
               <>
                 <li className="nav-item">
-                  <NavLink
+                  <Link
                     exact="true"
                     to="/login"
                     activeclassname="active"
@@ -47,10 +47,10 @@ function Navbar() {
                     onClick={handleClose}
                   >
                     Giriş Yap
-                  </NavLink>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <NavLink
+                  <Link
                     exact="true"
                     to="/register"
                     activeclassname="active"
@@ -58,7 +58,7 @@ function Navbar() {
                     onClick={handleClose}
                   >
                     Hesap Aç
-                  </NavLink>
+                  </Link>
                 </li>
               </>
             )}
@@ -75,7 +75,7 @@ function Navbar() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <NavLink
+                  <Link
                     exact="true"
                     to="/ilanyukle"
                     activeclassname="active"
@@ -84,7 +84,7 @@ function Navbar() {
                     id="ad"
                   >
                     Ücretsiz İlan Ver
-                  </NavLink>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/" className="bg-dark nav-links" onClick={handleLogout}>

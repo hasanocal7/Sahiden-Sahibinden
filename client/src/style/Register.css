@@ -62,7 +62,9 @@
   height: calc(1.8em + 0.75rem);
   padding: 0.375rem 0.75rem;
 }
-
+.registerLink{
+  color: white;
+}
 @media (min-width: 768px) {
   .registerContainer {
     width: 50%;

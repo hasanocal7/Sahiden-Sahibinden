@@ -22,7 +22,7 @@ function ConfirmPassword() {
         return;
       }
 
-      const response = await axios.post("http://localhost:3001/api/reset-password", {
+      const response = await axios.post("https://sahiden-sahibinden-production.up.railway.app/api/forgot-password/", { // ${user.id} tutulmalı
         email: "user@example.com", 
         password,
       });

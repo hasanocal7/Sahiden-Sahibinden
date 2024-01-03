@@ -3,6 +3,7 @@ import GoogleMaps from "./GoogleMaps";
 import axios from "axios";
 import "../style/Ad.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./Navbar";
 
 function Ilan() {
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -27,6 +28,8 @@ function Ilan() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="adContainer container mt-4">
       <div className="row">
         <div className="col-md-6">
@@ -71,7 +74,7 @@ function Ilan() {
           </div>
         </div>
       </div>
-    </div>
+    </div></>
   );
 }
 
