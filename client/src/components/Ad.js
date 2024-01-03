@@ -10,7 +10,7 @@ function Ilan() {
   const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
-    // Axios kullanarak sunucudan görsel URL'lerini al
+    
     const fetchImages = async () => {
       try {
         const response = await axios.get("your_backend_api_endpoint");
@@ -21,8 +21,7 @@ function Ilan() {
     };
 
     fetchImages();
-  }, []); // Boş bağımlılık dizisi, etkinin sadece bir kez bileşen yüklenirken çalışmasını sağlar.
-
+  }, []); 
   const handleLocationSelect = (location) => {
     setSelectedLocation(location);
   };

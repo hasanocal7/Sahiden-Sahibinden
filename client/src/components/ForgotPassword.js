@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/ForgotPassword.css";
 import "../style/Login.css";
-import axios from 'axios';
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -15,22 +16,30 @@ function ForgotPassword() {
       // Eposta değeri boş mu kontrolü
       if (!email) {
         setError("Lütfen geçerli bir e-posta giriniz.");
+        toast.error("Lütfen geçerli bir e-posta giriniz.");
         return;
       }
 
-      const response = await axios.post("https://sahiden-sahibinden-production.up.railway.app/api/forgot-password", {
-        email,
-      });
+      const response = await axios.post(
+        "https://sahiden-sahibinden-production.up.railway.app/api/forgot-password",
+        {
+          email,
+        }
+      );
 
       if (response.status === 200) {
-        setMessage("Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.");
-        navigate("/login");
+        // setMessage("Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.");
+        // Giriş başarılı olduğunda toaster mesajı gösterme
+        toast.success("E-posta adresinizi kontrol ediniz.");
+        // navigate("/login");
       } else {
         setMessage("Şifre sıfırlama işlemi başarısız oldu.");
       }
     } catch (error) {
       console.error("Şifre sıfırlama işlemi hatası:", error.message);
-      setError("Şifre sıfırlama işlemi başarısız oldu. Lütfen geçerli bir e-posta giriniz.");
+      setError(
+        "Şifre sıfırlama işlemi başarısız oldu. Lütfen geçerli bir e-posta giriniz."
+      );
     }
   };
 
@@ -55,7 +64,7 @@ function ForgotPassword() {
       <button onClick={handleForgotPassword} className="forgot-password-button">
         Şifre Sıfırlama Bağlantısı Al
       </button>
-
+      <Toaster />
       {error && <p className="forgot-password-error mt-3">{error}</p>}
       {message && <p className="forgot-password-message">{message}</p>}
     </div>

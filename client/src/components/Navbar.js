@@ -1,8 +1,8 @@
-// Navbar.js
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import "../style/navbar.css";
 import { HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
+import UserDetails from "../components/UserDetails";
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -10,7 +10,6 @@ function Navbar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // localStorage'da token kontrolü
     const token = localStorage.getItem("token");
     if (token) {
       setIsLoggedIn(true);
@@ -23,11 +22,8 @@ function Navbar() {
   const handleClose = () => setClick(false);
 
   const handleLogout = () => {
-    // Çıkış yapma işlemi
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-
-    // Kullanıcıyı giriş yap sayfasına yönlendirme
     navigate("/login");
   };
 
@@ -70,6 +66,15 @@ function Navbar() {
             {isLoggedIn && (
               <>
                 <li className="nav-item">
+                  <Link
+                    to="/user-details"
+                    className="nav-links"
+                    onClick={handleClose}
+                  >
+                    Profilim
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <NavLink
                     exact="true"
                     to="/ilanyukle"
@@ -82,9 +87,9 @@ function Navbar() {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <button onClick={handleLogout} className="bg-dark nav-links">
+                  <Link to="/" className="bg-dark nav-links" onClick={handleLogout}>
                     Çıkış Yap
-                  </button>
+                  </Link>
                 </li>
               </>
             )}
