@@ -20,16 +20,12 @@ exports.beforeRegister = async (req, res, next) => {
 
 exports.beforeLogin = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    validators.validationEmail(email);
-    validators.validationPassword(undefined, undefined, undefined, password);
     if (req.headers.authorization) {
       res.status(401);
       return next(new Error("User already logged"));
     }
     next();
   } catch (error) {
-    res.status(400);
     return next(new Error(error.message));
   }
 };
