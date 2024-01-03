@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     display_card: { type: DataTypes.STRING, allowNull: false },
     screen_size: { type: DataTypes.STRING, allowNull: false },
     resolution: { type: DataTypes.STRING, allowNull: false },
-    status: { type: DataTypes.STRING, allowNull: false },
   });
 
   Computer.associate = (models) => {
