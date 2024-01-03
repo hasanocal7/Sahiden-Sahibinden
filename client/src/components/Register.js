@@ -97,7 +97,11 @@ function Register() {
             </button>
           </div>
         </div>
-
+        <div className="registerLink">
+          <p>
+            Hesabın var mı <a href="/login">Giriş Yap!</a>
+          </p>
+        </div>
         <button type="submit" className="registerButton btn btn-primary">
           Hesap Aç
         </button>

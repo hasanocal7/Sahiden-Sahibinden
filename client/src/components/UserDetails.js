@@ -5,11 +5,10 @@ import "../style/UserDetails.css";
 import User from "./User";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Axios from "axios";
+import Navbar from "./Navbar";
 
 function UserDetails() {
-  // ! Kullanıcı adı kaldırılacak
   const [editMode, setEditMode] = useState(false);
-  const [username, setUsername] = useState(""); 
   const [first_name, setFirst_Name] = useState("");
   const [last_name, setLast_Name] = useState("");
   const [birthDate, setBirthDate] = useState(null);
@@ -43,12 +42,11 @@ function UserDetails() {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await Axios.get("https://example.com/api/user", {
+        const response = await Axios.get("https://sahiden-sahibinden-production.up.railway.app/api/users/panel", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUsername(response.data.username);
         setFirst_Name(response.data.first_name);
         setLast_Name(response.data.last_name);
         setBirthDate(new Date(response.data.birthDate));
@@ -63,17 +61,13 @@ function UserDetails() {
   }, []); 
 
   return (
+    <>
+    <Navbar/>
     <div className="UserDetails">
       <div id="baslikBackground">
         <h2 className="baslik">Kişisel Bilgilerim</h2>
       </div>
       <div className="formMainDiv">
-        <User
-          label="Kullanıcı Adı"
-          value={username}
-          editMode={editMode}
-          onChange={(e) => handleInputChange(e, setUsername)}
-        />
         <User
           label="Adınız"
           value={first_name}
@@ -148,7 +142,7 @@ function UserDetails() {
           </button>
         )}
       </div>
-    </div>
+    </div></>
   );
 }
 export default UserDetails;
