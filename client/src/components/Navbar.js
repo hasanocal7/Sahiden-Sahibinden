@@ -22,16 +22,16 @@ function Navbar() {
   const handleClose = () => setClick(false);
 
   const handleLogout = () => {
+    console.log("Çıkış yapıldı");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    navigate("/login");
   };
 
   return (
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <Link exact to="/" className="nav-logo">
+          <Link exact to="/home" className="nav-logo">
             <span>DEHA</span>
           </Link>
 
@@ -41,7 +41,7 @@ function Navbar() {
                 <li className="nav-item">
                   <Link
                     exact="true"
-                    to="/login"
+                    to="/"
                     activeclassname="active"
                     className="nav-links"
                     onClick={handleClose}

@@ -1,30 +1,101 @@
-import React, { useState } from 'react';
-import Navbar from './Navbar';
-import axios from 'axios';
-import '../style/AddProduct.css';
+import React, { useState } from "react";
+import Navbar from "./Navbar";
+import axios from "axios";
+import "../style/AddProduct.css";
 
-function AddProduct() {
+const AddProduct = () => {
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
+    price: 0,
+    province: "",
+    distcrict: "",
+    neighborhood: "",
+    category: "",
+    sub_category: "",
+    room_count: "",
+    m2_net: 0,
+    m2_gross: 0,
+    m2: 0,
+
+    zoning_status: "",
+
+    parcel_no: 0,
+    island_no: 0,
+    balcony: 0,
+
+    series: "",
+    images: [],
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const token = localStorage.getItem("token");
+
+  const mapCategoryToApi = (category) => {
+    const categoryMap = {
+      Emlak: "Property",
+      Vasıta: "Vehicle",
+      Elektronik: "Electronics",
+    };
+    return categoryMap[category] || category;
+  };
+
+  const mapsub_categoryToApi = (sub_category) => {
+    const sub_categoryMap = {
+      Konut: "Housing",
+      Arsa: "Land",
+      Otomobil: "Car",
+      Motosiklet: "Motorcycle",
+      Bilgisayar: "Computer",
+      Telefon: "Phone",
+    };
+    return sub_categoryMap[sub_category] || sub_category;
+  };
+
+  const handleImageChange = (e) => {
+    const files = e.target.files;
+    setFormData((prevData) => ({
+      ...prevData,
+      images: files,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      const updatedCategory = mapCategoryToApi(formData.category);
+      const updatedsub_category = mapsub_categoryToApi(formData.sub_category);
+
+      const updatedFormData = {
+        ...formData,
+        category: updatedCategory,
+
+        sub_category: updatedsub_category,
+      };
+
+      const data = new FormData();
+
+      for (const key in updatedFormData) {
+        if (key === "images") {
+          for (let i = 0; i < updatedFormData[key].length; i++) {
+            data.append(`image`, updatedFormData[key][i]);
+          }
+        } else {
+          data.append(key, updatedFormData[key]);
+        }
+      }
+      console.log(data);
       const response = await axios.post(
         "https://sahiden-sahibinden-production.up.railway.app/api/ads",
-        formData,
+        data,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -32,15 +103,276 @@ function AddProduct() {
           },
         }
       );
-      console.log('Başarılı istek:', response.data);
 
-      setFormData({
-        title: '',
-        description: '',
-      });
-
+      console.log("Başarılı istek:", response.data);
     } catch (error) {
-      console.error('İstek hatası:', error);
+      console.error("İstek hatası:", error);
+    }
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setFormData({
+      title: "",
+      description: "",
+      price: 0,
+      province: "",
+      distcrict: "",
+      neighborhood: "",
+      category: "",
+      sub_category: "",
+      room_count: "",
+      m2_net: 0,
+      m2_gross: 0,
+      m2: 0,
+      zoning_status: "",
+      parcel_no: 0,
+      island_no: 0,
+      balcony: 0,
+      images: [],
+      series: "",
+    });
+  };
+
+  const categoryOptions = ["Emlak", "Vasıta", "Elektronik"];
+
+  const sub_category = {
+    Emlak: ["Konut", "Arsa"],
+    Vasıta: ["Otomobil", "Motosiklet"],
+    Elektronik: ["Bilgisayar", "Telefon"],
+  };
+
+  const rendersub_categoryFields = () => {
+    const { sub_category } = formData;
+
+    const renderBrandFields = () => {
+      switch (formData.brand) {
+        case "audi":
+          return (
+            <div className="mb-3">
+              <label htmlFor="series" className="form-label">
+                Seri Seçiniz
+              </label>
+              <select
+                id="series"
+                name="series"
+                className="form-select"
+                value={formData.series}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Seri Seçiniz:
+                </option>
+                <option value="A">A Serisi</option>
+                <option value="GT">Audi RS e-tron GT</option>
+              </select>
+            </div>
+          );
+        case "mercedes":
+          return (
+            <div className="mb-3">
+              <label htmlFor="series" className="form-label">
+                Seri Seçiniz
+              </label>
+              <select
+                id="series"
+                name="series"
+                className="form-select"
+                value={formData.series}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Seri Seçiniz:
+                </option>
+                <option value="S">S-Serisi</option>
+                <option value="G">G-Serisi</option>
+              </select>
+            </div>
+          );
+        default:
+          return null;
+      }
+    };
+
+    switch (sub_category) {
+      case "Konut":
+        return (
+          <>
+            <div className="mb-3">
+              <label htmlFor="room_count" className="form-label">
+                Oda Sayısı:
+              </label>
+              <select
+                id="room_count"
+                name="room_count"
+                className="form-select"
+                value={formData.room_count}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Oda Sayısı Seçiniz:
+                </option>
+                <option value="1+1">1+1</option>
+                <option value="2+1">2+1</option>
+                <option value="3+1">3+1</option>
+              </select>
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="m2_net" className="form-label">
+                Metrekaresi (m²):
+              </label>
+              <input
+                type="number"
+                id="m2_net"
+                name="m2_net"
+                className="form-control"
+                value={formData.m2_net}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="m2_gross" className="form-label">
+                Metrekare Brüt (m²):
+              </label>
+              <input
+                type="number"
+                id="m2_gross"
+                name="m2_gross"
+                className="form-control"
+                value={formData.m2_gross}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="balcony" className="form-label">
+                Balkon Var mı?
+              </label>
+              <select
+                id="balcony"
+                name="balcony"
+                className="form-select"
+                value={formData.balcony}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Balkon Var mı?
+                </option>
+                <option value="true">Evet</option>
+                <option value="false">Hayır</option>
+              </select>
+            </div>
+          </>
+        );
+
+      case "Arsa":
+        return (
+          <>
+            <div className="mb-3">
+              <label htmlFor="m2" className="form-label">
+                Metrekaresi (m²):
+              </label>
+              <input
+                type="number"
+                id="m2"
+                name="m2"
+                className="form-control"
+                value={formData.m2}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="zoning_status" className="form-label">
+                İmar Durumu:
+              </label>
+              <select
+                id="zoning_status"
+                name="zoning_status"
+                className="form-select"
+                value={formData.zoning_status}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  İmar Durumu Seçiniz:
+                </option>
+                <option value="Ada">Ada</option>
+                <option value="Housing">Konut</option>
+                <option value="Tarla">Tarla</option>
+                <option value="Zeytinlik">Zeytinlik</option>
+              </select>
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="parcel_no" className="form-label">
+                Ada Numarası:
+              </label>
+              <input
+                type="number"
+                id="parcel_no"
+                name="parcel_no"
+                className="form-control"
+                value={formData.parcel_no}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="island_no" className="form-label">
+                Parsel Numarası:
+              </label>
+              <input
+                type="number"
+                id="island_no"
+                name="island_no"
+                className="form-control"
+                value={formData.island_no}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </>
+        );
+
+      case "Otomobil":
+        return (
+          <>
+            <div className="mb-3">
+              <label htmlFor="brand" className="form-label">
+                Marka Seçiniz
+              </label>
+              <select
+                id="brand"
+                name="brand"
+                className="form-select"
+                value={formData.brand}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Marka Seçiniz:
+                </option>
+                <option value="audi">Audi</option>
+                <option value="mercedes">Mercedes</option>
+              </select>
+            </div>
+            {renderBrandFields()}
+          </>
+        );
+
+      default:
+        return null;
     }
   };
 
@@ -54,6 +386,19 @@ function AddProduct() {
               <div className="card-body">
                 <h2 className="card-title text-center">Yeni Ürün Ekle</h2>
                 <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="images" className="form-label">
+                      Görsel Seçiniz:
+                    </label>
+                    <input
+                      type="file"
+                      id="images"
+                      name="images"
+                      className="form-control"
+                      onChange={handleImageChange}
+                      multiple
+                    />
+                  </div>
                   <div className="mb-3">
                     <label htmlFor="title" className="form-label">
                       Başlık:
@@ -79,7 +424,113 @@ function AddProduct() {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="d-grid">
+                  <div className="mb-3">
+                    <label htmlFor="price" className="form-label">
+                      Fiyat
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="price"
+                      name="price"
+                      value={Number(formData.price)}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label htmlFor="province" className="form-label">
+                      İl
+                    </label>
+                    <input
+                      className="form-control"
+                      id="province"
+                      name="province"
+                      value={formData.province}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label htmlFor="distcrict" className="form-label">
+                      İlçe
+                    </label>
+                    <input
+                      className="form-control"
+                      id="distcrict"
+                      name="distcrict"
+                      value={formData.distcrict}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label htmlFor="neighborhood" className="form-label">
+                      Mahalle
+                    </label>
+                    <input
+                      className="form-control"
+                      id="neighborhood"
+                      name="neighborhood"
+                      value={formData.neighborhood}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="category" className="form-label">
+                      Kategori:
+                    </label>
+                    <select
+                      className="form-select"
+                      id="category"
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                    >
+                      <option value="" disabled>
+                        Kategori Seçiniz:
+                      </option>
+                      {categoryOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {formData.category && (
+                    <div className="mb-3">
+                      <label htmlFor="sub_category" className="form-label">
+                        Alt Kategori:
+                      </label>
+                      <select
+                        className="form-select"
+                        id="sub_category"
+                        name="sub_category"
+                        value={formData.sub_category}
+                        onChange={handleChange}
+                      >
+                        <option value="" disabled>
+                          Alt Kategori Seçiniz:
+                        </option>
+                        {sub_category[formData.category].map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+
+                  {rendersub_categoryFields()}
+
+                  <div className="d-flex justify-content-between">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={resetForm}
+                    >
+                      Sıfırla
+                    </button>
                     <button type="submit" className="btn btn-primary">
                       Ürünü Yükle
                     </button>
@@ -92,6 +543,6 @@ function AddProduct() {
       </div>
     </>
   );
-}
+};
 
 export default AddProduct;
