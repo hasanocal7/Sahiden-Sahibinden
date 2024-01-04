@@ -10,6 +10,7 @@ import AddProduct from "./components/AddProduct";
 import ForgotPassword from "./components/ForgotPassword";
 import ConfirmPassword from "./components/ConfirmPassword";
 import UserDetails from "./components/UserDetails";
+import Car from "./models/Car";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/confirm-password" element={<ConfirmPassword />} />
         <Route path="/user-details" element={<UserDetails />} />
+        <Route path="/car" element={<Car />} />
       </Routes>
       <Footer />
     </div>

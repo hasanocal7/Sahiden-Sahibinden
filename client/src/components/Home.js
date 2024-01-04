@@ -5,13 +5,13 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ComputerIcon from "@mui/icons-material/Computer";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-
 import axios from "axios";
 
 function Home() {
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     axios
@@ -22,115 +22,75 @@ function Home() {
       })
       .then((response) => {
         setData(response.data.results);
-        setFilteredData(response.data.results); // İlk başta tüm veriyi göster
+        setFilteredData(response.data.results);
       })
       .catch((error) => {
         console.error("Veri çekme hatası:", error);
-        // Hata durumunda setFilteredData ile bir başlangıç değeri atanabilir.
         setFilteredData([]);
       });
   }, [token]);
 
-  {
-    filteredData &&
-      filteredData.map((item) => (
-        <div key={item.id}>
-          {/* İlan detayları burada gösterilebilir */}
-          <p>{item.title}</p>
-          <p>{item.description}</p>
-        </div>
-      ));
-  }
-
   const filterDataByCategory = (category) => {
     // Kategoriye göre filtreleme yap
-    if (category === "emlak") {
-      setFilteredData(
-        data.filter(
-          (item) => item.category === "Konut" || item.category === "Arsa"
-        )
-      );
-    } else if (category === "vasita") {
-      setFilteredData(
-        data.filter(
-          (item) =>
-            item.category === "Otomobil" || item.category === "Motosiklet"
-        )
-      );
-    } else if (category === "elektronik") {
-      setFilteredData(
-        data.filter(
-          (item) =>
-            item.category === "Bilgisayar" || item.category === "Telefon"
-        )
-      );
-    } else {
-      // Tüm kategorileri göster
+    if (category === selectedCategory) {
+      // Deselect category if already selected
       setFilteredData(data);
+      setSelectedCategory(null);
+    } else {
+      // Select category and filter data
+      setSelectedCategory(category);
+      setFilteredData(
+        data.filter((item) => item.category === category)
+      );
     }
   };
 
+  const renderCategoryLink = (category, icon) => (
+    <Link to="#" onClick={() => filterDataByCategory(category)}>
+      <div className={`${category}Area`}>
+        {icon}
+        <h4 style={{ color: "#394399" }}>{category}</h4>
+      </div>
+    </Link>
+  );
+
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="homeContainer container">
         <div className="leftSide">
           <div className="property">
-            <div
-              className="propertyArea"
-              onClick={() => filterDataByCategory("emlak")}
-            >
-              <HomeIcon />
-              <h4 style={{ color: "#394399" }}>Emlak</h4>
-            </div>
+            {renderCategoryLink("Konut", <HomeIcon />)}
             <ul>
-              <li onClick={() => filterDataByCategory("emlak")}>Konut</li>
-              <li onClick={() => filterDataByCategory("emlak")}>Arsa</li>
+              <li onClick={() => filterDataByCategory("Konut")}>Konut</li>
+              <li onClick={() => filterDataByCategory("Arsa")}>Arsa</li>
             </ul>
           </div>
 
           <hr />
 
           <div className="vasita">
-            <div
-              className="vasitaArea"
-              onClick={() => filterDataByCategory("vasita")}
-            >
-              <DirectionsCarIcon />
-              <h4 style={{ color: "#394399" }}>Vasıta</h4>
-            </div>
+            {renderCategoryLink("Otomobil", <DirectionsCarIcon />)}
             <ul>
-              <li onClick={() => filterDataByCategory("vasita")}>Otomobil</li>
-              <li onClick={() => filterDataByCategory("vasita")}>Motosiklet</li>
+              <li onClick={() => filterDataByCategory("Otomobil")}>Otomobil</li>
+              <li onClick={() => filterDataByCategory("Motosiklet")}>Motosiklet</li>
             </ul>
           </div>
 
           <hr />
 
           <div className="elektronik">
-            <div
-              className="elektronikArea"
-              onClick={() => filterDataByCategory("elektronik")}
-            >
-              <ComputerIcon />
-              <h4 style={{ color: "#394399" }}>Elektronik</h4>
-            </div>
+            {renderCategoryLink("Bilgisayar", <ComputerIcon />)}
             <ul>
-              <li onClick={() => filterDataByCategory("elektronik")}>
-                Bilgisayar
-              </li>
-              <li onClick={() => filterDataByCategory("elektronik")}>
-                Telefon
-              </li>
+              <li onClick={() => filterDataByCategory("Bilgisayar")}>Bilgisayar</li>
+              <li onClick={() => filterDataByCategory("Telefon")}>Telefon</li>
             </ul>
           </div>
         </div>
         <div className="rightSide">
-          {/* Filtrelenmiş verileri göster */}
           {filteredData &&
             filteredData.map((item) => (
               <div key={item.id}>
-                {/* İlan detayları burada gösterilebilir */}
                 <p>{item.title}</p>
                 <p>{item.description}</p>
               </div>

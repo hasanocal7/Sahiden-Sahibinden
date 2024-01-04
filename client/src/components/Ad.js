@@ -60,7 +60,7 @@ function Ilan() {
             Slider
             <hr/>
             <div className="icon mt-4">
-              <GoogleMaps onSelect={handleLocationSelect} />
+              {/* <GoogleMaps onSelect={handleLocationSelect} /> */}
             </div>
           </div>
         </div>
