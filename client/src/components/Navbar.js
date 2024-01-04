@@ -22,6 +22,7 @@ function Navbar() {
   const handleClose = () => setClick(false);
 
   const handleLogout = () => {
+    console.log("Logging out...");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     navigate("/login");

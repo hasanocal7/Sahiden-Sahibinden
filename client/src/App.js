@@ -14,14 +14,13 @@ import UserDetails from "./components/UserDetails";
 function App() {
   return (
     <div className="App">
-     
       <Routes>
-        <Route path="/login" element={<Login />} exact="true" />
-        <Route path="/" element={<Home />} exact="true" /> 
-        <Route path="/register" element={<Register exact="true" />} />
-        <Route path="/ilan" element={<Ad />} exact="true" />
-        <Route path="/ilanyukle" element={<AddProduct />} exact="true" />
-        <Route path="/forgot-password" element={<ForgotPassword />} exact="true" />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/ilan" element={<Ad />} />
+        <Route path="/ilanyukle" element={<AddProduct />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/confirm-password" element={<ConfirmPassword />} />
         <Route path="/user-details" element={<UserDetails />} />
       </Routes>
@@ -31,6 +30,5 @@ function App() {
 }
 
 export default App;
-
 
 // Giriş yapmak için route'lar bakılacak

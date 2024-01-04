@@ -17,14 +17,15 @@ const AddProduct = () => {
     m2_net: 0,
     m2_gross: 0,
     m2: 0,
-    
+
     zoning_status: "",
-    
+
     parcel_no: 0,
     island_no: 0,
     balcony: 0,
+    images: [],
   });
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -56,6 +57,14 @@ const AddProduct = () => {
     return sub_categoryMap[sub_category] || sub_category;
   };
 
+  const handleImageChange = (e) => {
+    const files = e.target.files;
+    setFormData((prevData) => ({
+      ...prevData,
+      images: files,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -66,26 +75,37 @@ const AddProduct = () => {
       const updatedFormData = {
         ...formData,
         category: updatedCategory,
-        
+
         sub_category: updatedsub_category,
       };
 
+      const data = new FormData();
+
+      for (const key in updatedFormData) {
+        if (key === "images") {
+          for (let i = 0; i < updatedFormData[key].length; i++) {
+            data.append(`image`, updatedFormData[key][i]);
+          }
+        } else {
+          data.append(key, updatedFormData[key]);
+        }
+      }
+      console.log(data);
       const response = await axios.post(
         "https://sahiden-sahibinden-production.up.railway.app/api/ads",
-        updatedFormData,
+        data,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data'
           },
         }
       );
-
+        
       console.log("Başarılı istek:", response.data);
     } catch (error) {
       console.error("İstek hatası:", error);
     }
-
     resetForm();
   };
 
@@ -107,11 +127,12 @@ const AddProduct = () => {
       parcel_no: 0,
       island_no: 0,
       balcony: 0,
+      images: [],
     });
   };
 
   const categoryOptions = ["Emlak", "Vasıta", "Elektronik"];
-  
+
   const sub_category = {
     Emlak: ["Konut", "Arsa"],
     Vasıta: ["Otomobil", "Motosiklet"],
@@ -129,7 +150,7 @@ const AddProduct = () => {
               <label htmlFor="room_count" className="form-label">
                 Oda Sayısı:
               </label>
-              <select 
+              <select
                 id="room_count"
                 name="room_count"
                 className="form-select"
@@ -149,7 +170,7 @@ const AddProduct = () => {
             <div className="mb-3">
               <label htmlFor="m2_net" className="form-label">
                 Metrekaresi (m²):
-              </label> 
+              </label>
               <input
                 type="number"
                 id="m2_net"
@@ -165,7 +186,7 @@ const AddProduct = () => {
               <label htmlFor="m2_gross" className="form-label">
                 Metrekare Brüt (m²):
               </label>
-              <input 
+              <input
                 type="number"
                 id="m2_gross"
                 name="m2_gross"
@@ -178,10 +199,9 @@ const AddProduct = () => {
 
             <div className="mb-3">
               <label htmlFor="balcony" className="form-label">
-                Balkon Sayısı:
+                Balkon Var mı?
               </label>
               <select
-              
                 id="balcony"
                 name="balcony"
                 className="form-select"
@@ -190,14 +210,10 @@ const AddProduct = () => {
                 required
               >
                 <option value="" disabled>
-                  Balkon Sayısı Seçiniz:
+                  Balkon Var mı?
                 </option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5 ve üzeri</option>
+                <option value="true">Evet</option>
+                <option value="false">Hayır</option>
               </select>
             </div>
           </>
@@ -275,6 +291,32 @@ const AddProduct = () => {
           </>
         );
 
+      case "Otomobil":
+        return (
+          <>
+            <div className="mb-3">
+              <label htmlFor="brand" className="form-label">
+                Marka Seçiniz
+              </label>
+              <select
+                id="brand"
+                name="brand"
+                className="form-select"
+                value={formData.brand}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Marka Seçiniz:
+                </option>
+                <option value="audi">Audi</option>
+                <option value="mercedes">Mercedes</option>
+              </select>
+            </div>
+
+          </>
+        );
+
       default:
         return null;
     }
@@ -288,9 +330,23 @@ const AddProduct = () => {
           <div className="col-md-6">
             <div className="card">
               <div className="card-body">
+
                 <h2 className="card-title text-center">Yeni Ürün Ekle</h2>
                 <form onSubmit={handleSubmit}>
                 <div className="mb-3">
+                    <label htmlFor="images" className="form-label">
+                      Görsel Seçiniz:
+                    </label>
+                    <input
+                      type="file"
+                      id="images"
+                      name="images"
+                      className="form-control"
+                      onChange={handleImageChange}
+                      multiple
+                    />
+                  </div>
+                  <div className="mb-3">
                     <label htmlFor="title" className="form-label">
                       Başlık:
                     </label>
@@ -346,7 +402,7 @@ const AddProduct = () => {
                     <label htmlFor="distcrict" className="form-label">
                       İlçe
                     </label>
-                    <input 
+                    <input
                       className="form-control"
                       id="distcrict"
                       name="distcrict"
@@ -379,8 +435,8 @@ const AddProduct = () => {
                       onChange={handleChange}
                     >
                       <option value="" disabled>
-                         Kategori Seçiniz:
-                        </option>
+                        Kategori Seçiniz:
+                      </option>
                       {categoryOptions.map((option) => (
                         <option key={option} value={option}>
                           {option}
