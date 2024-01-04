@@ -52,7 +52,7 @@ const Login = () => {
       localStorage.setItem("token", token);
 
       // Başarılı giriş sonrasında anasayfaya yönlendirme
-      navigate("/");
+      navigate("/home");
     } catch (error) {
    console.error("Hata:", error);
 

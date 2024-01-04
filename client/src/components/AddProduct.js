@@ -23,9 +23,11 @@ const AddProduct = () => {
     parcel_no: 0,
     island_no: 0,
     balcony: 0,
+
+    series: "",
     images: [],
   });
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -97,11 +99,11 @@ const AddProduct = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
+            "Content-Type": "multipart/form-data",
           },
         }
       );
-        
+
       console.log("Başarılı istek:", response.data);
     } catch (error) {
       console.error("İstek hatası:", error);
@@ -128,6 +130,7 @@ const AddProduct = () => {
       island_no: 0,
       balcony: 0,
       images: [],
+      series: "",
     });
   };
 
@@ -141,6 +144,57 @@ const AddProduct = () => {
 
   const rendersub_categoryFields = () => {
     const { sub_category } = formData;
+
+    const renderBrandFields = () => {
+      switch (formData.brand) {
+        case "audi":
+          return (
+            <div className="mb-3">
+              <label htmlFor="series" className="form-label">
+                Seri Seçiniz
+              </label>
+              <select
+                id="series"
+                name="series"
+                className="form-select"
+                value={formData.series}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Seri Seçiniz:
+                </option>
+                <option value="A">A Serisi</option>
+                <option value="GT">Audi RS e-tron GT</option>
+              </select>
+            </div>
+          );
+        case "mercedes":
+          return (
+            <div className="mb-3">
+              <label htmlFor="series" className="form-label">
+                Seri Seçiniz
+              </label>
+              <select
+                id="series"
+                name="series"
+                className="form-select"
+                value={formData.series}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Seri Seçiniz:
+                </option>
+                <option value="S">S-Serisi</option>
+                <option value="G">G-Serisi</option>
+              </select>
+            </div>
+          );
+        default:
+          return null;
+      }
+    };
 
     switch (sub_category) {
       case "Konut":
@@ -313,7 +367,7 @@ const AddProduct = () => {
                 <option value="mercedes">Mercedes</option>
               </select>
             </div>
-
+            {renderBrandFields()}
           </>
         );
 
@@ -330,10 +384,9 @@ const AddProduct = () => {
           <div className="col-md-6">
             <div className="card">
               <div className="card-body">
-
                 <h2 className="card-title text-center">Yeni Ürün Ekle</h2>
                 <form onSubmit={handleSubmit}>
-                <div className="mb-3">
+                  <div className="mb-3">
                     <label htmlFor="images" className="form-label">
                       Görsel Seçiniz:
                     </label>
