@@ -48,6 +48,7 @@ function Car() {
           <ul style={{ listStyle: "none" }}>
             <li>
               <b>İlan Başlığı:</b> {adData.title}
+              <p>İlan Başlığı: {adData.brand}</p>
             </li>
             <li>
               <b>İlan No:</b> {adData.ilan_no}

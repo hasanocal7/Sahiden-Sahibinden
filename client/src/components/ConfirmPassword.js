@@ -1,35 +1,43 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../style/ConfirmPassword.css";
 import axios from "axios";
 
 function ConfirmPassword() {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const { id } = useParams();
+  const [newPassword, setPassword] = useState("");
+  const [confirmNewPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleConfirmPassword = async () => {
     try {
-      if (!password || !confirmPassword) {
+      if (!newPassword || !confirmNewPassword) {
         setError("Lütfen tüm alanları doldurun.");
         return;
       }
 
-      if (password !== confirmPassword) {
+      if (newPassword !== confirmNewPassword) {
         setError("Şifreler uyuşmuyor. Lütfen kontrol edin.");
         return;
       }
 
-      const response = await axios.post("https://sahiden-sahibinden-production.up.railway.app/api/forgot-password/", { // ${user.id} tutulmalı
-        email: "user@example.com", 
-        password,
-      });
+      const passwordData = {
+        newPassword: newPassword,
+        confirmNewPassword: confirmNewPassword
+      }
+
+      const response = await axios.put(
+        `https://sahiden-sahibinden-production.up.railway.app/api/forgot-password/${id}`,
+        passwordData,
+      );
 
       if (response.status === 200) {
-        setMessage("Şifre sıfırlama işlemi başarıyla tamamlandı. Yeni şifrenizle giriş yapabilirsiniz.");
-        navigate("/login");
+        setMessage(
+          "Şifre sıfırlama işlemi başarıyla tamamlandı. Yeni şifrenizle giriş yapabilirsiniz."
+        );
+        navigate("/");
       } else {
         setMessage("Şifre sıfırlama işlemi başarısız oldu.");
       }
@@ -43,37 +51,39 @@ function ConfirmPassword() {
     <div className="container confirm-password-container mt-5 d-flex flex-column align-items-center">
       <h2 className="confirm-password-heading">DEHA</h2>
 
-      <label htmlFor="password" className="confirm-password-label">
-      
-      </label>
+      <label htmlFor="password" className="confirm-password-label"></label>
       <input
         type="password"
         id="password"
         className="confirm-password-input mt-3"
         placeholder="Yeni şifrenizi girin"
-        value={password}
+        value={newPassword}
         onChange={(e) => {
           setPassword(e.target.value);
           setError("");
         }}
       />
 
-      <label htmlFor="confirmPassword" className="confirm-password-label">
-    
-      </label>
+      <label
+        htmlFor="confirmPassword"
+        className="confirm-password-label"
+      ></label>
       <input
         type="password"
         id="confirmPassword"
         className="confirm-password-input"
         placeholder="Yeni şifrenizi tekrar girin"
-        value={confirmPassword}
+        value={confirmNewPassword}
         onChange={(e) => {
           setConfirmPassword(e.target.value);
           setError("");
         }}
       />
 
-      <button onClick={handleConfirmPassword} className="confirm-password-button">
+      <button
+        onClick={handleConfirmPassword}
+        className="confirm-password-button"
+      >
         Şifreyi Onayla
       </button>
 

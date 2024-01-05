@@ -23,7 +23,7 @@ function Register() {
        
         console.log('Kullanıcı Hesabı Açıldı:', response.data);
         actions.resetForm();
-        navigate('/login');
+        navigate('/');
       } catch (error) {
         console.error('Hata:', error);
       }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../style/navbar.css";
 import { HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
-import UserDetails from "../components/UserDetails";
+// import UserDetails from "../components/UserDetails";
 
 function Navbar() {
   const [click, setClick] = useState(false);
