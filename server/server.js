@@ -32,7 +32,7 @@ app.use(errorHandler);
 const Port = process.env.PORT || 5000;
 
 db.sequelize
-  .sync({ alter: true })
+  .sync()
   .then(() => {
     app.listen(Port, () => {
       console.log(`Server is running on port: ${Port}`);

@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 
 exports.sendingMail = async ({ from, to, subject, text }) => {
   try {
