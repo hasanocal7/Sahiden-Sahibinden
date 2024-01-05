@@ -65,7 +65,7 @@ const forgotPassword = async (email) => {
   } else {
     const maskedEmail = `${email[0]}***@${email.split("@")[1]}`;
     sendingMail({
-      from: process.env.TRANSPORTER_USER,
+      from: "softalyainternship@sahiden.com",
       to: email,
       subject: "Forgot Password",
       text: `Hello! Please click on this link to change your password:
