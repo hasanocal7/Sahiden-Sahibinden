@@ -13,7 +13,6 @@ function ForgotPassword() {
 
   const handleForgotPassword = async () => {
     try {
-      // Eposta değeri boş mu kontrolü
       if (!email) {
         setError("Lütfen geçerli bir e-posta giriniz.");
         toast.error("Lütfen geçerli bir e-posta giriniz.");
@@ -28,10 +27,8 @@ function ForgotPassword() {
       );
 
       if (response.status === 200) {
-        // setMessage("Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.");
-        // Giriş başarılı olduğunda toaster mesajı gösterme
         toast.success("E-posta adresinizi kontrol ediniz.");
-        // navigate("/login");
+        setEmail("");
       } else {
         setMessage("Şifre sıfırlama işlemi başarısız oldu.");
       }

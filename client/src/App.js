@@ -1,7 +1,7 @@
 import "./App.css";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 
 import Ad from "./components/Ad";
 import Login from "./components/Login";
@@ -11,6 +11,8 @@ import ForgotPassword from "./components/ForgotPassword";
 import ConfirmPassword from "./components/ConfirmPassword";
 import UserDetails from "./components/UserDetails";
 import Car from "./models/Car";
+import Land from "./models/Land";
+
 
 function App() {
   return (
@@ -22,9 +24,10 @@ function App() {
         <Route path="/ilan" element={<Ad />} />
         <Route path="/ilanyukle" element={<AddProduct />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/confirm-password" element={<ConfirmPassword />} />
+        <Route path="/confirm-password/:id" element={<ConfirmPassword />} />
         <Route path="/user-details" element={<UserDetails />} />
         <Route path="/car" element={<Car />} />
+        <Route path="/land" element={<Land />} />
       </Routes>
       <Footer />
     </div>
