@@ -6,13 +6,14 @@ const createAd = async (req, res, next) => {
     const userID = res.locals.user.id;
     const allData = req.body;
     console.log(allData);
+    console.log(req.files);
     const mainData = {
       title: req.body.title,
       description: req.body.description,
       price: req.body.price,
       address: `${req.body.province}/${req.body.distcrict}/${req.body.neighborhood}`,
-      ...(req.files ? { image: req.files.map((image) => image.path) } : {}),
-      UserID: userID,
+      ...(req.files ? { image: req.files.map((image) => image.filename) } : {}),
+      UserId: userID,
       category: req.body.category,
       sub_category: req.body.sub_category,
     };
@@ -53,6 +54,19 @@ const getAllAds = async (req, res, next) => {
     if (!ads) {
       throw new Error("Ad not found");
     }
+    res.status(200).json({
+      ads: ads,
+    });
+  } catch (error) {
+    res.status(404);
+    return next(new Error(error.message));
+  }
+};
+
+const getAllAdsOfUser = async (req, res, next) => {
+  try {
+    const userID = res.locals.user.id;
+    const ads = await services.adServices.getAllAdsOfUser(userID);
     res.status(200).json({
       ads: ads,
     });
@@ -192,6 +206,7 @@ const deleteAd = async (req, res, next) => {
 module.exports = {
   createAd,
   getAllAds,
+  getAllAdsOfUser,
   getAd,
   categoryFilter,
   subCategoryFilter,

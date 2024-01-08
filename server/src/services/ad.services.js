@@ -72,6 +72,19 @@ const getAllAds = async (query = "") => {
   return ads;
 };
 
+const getAllAdsOfUser = async (id) => {
+  try {
+    const userAds = await Ad.findAll({
+      where: {
+        UserId: id,
+      },
+    });
+    return userAds;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 const getAd = async (slug) => {
   try {
     const filter = Number(slug.split("-").at(-1));
@@ -201,6 +214,7 @@ const deleteAd = async (id) => {
 module.exports = {
   createAd,
   getAllAds,
+  getAllAdsOfUser,
   getAd,
   categoryFilter,
   subCategoryFilter,
