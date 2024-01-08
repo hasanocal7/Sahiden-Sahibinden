@@ -116,7 +116,7 @@ const AddProduct = () => {
           data.append(key, updatedFormData[key]);
         }
       }
-      console.log(data);
+      console.log(data); 
       const response = await axios.post(
         "https://sahiden-sahibinden-production.up.railway.app/api/ads",
         data,
