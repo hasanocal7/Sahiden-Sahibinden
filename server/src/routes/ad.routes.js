@@ -10,6 +10,7 @@ router
   .route("/")
   .post(upload.array("image", 10), controller.adController.createAd);
 router.route("/").get(controller.adController.getAllAds);
+router.route("/userAds").get(controller.adController.getAllAdsOfUser);
 router.route("/:slug/detay").get(controller.adController.getAd);
 router.route("/category/:category").get(controller.adController.categoryFilter);
 router
