@@ -22,7 +22,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path={`/ilan/:${item.id}`} element={<Ad item={item}/>} />
+        <Route path={`/ilan/:slug`} element={<Ad />} />
         <Route path="/ilanyukle" element={<AddProduct />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/confirm-password/:id" element={<ConfirmPassword />} />

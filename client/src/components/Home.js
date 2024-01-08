@@ -80,7 +80,7 @@ function Home({ item }) {
         <div className="row">
           {data &&
             data.map((item) => (
-              <div key={item.id} className="col-md-4">
+              <div key={item.slug} className="col-md-4">
                 <div className="card mb-4">
                   <img
                     src={item.image[0]}
@@ -91,10 +91,10 @@ function Home({ item }) {
                     <h5 className="card-title">{item.title}</h5>
                     <p className="card-text">{item.description}</p>
                     <Link
-                      to={`/ilan/${item.id}`}
+                      to={`/ilan/${item.slug}`}
                       className="btn btn-primary"
                       onClick={() =>
-                        console.log(`Tıklanan İlan ID: ${item.id}`)
+                        console.log(`Tıklanan İlan ID: ${item.slug}`)
                       }
                     >
                       İlanı Görüntüle
