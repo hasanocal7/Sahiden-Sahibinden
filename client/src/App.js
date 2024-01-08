@@ -15,13 +15,14 @@ import Land from "./models/Land";
 
 
 function App() {
+  const item = {};
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/ilan" element={<Ad />} />
+        <Route path={`/ilan/:slug`} element={<Ad />} />
         <Route path="/ilanyukle" element={<AddProduct />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/confirm-password/:id" element={<ConfirmPassword />} />

@@ -1,21 +1,34 @@
 import React, { useState, useEffect } from "react";
-import GoogleMaps from "./GoogleMaps";
+import { useParams } from "react-router-dom";
+// import GoogleMaps from "./GoogleMaps";
 import axios from "axios";
 import "../style/Ad.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Navbar";
 
-function Ilan() {
+function Ilan({}) {
+  const { slug } = useParams();
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [title, setTitle] = useState("");
-  const [imageUrls, setImageUrls] = useState([]);
+  const [image, setImage] = useState([]);
+  const [ad, setAd] = useState();
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    
+   
     const fetchImages = async () => {
       try {
-        const response = await axios.get("your_backend_api_endpoint");
-        setImageUrls(response.data);
+        const response = await axios.get(`https://sahiden-sahibinden-production.up.railway.app/api/ads/${slug}/detay`,
+        {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },}
+        );
+
+        const ad = response.data.ad
+        console.log(ad);
+        const images = ad.image || [];
+        setImage(images);
       } catch (error) {
         console.error("Görseller alınırken hata oluştu:", error);
       }
@@ -35,10 +48,10 @@ function Ilan() {
         <div className="col-md-6">
           <div className="fotograf bg-secondary text-light p-4">
             <h2>{title}</h2>
-            {imageUrls.map((imageUrl, index) => (
+            {image.map((name, index) => (
               <div key={index} className="fotograf bg-secondary text-light p-4">
                 <h2>{title}</h2>
-                <img className="smallImage" src={imageUrl} alt={`Ürün Fotoğrafı ${index + 1}`} />
+                <img className="smallImage" src={`https://sahiden-sahibinden-production.up.railway.app/uploads/${name}`} alt={`Ürün Fotoğrafı ${index + 1}`} />
               </div>
             ))}
           </div>
@@ -79,3 +92,6 @@ function Ilan() {
 }
 
 export default Ilan;
+
+
+// Görüntülenme ekranında keyleri ve valueleri oluştur buna göre çağır.
