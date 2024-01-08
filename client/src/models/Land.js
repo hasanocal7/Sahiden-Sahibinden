@@ -21,7 +21,6 @@ function Land() {
 
         console.log('API Response:', response.data);
 
-
         if (Array.isArray(response.data)) {
           setData(response.data);
           setLoading(false);

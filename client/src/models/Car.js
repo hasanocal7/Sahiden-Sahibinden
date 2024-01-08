@@ -4,17 +4,7 @@ import axios from "axios";
 import "../App.css";
 
 function Car() {
-  const [adData, setAdData] = useState({
-    brand: "",
-    series: "",
-    model: "",
-    year: "",
-    fuel: "",
-    gear: "",
-    km: "",
-    case_type: "",
-    traction: "",
-  });
+  const [adDataList, setAdDataList] = useState([]);
 
   const token = localStorage.getItem("token");
 
@@ -29,14 +19,15 @@ function Car() {
             },
           }
         );
-        const data = response.data;
-        setAdData(data);
+
+        const data = response.data.ads;
+        setAdDataList(data);
         console.log(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData();
   }, [token]);
 
@@ -45,48 +36,53 @@ function Car() {
       <Navbar />
       <div className="carDetails">
         <div className="container">
-          <ul style={{ listStyle: "none" }}>
+          {adDataList.map((adData) => (
+            <ul key={adData.id} style={{ listStyle: "none" }}>
             <li>
-              <b>İlan Başlığı:</b> {adData.title}
-              <p>İlan Başlığı: {adData.brand}</p>
-            </li>
-            <li>
-              <b>İlan No:</b> {adData.ilan_no}
-            </li>
-            <li>
-              <b>İlan Tarihi:</b> {adData.ilan_date}
-            </li>
-            <li>
-              <b>İlan Açıklaması:</b> {adData.description}
-            </li>
-            <li>
-              <b>Marka:</b> {adData.brand}
-            </li>
-            <li>
-              <b>Seri:</b> {adData.series}
-            </li>
-            <li>
-              <b>Model:</b> {adData.model}
-            </li>
-            <li>
-              <b>Yıl:</b> {adData.year}
-            </li>
-            <li>
-              <b>Yakıt:</b> {adData.fuel}
-            </li>
-            <li>
-              <b>Vites:</b> {adData.gear}
-            </li>
-            <li>
-              <b>Kilometre:</b> {adData.km}
-            </li>
-            <li>
-              <b>Kasa Tipi:</b> {adData.case_type}
-            </li>
-            <li>
-              <b>Çekiş:</b> {adData.traction}
-            </li>
-          </ul>
+                <img src={adData.image} ></img>
+              </li>
+              <li>
+                <b>İlan Numarası:</b> {adData.id}
+              </li>
+              <li>
+                <b>İlan Başlığı:</b> {adData.title}
+              </li>
+              <li>
+                <b>İlan Fiyatı:</b> {adData.price}
+              </li>
+              <li>
+                <b>İlan Tarihi:</b> {adData.ilan_date}
+              </li>
+              <li>
+                <b>İlan Açıklaması:</b> {adData.description}
+              </li>
+            
+              <li>
+                <b>Seri:</b> {adData.series}
+              </li>
+              <li>
+                <b>Model:</b> {adData.model}
+              </li>
+              <li>
+                <b>Yıl:</b> {adData.year}
+              </li>
+              <li>
+                <b>Yakıt:</b> {adData.fuel}
+              </li>
+              <li>
+                <b>Vites:</b> {adData.gear}
+              </li>
+              <li>
+                <b>Kilometre:</b> {adData.km}
+              </li>
+              <li>
+                <b>Kasa Tipi:</b> {adData.case_type}
+              </li>
+              <li>
+                <b>Çekiş:</b> {adData.traction}
+              </li>
+            </ul>
+          ))}
         </div>
       </div>
     </>

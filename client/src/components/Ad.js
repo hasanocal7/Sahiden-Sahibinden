@@ -5,7 +5,8 @@ import "../style/Ad.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Navbar";
 
-function Ilan() {
+function Ilan({}) {
+
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [title, setTitle] = useState("");
   const [imageUrls, setImageUrls] = useState([]);
@@ -14,7 +15,7 @@ function Ilan() {
     
     const fetchImages = async () => {
       try {
-        const response = await axios.get("your_backend_api_endpoint");
+        const response = await axios.get("https://sahiden-sahibinden-production.up.railway.app/api/ads");
         setImageUrls(response.data);
       } catch (error) {
         console.error("Görseller alınırken hata oluştu:", error);
