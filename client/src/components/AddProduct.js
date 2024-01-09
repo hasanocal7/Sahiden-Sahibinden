@@ -13,11 +13,11 @@ const AddProduct = () => {
     neighborhood: "",
     category: "",
     sub_category: "",
+    
     room_count: "",
     m2_net: 0,
     m2_gross: 0,
     m2: 0,
-
     zoning_status: "",
 
     parcel_no: 0,
@@ -429,9 +429,9 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Oda Sayısı Seçiniz:
                 </option>
-                <option value="1+1">1+1</option>
-                <option value="2+1">2+1</option>
-                <option value="3+1">3+1</option>
+                <option value="1+1">1</option>
+                <option value="2+1">2</option>
+                <option value="3+1">3</option>
               </select>
             </div>
 
@@ -467,7 +467,7 @@ const AddProduct = () => {
 
             <div className="mb-3">
               <label htmlFor="balcony" className="form-label">
-                Balkon Var mı?
+                Balkon Sayısı?
               </label>
               <select
                 id="balcony"
@@ -478,10 +478,11 @@ const AddProduct = () => {
                 required
               >
                 <option value="" disabled>
-                  Balkon Var mı?
+                  Balkon Sayısı?
                 </option>
-                <option value="true">Evet</option>
-                <option value="false">Hayır</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
               </select>
             </div>
           </>
