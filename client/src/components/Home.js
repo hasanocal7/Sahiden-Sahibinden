@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import axios from "axios";
 
-function Home({ item }) {
+function Home( ) {
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
 

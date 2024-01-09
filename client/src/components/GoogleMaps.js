@@ -6,34 +6,36 @@ const GoogleMaps = ({ initialLatitude, initialLongitude }) => {
   const [mapCenter, setMapCenter] = useState({ lat: initialLatitude, lng: initialLongitude });
   const [locationInfo, setLocationInfo] = useState(null);
 
-  const mapStyles = {
-    height: '500px',
-    width: '100%',
-  };
 
+const mapStyles = {
+  height: '500px',
+  width: '100%',
+};
+  
   const getGeocodeInfo = async (latitude, longitude) => {
     try {
       const response = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyCBN1eyxepn25Pg467BE6Y0lo-O9p4DfMM`
       );
-
+  
       const addressComponents = response.data.results[0].address_components;
       const city = addressComponents.find((component) =>
         component.types.includes('locality')
-      ).long_name;
+      )?.long_name || '';   
       const district = addressComponents.find((component) =>
         component.types.includes('administrative_area_level_2')
-      ).long_name;
+      )?.long_name || '';
       const neighborhood = addressComponents.find((component) =>
         component.types.includes('sublocality_level_1')
-      ).long_name;
-
+      )?.long_name || '';
+  
       return { city, district, neighborhood };
     } catch (error) {
       console.error('Geocode API hatası:', error);
       return null;
     }
   };
+  
 
   const handleMapClick = async (event) => {
     // Kullanıcının tıkladığı konumu al
