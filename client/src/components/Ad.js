@@ -10,47 +10,54 @@ function Ilan({}) {
   const { slug } = useParams();
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+
+  const [m2_net, setm2_net] = useState("");
   const [image, setImage] = useState([]);
-  const [ad, setAd] = useState();
+
+
+  // const [ad, setAd] = useState({});
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-   
     const fetchImages = async () => {
       try {
-        const response = await axios.get(`https://sahiden-sahibinden-production.up.railway.app/api/ads/${slug}/detay`,
-        {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },}
-        );
-
-        const ad = response.data.ad
-        console.log(ad);
-        const images = ad.image || [];
-        setImage(images);
+        const response = await axios.get(`https://sahiden-sahibinden-production.up.railway.app/api/ads/${slug}/detay`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        const ad = response.data.ad;
+        setTitle(ad.title);
+        setImage(ad.image || []);
+        setPrice(ad.price);
+        setDescription(ad.description);
+        setm2_net(ad.m2_net);
       } catch (error) {
-        console.error("Görseller alınırken hata oluştu:", error);
+        console.error("Verileri alınırken hata oluştu:", error);
       }
     };
-
+  
     fetchImages();
-  }, []); 
+  }, []);
+
   const handleLocationSelect = (location) => {
     setSelectedLocation(location);
-  };
-
+  };  
   return (
     <>
     <Navbar/>
     <div className="adContainer container mt-4">
+    <h2>{title}</h2>
+
       <div className="row">
         <div className="col-md-6">
-          <div className="fotograf bg-secondary text-light p-4">
-            <h2>{title}</h2>
+        <div className="fotograf bg-secondary text-light p-4">
+            
             {image.map((name, index) => (
               <div key={index} className="fotograf bg-secondary text-light p-4">
-                <h2>{title}</h2>
                 <img className="smallImage" src={`https://sahiden-sahibinden-production.up.railway.app/uploads/${name}`} alt={`Ürün Fotoğrafı ${index + 1}`} />
               </div>
             ))}
@@ -59,9 +66,12 @@ function Ilan({}) {
         <div className="col-md-6">
           <div className="özellik p-4">
             <p>Fiyat kısmı</p>
+            <p>{price}</p>
             <div className="property">
               <hr />
               <p>Özellikler Kısmı</p> 
+              <p>{description}</p>
+              <p>{m2_net}</p>
               <hr />
             </div>
           </div>
@@ -89,7 +99,9 @@ function Ilan({}) {
       </div>
     </div></>
   );
+
 }
+
 
 export default Ilan;
 
