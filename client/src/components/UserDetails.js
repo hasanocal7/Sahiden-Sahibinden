@@ -37,14 +37,12 @@ function UserDetails() {
   };
 
   useEffect(() => {
-    // Kullanıcı giriş yapmışsa, burada kullanıcı bilgilerini set edebilirsiniz.
     if (isLoggedIn) {
       setFirst_Name("KullanıcınınAdı");
       setLast_Name("KullanıcınınSoyadı");
       setPhone("KullanıcınınTelefonu");
       setEmail("KullanıcınınEmaili");
     } else {
-      // Kullanıcı giriş yapmamışsa, verileri çekmek için Axios kullanabilirsiniz.
       const fetchUserData = async () => {
         try {
           const token = localStorage.getItem("token");
@@ -54,10 +52,10 @@ function UserDetails() {
               Authorization: `Bearer ${token}`,
             },
           });
-          setFirst_Name(response.data.first_name);
-          setLast_Name(response.data.last_name);
-          setPhone(response.data.phone);
-          setEmail(response.data.email);
+          setFirst_Name(response.data.user.first_name);
+          setLast_Name(response.data.user.last_name);
+          setPhone(response.data.user.phone);
+          setEmail(response.data.user.email);
         } catch (error) {
           console.error("Kullanıcı bilgileri alınamadı", error);
         }
