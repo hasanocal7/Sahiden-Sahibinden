@@ -5,8 +5,9 @@ import ComputerIcon from "@mui/icons-material/Computer";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import axios from "axios";
+import "../style/home.css";
 
-function Home( ) {
+function Home() {
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
 
@@ -35,7 +36,7 @@ function Home( ) {
 
   const renderCategoryLink = (category, icon) => (
     <Link to="#">
-      <div className={`${category}Area`}>
+      <div className={`${category.toLowerCase()}Area`}>
         {icon}
         <h4 style={{ color: "#394399" }}>{category}</h4>
       </div>
@@ -50,64 +51,42 @@ function Home( ) {
           <div className="col-md-4">
             <div className="property">
               {renderCategoryLink("Konut", <HomeIcon />)}
-              <ul>
-                <li>Konut</li>
-                <li>Arsa</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div className="vasita">
               {renderCategoryLink("Otomobil", <DirectionsCarIcon />)}
-              <ul>
-                <li>Otomobil</li>
-                <li>Motosiklet</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div className="elektronik">
               {renderCategoryLink("Bilgisayar", <ComputerIcon />)}
-              <ul>
-                <li>Bilgisayar</li>
-                <li>Telefon</li>
-              </ul>
+            </div>
+          </div>
+
+          <div className="col-md-8">
+            <div className="row">
+              {data &&
+                data.map((item) => (
+                  <div key={item.slug} className="col-md-4">
+                    <div className="card mb-4">
+                      <img
+                        src={item.image[0]}
+                        className="card-img-top"
+                        alt={item.title}
+                        
+                      />
+                      <div className="card-body">
+                        <h5 className="card-title">{item.title}</h5>
+                        <p className="card-text">{item.description}</p>
+                        <Link
+                          to={`/ilan/${item.slug}`}
+                          className="btn btn-primary"
+                          onClick={() =>
+                            console.log(`Tıklanan İlan ID: ${item.slug}`)
+                          }
+                        >
+                          İlanı Görüntüle
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
-        <div className="row">
-          {data &&
-            data.map((item) => (
-              <div key={item.slug} className="col-md-4">
-                <div className="card mb-4">
-                  <img
-                    src={item.image[0]}
-                    className="card-img-top"
-                    alt={item.title}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{item.title}</h5>
-                    <p className="card-text">{item.description}</p>
-                    <Link
-                      to={`/ilan/${item.slug}`}
-                      className="btn btn-primary"
-                      onClick={() =>
-                        console.log(`Tıklanan İlan ID: ${item.slug}`)
-                      }
-                    >
-                      İlanı Görüntüle
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-        </div>
-
-        {/* <Link to="/ilan" exact={true}>
-          Geçiş
-        </Link> */}
       </div>
     </>
   );
