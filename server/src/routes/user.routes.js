@@ -7,7 +7,7 @@ router.use(authentication.checkUser);
 router.use(authentication.authenticationToken);
 
 router.route("/signout").post(controller.authController.logoutUser);
-router.route("/panel").post(controller.authController.getPanelPage);
+router.route("/panel").get(controller.authController.getPanelPage);
 router
   .route("/update")
   .patch(upload.single("image"), controller.authController.editPersonalInfo);
