@@ -4,8 +4,12 @@ const getPanelPage = async (req, res, next) => {
   try {
     const user = await services.userServices.getUser(res.locals.user.id);
     res.status(200).json({
-      message: "Welcome",
-      user: `${user.first_name}`,
+      user: {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        phonenumber: user.phonenumber,
+      },
     });
   } catch (error) {
     res.status(500);
