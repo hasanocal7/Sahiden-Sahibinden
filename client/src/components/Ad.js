@@ -6,9 +6,8 @@ import "../style/Ad.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Navbar";
 
-function Ilan({}) {
+function Ilan() {
   const { slug } = useParams();
-  const [selectedLocation, setSelectedLocation] = useState(null);
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -25,6 +24,7 @@ function Ilan({}) {
   const [balcony, setBalcony] = useState(0);
 
   const [series, setSeries] = useState("");
+  const [brand, setBrand] = useState("");
   const [year, setYear] = useState("");
   const [model, setModel] = useState("");
   const [fuel, setFuel] = useState("");
@@ -49,7 +49,6 @@ function Ilan({}) {
 
   const [image, setImage] = useState([]);
 
-  const [locationInfo, setLocationInfo] = useState(null);
 
   const token = localStorage.getItem("token");
 
@@ -66,6 +65,8 @@ function Ilan({}) {
         );
 
         const ad = response.data.ad;
+        
+        
         console.log(ad);
         setTitle(ad.title);
         setImage(ad.image || []);
@@ -82,6 +83,7 @@ function Ilan({}) {
         setisland_no(ad.island_no);
         setBalcony(ad.balcony);
         setSeries(ad.series);
+        setBrand(ad.brand);
         setYear(ad.year);
         setModel(ad.model);
         setFuel(ad.fuel);
@@ -103,6 +105,8 @@ function Ilan({}) {
         setCamera(ad.camera);
         setfront_camera(ad.front_camera);
         setStatus(ad.status);
+
+      
       } catch (error) {
         console.error("Verileri alınırken hata oluştu:", error);
       }
@@ -112,7 +116,7 @@ function Ilan({}) {
   }, []);
 
   const handleLocationSelect = (location) => {
-    setSelectedLocation(location);
+    
   };
 
   return (
@@ -195,6 +199,8 @@ function Ilan({}) {
 
                 {case_type && (
                   <div>
+                    <p><b>Marka: </b>{brand}</p>
+
                     <p>
                       <b>Serisi: </b> {series}
                     </p>
@@ -306,24 +312,13 @@ function Ilan({}) {
               Slider
               <hr />
               <div className="icon mt-4">
-                {/* <GoogleMaps onSelect={handleLocationSelect} /> */}
+                {/* <GoogleMaps address={address} onSelect={handleLocationSelect} /> */}
               </div>
             </div>
           </div>
         </div>
-        <div className="row mt-4">
-          <div className="col-md-12">
-            <div className="selected-location text-light p-4">
-              {locationInfo && (
-                <div>
-                  <p>İl: {locationInfo.city}</p>
-                  <p>İlçe: {locationInfo.district}</p>
-                  <p>Mahalle: {locationInfo.neighborhood}</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+       
+        
       </div>
     </>
   );

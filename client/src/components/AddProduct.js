@@ -196,7 +196,7 @@ const AddProduct = () => {
 
     const renderCarFields = () => {
       switch (formData.car) {
-        case "audi":
+        case "Audi":
           return (
             <>
               <div className="mb-3">
@@ -214,8 +214,8 @@ const AddProduct = () => {
                   <option value="" disabled>
                     Seri Seçiniz:
                   </option>
-                  <option value="A">A Serisi</option>
-                  <option value="GT">Audi RS e-tron GT</option>
+                  <option value="A Serisi">A Serisi</option>
+                  <option value="Audi RS e-tron GT">Audi RS e-tron GT</option>
                 </select>
               </div>
 
@@ -240,12 +240,12 @@ const AddProduct = () => {
                   <option value="A6">A6</option>
                   <option value="A7">A7</option>
                   <option value="A8">A8</option>
-                  <option value="e-tron">e-tron GT</option>
+                  <option value="e-tron GT">e-tron GT</option>
                 </select>
               </div>
             </>
           );
-        case "mercedes":
+        case "Mercedes":
           return (
             <>
               <div className="mb-3">
@@ -263,8 +263,8 @@ const AddProduct = () => {
                   <option value="" disabled>
                     Seri Seçiniz:
                   </option>
-                  <option value="S">S-Serisi</option>
-                  <option value="G">G-Serisi</option>
+                  <option value="S-Serisi">S-Serisi</option>
+                  <option value="G-Serisi">G-Serisi</option>
                 </select>
               </div>
 
@@ -283,8 +283,8 @@ const AddProduct = () => {
                   <option value="" disabled>
                     Model Seçiniz
                   </option>
-                  <option value="amg">AMG</option>
-                  <option value="maybach">MAYBACH</option>
+                  <option value="AMG">AMG</option>
+                  <option value="MAYBACH">MAYBACH</option>
                 </select>
               </div>
             </>
@@ -314,8 +314,8 @@ const AddProduct = () => {
                   <option value="" disabled>
                     Model Seçiniz
                   </option>
-                  <option value="supersport">Supersport</option>
-                  <option value="adventure">ADVENTURE</option>
+                  <option value="Supersport">Supersport</option>
+                  <option value="ADVENTURE">ADVENTURE</option>
                 </select>
               </div>
             </>
@@ -338,8 +338,8 @@ const AddProduct = () => {
                   <option value="" disabled>
                     Model Seçiniz
                   </option>
-                  <option value="supersport">Supersport</option>
-                  <option value="naked">Naked</option>
+                  <option value="Supersport">Supersport</option>
+                  <option value="Naked">Naked</option>
                 </select>
               </div>
             </>
@@ -369,11 +369,11 @@ const AddProduct = () => {
                   <option value="" disabled>
                     Model Seçiniz
                   </option>
-                  <option value="apple11">iPhone 11</option>
-                  <option value="apple12">iPhone 12</option>
-                  <option value="apple13">iPhone 13</option>
-                  <option value="apple14">iPhone 14</option>
-                  <option value="apple15">iPhone 15</option>
+                  <option value="iPhone 11">iPhone 11</option>
+                  <option value="iPhone 12">iPhone 12</option>
+                  <option value="iPhone 13">iPhone 13</option>
+                  <option value="iPhone 14">iPhone 14</option>
+                  <option value="iPhone 15">iPhone 15</option>
                 </select>
               </div>
             </>
@@ -521,7 +521,7 @@ const AddProduct = () => {
                   İmar Durumu Seçiniz:
                 </option>
                 <option value="Ada">Ada</option>
-                <option value="Housing">Konut</option>
+                <option value="Konut">Konut</option>
                 <option value="Tarla">Tarla</option>
                 <option value="Zeytinlik">Zeytinlik</option>
               </select>
@@ -576,8 +576,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Marka Seçiniz:
                 </option>
-                <option value="audi">Audi</option>
-                <option value="mercedes">Mercedes</option>
+                <option value="Audi">Audi</option>
+                <option value="Mercedes">Mercedes</option>
               </select>
             </div>
             {renderCarFields()}
@@ -612,10 +612,10 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Yakıt Tipi Seçiniz:
                 </option>
-                <option value="gasoline">Benzin</option>
-                <option value="dizel">Dizel</option>
-                <option value="electric">Elektrik</option>
-                <option value="lpg">LPG</option>
+                <option value="Benzin">Benzin</option>
+                <option value="Dizel">Dizel</option>
+                <option value="Elektrik">Elektrik</option>
+                <option value="LPG">LPG</option>
               </select>
             </div>
 
@@ -634,8 +634,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Vites Tipi Seçiniz
                 </option>
-                <option value="manual_gear">Manuel Vites</option>
-                <option value="automatic_gear">Otomatik Vites</option>
+                <option value="Manuel Vites">Manuel Vites</option>
+                <option value="Otomatik Vites">Otomatik Vites</option>
               </select>
             </div>
 
@@ -669,8 +669,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Kasa Tipi Seçiniz:
                 </option>
-                <option value="sedan">Sedan</option>
-                <option value="hatchback">Hatchback</option>
+                <option value="Sedan">Sedan</option>
+                <option value="Hatchback">Hatchback</option>
               </select>
             </div>
 
@@ -689,8 +689,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Çekiş Türünü Seçiniz:
                 </option>
-                <option value="front_wheel_drive">Önden Çekişli</option>
-                <option value="rear_wheel_drive">Arkadan Çekişli</option>
+                <option value="Önden Çekişli">Önden Çekişli</option>
+                <option value="Arkadan Çekişli">Arkadan Çekişli</option>
               </select>
             </div>
           </>
@@ -713,8 +713,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Marka Seçiniz:
                 </option>
-                <option value="honda">Honda</option>
-                <option value="kawasaki">Kawasaki</option>
+                <option value="Honda">Honda</option>
+                <option value="Kawasaki">Kawasaki</option>
               </select>
             </div>
             {renderMotorFields()}
@@ -781,8 +781,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Marka Seçiniz:
                 </option>
-                <option value="acer">Acer</option>
-                <option value="asus">Asus</option>
+                <option value="Acer">Acer</option>
+                <option value="Asus">Asus</option>
               </select>
             </div>
             <div className="mb-3">
@@ -800,8 +800,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   İşlemci Seçiniz
                 </option>
-                <option value="amd">AMD</option>
-                <option value="intel">INTEL</option>
+                <option value="AMD">AMD</option>
+                <option value="INTEL">INTEL</option>
               </select>
             </div>
 
@@ -820,10 +820,10 @@ const AddProduct = () => {
                 <option value="" disabled>
                   RAM Seçiniz:
                 </option>
-                <option value="2gb">2 GB</option>
-                <option value="4gb">4 GB</option>
-                <option value="8gb">8 GB</option>
-                <option value="16gb">16 GB</option>
+                <option value="2 GB">2 GB</option>
+                <option value="4 GB">4 GB</option>
+                <option value="8 GB">8 GB</option>
+                <option value="16 GB">16 GB</option>
               </select>
             </div>
 
@@ -842,8 +842,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Sabit Disk (HDD):
                 </option>
-                <option value="true">Var</option>
-                <option value="false">Yok</option>
+                <option value="Var">Var</option>
+                <option value="Yok">Yok</option>
               </select>
             </div>
 
@@ -862,11 +862,11 @@ const AddProduct = () => {
                 <option value="" disabled>
                   SSD Seçiniz:
                 </option>
-                <option value="128gb">128 GB</option>
-                <option value="240gb">240 GB</option>
-                <option value="480gb">480 GB</option>
-                <option value="500gb">500 GB</option>
-                <option value="1tb">1 TB</option>
+                <option value="128 GB">128 GB</option>
+                <option value="240 GB">240 GB</option>
+                <option value="480 GB">480 GB</option>
+                <option value="500 GB">500 GB</option>
+                <option value="1 TB">1 TB</option>
               </select>
             </div>
 
@@ -885,18 +885,18 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Ekran Kartı Seçiniz:
                 </option>
-                <option value="GeForce_RTX_4070Ti">GeForce RTX 4070 Ti</option>
-                <option value="MSI_GeForce_RTX_4070">GeForce RTX 4070</option>
-                <option value="GeForce_RTX_4060Ti">GeForce RTX 4060 Ti</option>
-                <option value="GeForce_RTX_4060">GeForce RTX 4060</option>
-                <option value="GeForce_RTX_3070">GeForce RTX 3070</option>
-                <option value="GeForce_RTX_3060Ti">GeForce RTX 3060 Ti</option>
-                <option value="GeForce_RTX_3060">GeForce RTX 3060</option>
-                <option value="GeForce_RTX_3050">GeForce RTX 3050</option>
-                <option value="GeForce_GTX_1650">GeForce GTX 1650</option>
-                <option value="GeForce_GTX_1630">GeForce GTX 1630</option>
-                <option value="GeForce_GTX_1050Ti">GeForce GTX 1050 Ti</option>
-                <option value="GeForce_GT_030">GeForce GT 030</option>
+                <option value="GeForce RTX 4070 Ti">GeForce RTX 4070 Ti</option>
+                <option value="GeForce RTX 4070">GeForce RTX 4070</option>
+                <option value="GeForce RTX 4060 Ti">GeForce RTX 4060 Ti</option>
+                <option value="GeForce RTX 4060">GeForce RTX 4060</option>
+                <option value="GeForce RTX 3070">GeForce RTX 3070</option>
+                <option value="GeForce RTX 3060Ti">GeForce RTX 3060 Ti</option>
+                <option value="GeForce RTX 3060">GeForce RTX 3060</option>
+                <option value="GeForce RTX 3050">GeForce RTX 3050</option>
+                <option value="GeForce GTX 1650">GeForce GTX 1650</option>
+                <option value="GeForce GTX 1630">GeForce GTX 1630</option>
+                <option value="GeForce GTX 1050Ti">GeForce GTX 1050 Ti</option>
+                <option value="GeForce GT 030">GeForce GT 030</option>
               </select>
             </div>
 
@@ -915,9 +915,9 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Ekran Boyutu Seçiniz:
                 </option>
-                <option value="13inc">13 inç</option>
-                <option value="15inc">15 inç</option>
-                <option value="17inc">17 inç</option>
+                <option value="13 inç">13 inç</option>
+                <option value="15 inç">15 inç</option>
+                <option value="17 inç">17 inç</option>
               </select>
             </div>
 
@@ -961,8 +961,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Marka Seçiniz:
                 </option>
-                <option value="apple">Apple</option>
-                <option value="xiaomi">Xiaomi</option>
+                <option value="Apple">Apple</option>
+                <option value="Xiaomi">Xiaomi</option>
               </select>
             </div>
             {renderPhoneFields()}
@@ -981,9 +981,9 @@ const AddProduct = () => {
                 <option value="" disabled>
                   RAM Seçiniz:
                 </option>
-                <option value="2gb">2 GB</option>
-                <option value="4gb">4 GB</option>
-                <option value="8gb">8 GB</option>
+                <option value="2 GB">2 GB</option>
+                <option value="4 GB">4 GB</option>
+                <option value="8 GB">8 GB</option>
               </select>
             </div>
 
@@ -1002,8 +1002,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   İşletim Sistemi Seçiniz:
                 </option>
-                <option value="android">Android</option>
-                <option value="ios">iOS</option>
+                <option value="Android">Android</option>
+                <option value="iOS">iOS</option>
               </select>
             </div>
 
@@ -1022,9 +1022,9 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Dahilli Hafıza Seçiniz:
                 </option>
-                <option value="64gb">64 GB</option>
-                <option value="128gb">128 GB</option>
-                <option value="256gb">256 GB</option>
+                <option value="64 GB">64 GB</option>
+                <option value="128 GB">128 GB</option>
+                <option value="256 GB">256 GB</option>
               </select>
             </div>
 
@@ -1043,9 +1043,9 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Kamera MP Seçiniz:
                 </option>
-                <option value="12mp">12 MP</option>
-                <option value="50mp">50 MP</option>
-                <option value="108mp">108 MP</option>
+                <option value="12 MP">12 MP</option>
+                <option value="50 MP">50 MP</option>
+                <option value="108 MP">108 MP</option>
               </select>
             </div>
 
@@ -1064,9 +1064,9 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Ön Kamera MP Seçiniz:
                 </option>
-                <option value="12mp">12 MP</option>
-                <option value="16mp">16 MP</option>
-                <option value="40mp">40 MP</option>
+                <option value="12 MP">12 MP</option>
+                <option value="16 MP">16 MP</option>
+                <option value="40 MP">40 MP</option>
               </select>
             </div>
 
@@ -1085,11 +1085,11 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Ekran Boyutu Seçiniz:
                 </option>
-                <option value="4.7inc">4.7 inç</option>
-                <option value="6.1inc">6.1 inç</option>
-                <option value="6.7inc">6.7 inç</option>
-                <option value="6.8inc">6.8 inç</option>
-                <option value="6.9inc">6.9 inç</option>
+                <option value="4.7 inç">4.7 inç</option>
+                <option value="6.1 inç">6.1 inç</option>
+                <option value="6.7 inç">6.7 inç</option>
+                <option value="6.8 inç">6.8 inç</option>
+                <option value="6.9 inç">6.9 inç</option>
               </select>
             </div>
 
@@ -1108,8 +1108,8 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Durumu nedir
                 </option>
-                <option value="sifir">Sıfır</option>
-                <option value="ikinci_el">İkinci El</option>
+                <option value="Sıfır">Sıfır</option>
+                <option value="İkinci El">İkinci El</option>
               </select>
             </div>
           </>
