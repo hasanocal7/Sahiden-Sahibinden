@@ -13,7 +13,7 @@ const AddProduct = () => {
     neighborhood: "",
     category: "",
     sub_category: "",
-    
+
     room_count: "",
     m2_net: 0,
     m2_gross: 0,
@@ -28,6 +28,7 @@ const AddProduct = () => {
     year: "",
     model: "",
     fuel: "",
+    brand:"",
 
     gear: "",
     km: "",
@@ -116,7 +117,7 @@ const AddProduct = () => {
           data.append(key, updatedFormData[key]);
         }
       }
-      console.log(data); 
+      console.log(data);
       const response = await axios.post(
         "https://sahiden-sahibinden-production.up.railway.app/api/ads",
         data,
@@ -155,12 +156,12 @@ const AddProduct = () => {
       parcel_no: 0,
       island_no: 0,
       balcony: 0,
-      
+
       series: "",
       year: "",
       model: "",
       fuel: "",
-
+brand:"",
       gear: "",
       km: "",
       case_type: "",
@@ -195,30 +196,10 @@ const AddProduct = () => {
     const { sub_category } = formData;
 
     const renderCarFields = () => {
-      switch (formData.car) {
+      switch (formData.brand) {
         case "Audi":
           return (
             <>
-              <div className="mb-3">
-                <label htmlFor="series" className="form-label">
-                  Seri Seçiniz
-                </label>
-                <select
-                  id="series"
-                  name="series"
-                  className="form-select"
-                  value={formData.series}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="" disabled>
-                    Seri Seçiniz:
-                  </option>
-                  <option value="A Serisi">A Serisi</option>
-                  <option value="Audi RS e-tron GT">Audi RS e-tron GT</option>
-                </select>
-              </div>
-
               <div className="mb-3">
                 <label htmlFor="model" className="form-label">
                   Model Seçiniz
@@ -243,11 +224,6 @@ const AddProduct = () => {
                   <option value="e-tron GT">e-tron GT</option>
                 </select>
               </div>
-            </>
-          );
-        case "Mercedes":
-          return (
-            <>
               <div className="mb-3">
                 <label htmlFor="series" className="form-label">
                   Seri Seçiniz
@@ -263,11 +239,15 @@ const AddProduct = () => {
                   <option value="" disabled>
                     Seri Seçiniz:
                   </option>
-                  <option value="S-Serisi">S-Serisi</option>
-                  <option value="G-Serisi">G-Serisi</option>
+                  <option value="A Serisi">A Serisi</option>
+                  <option value="Audi RS e-tron GT">Audi RS e-tron GT</option>
                 </select>
               </div>
-
+            </>
+          );
+        case "Mercedes":
+          return (
+            <>
               <div className="mb-3">
                 <label htmlFor="model" className="form-label">
                   Model Seçiniz
@@ -285,6 +265,25 @@ const AddProduct = () => {
                   </option>
                   <option value="AMG">AMG</option>
                   <option value="MAYBACH">MAYBACH</option>
+                </select>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="series" className="form-label">
+                  Seri Seçiniz
+                </label>
+                <select
+                  id="series"
+                  name="series"
+                  className="form-select"
+                  value={formData.series}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="" disabled>
+                    Seri Seçiniz:
+                  </option>
+                  <option value="S-Serisi">S-Serisi</option>
+                  <option value="G-Serisi">G-Serisi</option>
                 </select>
               </div>
             </>
@@ -467,7 +466,7 @@ const AddProduct = () => {
 
             <div className="mb-3">
               <label htmlFor="balcony" className="form-label">
-              Balkon Var Mı?
+                Balkon Var Mı?
               </label>
               <select
                 id="balcony"
@@ -576,8 +575,8 @@ const AddProduct = () => {
                 <option value="Mercedes">Mercedes</option>
               </select>
             </div>
-            {renderCarFields()}
 
+                {renderCarFields()}
             <div className="mb-3">
               <label htmlFor="years" className="form-label">
                 Yıl Giriniz:

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Carousel } from "react-bootstrap";
 import GoogleMaps from "./GoogleMaps";
 import axios from "axios";
 import "../style/Ad.css";
@@ -14,7 +15,7 @@ function Ilan() {
   const [category, setcategory]= useState("");
   const [address, setAddress] = useState("");
   const [createdAt, setcreatedAt] = useState("");
-
+const [id, setID]=useState("");
   const [room_count, setroom_count] = useState("");
   const [m2_net, setm2_net] = useState(0);
   const [m2_gross, setm2_gross] = useState(0);
@@ -130,16 +131,21 @@ function Ilan() {
         <div className="row">
           <div className="col-md-6">
             <div className="fotograf text-light p-4">
+            <Carousel>
               {image.map((name, index) => (
+                <Carousel.Item key={index}>
                 <div key={index} className="fotograf text-light p-4">
                   <img
                     className="smallImage"
-                    src={`https://sahiden-sahibinden-production.up.railway.app/uploads/${name}`}
+                    src={`https://sahiden-sahibinden-production.up.railway.app/uploadss/${name}`}
                     alt={`Ürün Fotoğrafı ${index + 1}`}
                   />
                 </div>
+                 </Carousel.Item>
               ))}
+               </Carousel>
             </div>
+
           </div>
           <div className="col-md-6">
             <div className="rightSide p-4">
@@ -215,11 +221,12 @@ function Ilan() {
                       <b>Serisi: </b> {series}
                     </p>
                     <p>
-                      <b>Yıl: </b> {year}
-                    </p>
-                    <p>
                       <b>Modeli: </b> {model}
                     </p>
+                    <p>
+                      <b>Yıl: </b> {year}
+                    </p>
+                   
                     <p>
                       <b>Yakıt Tipi: </b> {fuel}
                     </p>
@@ -243,6 +250,7 @@ function Ilan() {
                     <p>
                       <b>Yıl: </b> {year}
                     </p>
+                    <p><b>Marka: </b>{brand}</p>
                     <p>
                       <b>Modeli: </b> {model}
                     </p>
