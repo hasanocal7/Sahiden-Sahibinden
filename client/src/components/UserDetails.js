@@ -46,7 +46,7 @@ function UserDetails() {
       const fetchUserData = async () => {
         try {
           const token = localStorage.getItem("token");
-
+          
           const response = await Axios.get("https://sahiden-sahibinden-production.up.railway.app/api/users/panel", {
             headers: {
               Authorization: `Bearer ${token}`,

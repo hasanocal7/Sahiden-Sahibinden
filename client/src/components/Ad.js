@@ -11,8 +11,9 @@ function Ilan() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-
+  const [category, setcategory]= useState("");
   const [address, setAddress] = useState("");
+  const [createdAt, setcreatedAt] = useState("");
 
   const [room_count, setroom_count] = useState("");
   const [m2_net, setm2_net] = useState(0);
@@ -21,7 +22,7 @@ function Ilan() {
   const [zoning_status, setzoning_status] = useState("");
   const [parcel_no, setparcel_no] = useState(0);
   const [island_no, setisland_no] = useState(0);
-  const [balcony, setBalcony] = useState(0);
+  const [balcony, setBalcony] = useState(false);
 
   const [series, setSeries] = useState("");
   const [brand, setBrand] = useState("");
@@ -73,7 +74,8 @@ function Ilan() {
         setPrice(ad.price);
         setDescription(ad.description);
         setAddress(ad.address);
-
+        setcreatedAt(ad.createdAt);
+        setcategory(ad.category);
         setroom_count(ad.room_count);
         setm2_gross(ad.m2_gross);
         setm2_net(ad.m2_net);
@@ -147,6 +149,14 @@ function Ilan() {
                   <b>Özellikler</b>
                 </p>
                 <p>
+                  <b>İlan Tarihi: </b>
+                  {createdAt.split("T")[0]}
+                </p>
+                <p>
+                  <b>Ürün Kategorisi: </b>
+                  {category}
+                </p>
+                <p>
                   <b>Fiyat: </b>
                   {price}
                 </p>
@@ -164,15 +174,15 @@ function Ilan() {
                     </p>
                     <p>
                       <b>Metrekare: </b>
-                      {m2}
+                      {m2_net}
                     </p>
                     <p>
                       <b>Metrekare Brüt: </b>
                       {m2_gross}
                     </p>
                     <p>
-                      <b>Balkon Sayısı: </b>
-                      {balcony}
+                      <b>Balkon Var Mı: </b>
+                      {balcony ? "Evet" : "Hayır"}
                     </p>
                   </div>
                 )}

@@ -32,7 +32,7 @@ function Navbar() {
       <nav className="navbar">
         <div className="nav-container">
           <Link exact to="/home" className="nav-logo">
-            <span>DEHA</span>
+            <span>Sahiden</span>
           </Link>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>

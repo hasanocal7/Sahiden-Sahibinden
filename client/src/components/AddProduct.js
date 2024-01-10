@@ -429,9 +429,9 @@ const AddProduct = () => {
                 <option value="" disabled>
                   Oda Sayısı Seçiniz:
                 </option>
-                <option value="1+1">1</option>
-                <option value="2+1">2</option>
-                <option value="3+1">3</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
               </select>
             </div>
 
@@ -467,7 +467,7 @@ const AddProduct = () => {
 
             <div className="mb-3">
               <label htmlFor="balcony" className="form-label">
-                Balkon Sayısı?
+              Balkon Var Mı?
               </label>
               <select
                 id="balcony"
@@ -477,12 +477,8 @@ const AddProduct = () => {
                 onChange={handleChange}
                 required
               >
-                <option value="" disabled>
-                  Balkon Sayısı?
-                </option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
+                <option value="true">Evet</option>
+                <option value="false">Hayır</option>
               </select>
             </div>
           </>
