@@ -17,9 +17,19 @@ const db = require("./src/models");
 const app = express();
 
 //* Middlewares
+const whiteList = [
+  "http://localhost:3000",
+  "https://sahiden-sahibinden.vercel.app",
+];
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: function (origin, callback) {
+      if (whiteList.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
