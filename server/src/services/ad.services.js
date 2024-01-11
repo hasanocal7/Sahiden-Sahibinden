@@ -198,7 +198,7 @@ const deleteAd = async (id) => {
     const imgPaths = ad.image;
     for (const img of imgPaths) {
       console.log(img);
-      fs.unlink(img, (err) => {
+      fs.unlink(`/src/uploads/${img}`, (err) => {
         if (err) {
           throw err;
         }
