@@ -42,8 +42,25 @@
 .categoryLink:hover, h4:hover {
   text-decoration: underline;
 }
-
-
+.homeAdButton{
+  background-color: #364958;
+  color: white;
+}
+.card {
+  height: 100%; 
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fixed-size-image {
+  object-fit: cover;
+  height: 200px; 
+}
+.inputSpacer {
+  margin-bottom: 10px; 
+}
 @media (max-width: 768px) {
   .homeContainer {
     margin-left: 0;

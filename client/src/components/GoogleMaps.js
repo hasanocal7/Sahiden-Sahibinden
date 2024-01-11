@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const containerStyle = {
-  maxWidth: "1250px",
-  height: "350px",
+  maxWidth: "500px",
+  height: "250px",
 };
 
 function GoogleMaps({ address, onSelect }) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Carousel } from "react-bootstrap";
 import GoogleMaps from "./GoogleMaps";
 import axios from "axios";
 import "../style/Ad.css";
@@ -11,9 +12,10 @@ function Ilan() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-
+  const [category, setcategory]= useState("");
   const [address, setAddress] = useState("");
-
+  const [createdAt, setcreatedAt] = useState("");
+const [id, setID]=useState("");
   const [room_count, setroom_count] = useState("");
   const [m2_net, setm2_net] = useState(0);
   const [m2_gross, setm2_gross] = useState(0);
@@ -21,7 +23,7 @@ function Ilan() {
   const [zoning_status, setzoning_status] = useState("");
   const [parcel_no, setparcel_no] = useState(0);
   const [island_no, setisland_no] = useState(0);
-  const [balcony, setBalcony] = useState(0);
+  const [balcony, setBalcony] = useState(false);
 
   const [series, setSeries] = useState("");
   const [brand, setBrand] = useState("");
@@ -73,7 +75,8 @@ function Ilan() {
         setPrice(ad.price);
         setDescription(ad.description);
         setAddress(ad.address);
-
+        setcreatedAt(ad.createdAt);
+        setcategory(ad.category);
         setroom_count(ad.room_count);
         setm2_gross(ad.m2_gross);
         setm2_net(ad.m2_net);
@@ -115,10 +118,6 @@ function Ilan() {
     fetchImages();
   }, []);
 
-  const handleLocationSelect = (location) => {
-    
-  };
-
   return (
     <>
       <Navbar />
@@ -128,7 +127,9 @@ function Ilan() {
         <div className="row">
           <div className="col-md-6">
             <div className="fotograf text-light p-4">
+            <Carousel>
               {image.map((name, index) => (
+                <Carousel.Item key={index}>
                 <div key={index} className="fotograf text-light p-4">
                   <img
                     className="smallImage"
@@ -136,8 +137,11 @@ function Ilan() {
                     alt={`Ürün Fotoğrafı ${index + 1}`}
                   />
                 </div>
+                 </Carousel.Item>
               ))}
+               </Carousel>
             </div>
+
           </div>
           <div className="col-md-6">
             <div className="rightSide p-4">
@@ -145,6 +149,14 @@ function Ilan() {
                 <hr />
                 <p className="feature">
                   <b>Özellikler</b>
+                </p>
+                <p>
+                  <b>İlan Tarihi: </b>
+                  {createdAt.split("T")[0]}
+                </p>
+                <p>
+                  <b>Ürün Kategorisi: </b>
+                  {category}
                 </p>
                 <p>
                   <b>Fiyat: </b>
@@ -164,15 +176,15 @@ function Ilan() {
                     </p>
                     <p>
                       <b>Metrekare: </b>
-                      {m2}
+                      {m2_net}
                     </p>
                     <p>
                       <b>Metrekare Brüt: </b>
                       {m2_gross}
                     </p>
                     <p>
-                      <b>Balkon Sayısı: </b>
-                      {balcony}
+                      <b>Balkon Var Mı: </b>
+                      {balcony ? "Evet" : "Hayır"}
                     </p>
                   </div>
                 )}
@@ -205,11 +217,12 @@ function Ilan() {
                       <b>Serisi: </b> {series}
                     </p>
                     <p>
-                      <b>Yıl: </b> {year}
-                    </p>
-                    <p>
                       <b>Modeli: </b> {model}
                     </p>
+                    <p>
+                      <b>Yıl: </b> {year}
+                    </p>
+                   
                     <p>
                       <b>Yakıt Tipi: </b> {fuel}
                     </p>
@@ -233,6 +246,7 @@ function Ilan() {
                     <p>
                       <b>Yıl: </b> {year}
                     </p>
+                    <p><b>Marka: </b>{brand}</p>
                     <p>
                       <b>Modeli: </b> {model}
                     </p>

@@ -18,9 +18,35 @@ function UserDetails() {
     setEditMode(true);
   };
 
-  const handleSaveClick = () => {
-    setEditMode(false);
+  const handleSaveClick = async () => {
+    try {
+      const token = localStorage.getItem("token");
+  
+      const response = await Axios.patch(
+        "https://sahiden-sahibinden-production.up.railway.app/api/users/update",
+        {
+          first_name: first_name,
+          last_name: last_name,
+          phone: phone,
+          email: email,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      // İsteğin başarılı olup olmadığını kontrol etmek için response nesnesini kullanabilirsiniz.
+      console.log(response);
+  
+      // Başarılı bir şekilde güncellendiğinde editMode'u kapatın
+      setEditMode(false);
+    } catch (error) {
+      console.error("Kullanıcı bilgileri güncellenirken hata oluştu: ", error);
+    }
   };
+  
 
   const handleInputChange = (e, setter) => {
     setter(e.target.value);
@@ -37,27 +63,25 @@ function UserDetails() {
   };
 
   useEffect(() => {
-    // Kullanıcı giriş yapmışsa, burada kullanıcı bilgilerini set edebilirsiniz.
     if (isLoggedIn) {
       setFirst_Name("KullanıcınınAdı");
       setLast_Name("KullanıcınınSoyadı");
       setPhone("KullanıcınınTelefonu");
       setEmail("KullanıcınınEmaili");
     } else {
-      // Kullanıcı giriş yapmamışsa, verileri çekmek için Axios kullanabilirsiniz.
       const fetchUserData = async () => {
         try {
           const token = localStorage.getItem("token");
-
+          
           const response = await Axios.get("https://sahiden-sahibinden-production.up.railway.app/api/users/panel", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
-          setFirst_Name(response.data.first_name);
-          setLast_Name(response.data.last_name);
-          setPhone(response.data.phone);
-          setEmail(response.data.email);
+          setFirst_Name(response.data.user.first_name);
+          setLast_Name(response.data.user.last_name);
+          setPhone(response.data.user.phone);
+          setEmail(response.data.user.email);
         } catch (error) {
           console.error("Kullanıcı bilgileri alınamadı", error);
         }

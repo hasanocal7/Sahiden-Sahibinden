@@ -36,7 +36,7 @@ function Register() {
 
   return (
     <div className="registerContainer container mt-5 d-flex flex-column align-items-center ">
-      <h2 className="register-heading">DEHA</h2>
+      <h2 className="register-heading">Sahiden</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label"></label>
@@ -98,7 +98,7 @@ function Register() {
           </div>
         </div>
         <div className="registerLink">
-          <p>
+          <p className='hesapRegister'>
             Hesabın var mı <a href="/login">Giriş Yap!</a>
           </p>
         </div>

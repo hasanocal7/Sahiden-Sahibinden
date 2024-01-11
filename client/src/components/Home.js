@@ -43,7 +43,7 @@ function Home() {
     </Link>
   );
 
-  return (
+ return (
     <>
       <Navbar />
       <div className="homeContainer container">
@@ -60,20 +60,18 @@ function Home() {
             <div className="row">
               {data &&
                 data.map((item) => (
-                  <div key={item.slug} className="col-md-4">
-                    <div className="card mb-4">
+                  <div key={item.slug} className="col-12 col-md-6 col-lg-4 mb-4">
+                    <div className="card">
                       <img
-                        src={item.image[0]}
-                        className="card-img-top"
+                        src={`https://sahiden-sahibinden-production.up.railway.app/uploads/${item.image[0]}`}
+                        className="card-img-top fixed-size-image"
                         alt={item.title}
-                        
                       />
                       <div className="card-body">
                         <h5 className="card-title">{item.title}</h5>
-                        <p className="card-text">{item.description}</p>
                         <Link
                           to={`/ilan/${item.slug}`}
-                          className="btn btn-primary"
+                          className="homeAdButton btn"
                           onClick={() =>
                             console.log(`Tıklanan İlan ID: ${item.slug}`)
                           }
@@ -84,12 +82,15 @@ function Home() {
                     </div>
                   </div>
                 ))}
+              {/* Ek boş div */}
+              <div className="col-12 col-md-6 col-lg-4 mb-4"></div>
             </div>
           </div>
         </div>
       </div>
     </>
   );
+  
 }
 
 export default Home;
