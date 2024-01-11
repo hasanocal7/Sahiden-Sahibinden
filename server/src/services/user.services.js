@@ -91,19 +91,14 @@ const changePassword = async (id, newPassword) => {
   }
 };
 
-const editPersonalInfo = async (
-  id,
-  phonenumber_home,
-  phonenumber_bussines,
-  image
-) => {
+const editPersonalInfo = async (id, first_name, last_name, phonenumber) => {
   const user = await User.findOne({ where: { id: id } });
   if (user) {
     await User.update(
       {
-        phonenumber_home: phonenumber_home,
-        phonenumber_bussines: phonenumber_bussines,
-        image: image,
+        first_name: first_name,
+        last_name: last_name,
+        phonenumber: phonenumber,
       },
       { where: { id: id } }
     );
