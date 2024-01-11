@@ -24,12 +24,14 @@ const whiteList = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (whiteList.indexOf(origin) !== -1) {
+      if (whiteList.indexOf(origin) !== -1 || !origin) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
       }
     },
+    credentials: false,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
