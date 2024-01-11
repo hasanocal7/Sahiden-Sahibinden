@@ -16,12 +16,23 @@ const db = require("./src/models");
 //* App
 const app = express();
 
-//* Middlewares
+//* CORS Options
 const whiteList = [
   "http://localhost:3000",
   "https://sahiden-sahibinden.vercel.app",
 ];
-app.use(cors());
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whiteList.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+//* Middlewares
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
