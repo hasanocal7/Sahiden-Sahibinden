@@ -28,14 +28,13 @@ const logoutUser = async (req, res, next) => {
 
 const editPersonalInfo = async (req, res, next) => {
   try {
-    const { phonenumber_home, phonenumber_bussines } = req.body;
+    const { first_name, last_name, phonenumber } = req.body;
     const id = res.locals.user.id;
-    const image = req.file.originalname;
     await services.userServices.editPersonalInfo(
       id,
-      phonenumber_home,
-      phonenumber_bussines,
-      image
+      first_name,
+      last_name,
+      phonenumber
     );
     res.status(200).json({
       success: true,
