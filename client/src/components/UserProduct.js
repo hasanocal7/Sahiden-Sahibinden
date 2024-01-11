@@ -17,6 +17,7 @@ function UserProduct() {
         });
 
         const userProducts = response.data.ads;
+        console.log(userProducts);
         setUserProducts(userProducts);
       } catch (error) {
         console.error('Kullanıcı ürünleri alınamadı', error);
@@ -54,11 +55,9 @@ function UserProduct() {
           {userProducts.map((product) => (
             <div className="col" key={product.id}>
               <div className="card">
-                <img src={product.image_url} className="card-img-top" alt={product.name} />
+                <img src={`https://sahiden-sahibinden-production.up.railway.app/uploads/${product.image[0]}`} className="card-img-top" alt={product.name} />
                 <div className="card-body">
-                  <h5 className="card-title">{product.name}</h5>
-                  <p className="card-text">{product.description}</p>
-                  <p className="card-text">Price: {product.price}</p>
+                  <h5 className="card-title">{product.title}</h5>
                   <button className="btn btn-primary" onClick={() => handleEdit(product.id)}>Düzenle</button>
                   <button className="btn btn-danger" onClick={() => handleDelete(product.id)}>Ürünü Sil</button>
                 </div>
