@@ -12,6 +12,7 @@ import ConfirmPassword from "./components/ConfirmPassword";
 import UserDetails from "./components/UserDetails";
 import Car from "./models/Car";
 import Land from "./models/Land";
+import UserProduct from "./components/UserProduct";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path={`/ilan/:slug`} element={<Ad />} />
         <Route path="/ilanyukle" element={<AddProduct />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/user-product" element={<UserProduct />} />
         <Route path="/confirm-password/:id" element={<ConfirmPassword />} />
         <Route path="/user-details" element={<UserDetails />} />
         <Route path="/car" element={<Car />} />

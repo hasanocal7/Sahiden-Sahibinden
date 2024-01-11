@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import HomeIcon from "@mui/icons-material/Home";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-import ComputerIcon from "@mui/icons-material/Computer";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import axios from "axios";
@@ -10,7 +7,9 @@ import "../style/home.css";
 function Home() {
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,6 +33,25 @@ function Home() {
     fetchData();
   }, [token]);
 
+  const handleSearch = () => {
+    let filteredData = data;
+
+    if (searchTerm) {
+      filteredData = filteredData.filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (minPrice && maxPrice) {
+      filteredData = filteredData.filter(
+        (item) =>
+          item.price >= parseInt(minPrice) && item.price <= parseInt(maxPrice)
+      );
+    }
+
+    setData(filteredData);
+  };
+
   const renderCategoryLink = (category, icon) => (
     <Link to="#">
       <div className={`${category.toLowerCase()}Area`}>
@@ -48,15 +66,38 @@ function Home() {
       <Navbar />
       <div className="homeContainer container">
         <div className="row">
-          <div className="col-md-4">
-            <div className="property">
-              {renderCategoryLink("Konut", <HomeIcon />)}
-              {renderCategoryLink("Otomobil", <DirectionsCarIcon />)}
-              {renderCategoryLink("Bilgisayar", <ComputerIcon />)}
+        <div className="col-md-3">
+            <div className="filter">
+              <h3>Fiyat Aralığı</h3>
+              <div className="priceFilter">
+                <input
+                  type="number"
+                  placeholder="Min Fiyat"
+                  value={minPrice}
+                  onChange={(e) => setMinPrice(e.target.value)}
+                />
+                <div className="inputSpacer"></div>
+                <input
+                  type="number"
+                  placeholder="Max Fiyat"
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                />
+              </div>
+              <button onClick={handleSearch}>Filtrele</button>
             </div>
           </div>
 
           <div className="col-md-8">
+          <div className="search">
+              <input
+                type="text"
+                placeholder="Ürün Ara"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button className="searchButton" onClick={handleSearch}>Ara</button>
+            </div>
             <div className="row">
               {data &&
                 data.map((item) => (
@@ -67,8 +108,9 @@ function Home() {
                         className="card-img-top fixed-size-image"
                         alt={item.title}
                       />
-                      <div className="card-body">
+                     <div className="card-body">
                         <h5 className="card-title">{item.title}</h5>
+                        <p>Fiyat: {item.price} TL</p>
                         <Link
                           to={`/ilan/${item.slug}`}
                           className="homeAdButton btn"
