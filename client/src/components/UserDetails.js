@@ -10,7 +10,7 @@ function UserDetails() {
   const [editMode, setEditMode] = useState(false);
   const [first_name, setFirst_Name] = useState("");
   const [last_name, setLast_Name] = useState("");
-  const [phone, setPhone] = useState("-");
+  const [phonenumber, setPhone] = useState("-");
   const [email, setEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -27,7 +27,7 @@ function UserDetails() {
         {
           first_name: first_name,
           last_name: last_name,
-          phone: phone,
+          phonenumber: phonenumber,
           email: email,
         },
         {
@@ -80,7 +80,7 @@ function UserDetails() {
           });
           setFirst_Name(response.data.user.first_name);
           setLast_Name(response.data.user.last_name);
-          setPhone(response.data.user.phone);
+          setPhone(response.data.user.phonenumber);
           setEmail(response.data.user.email);
         } catch (error) {
           console.error("Kullanıcı bilgileri alınamadı", error);
@@ -122,11 +122,11 @@ function UserDetails() {
                 <input
                   type="tel"
                   className="form-control"
-                  value={phone}
+                  value={phonenumber}
                   onChange={handlePhoneInputChange}
                 />
               ) : (
-                <input type="text" readOnly className="form-control-plaintext" value={phone} />
+                <input type="text" readOnly className="form-control-plaintext" value={phonenumber} />
               )}
             </div>
           </div>
@@ -147,6 +147,12 @@ function UserDetails() {
               Düzenle
             </button>
           )}
+
+          <div>
+          <button className="userProductButton btn" type="button" >
+              <a href="/user-product" >İlanlarımı Göster</a>
+            </button>
+          </div>
         </div>
       </div>
     </>

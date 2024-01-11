@@ -61,6 +61,18 @@
 .inputSpacer {
   margin-bottom: 10px; 
 }
+.search{
+  border: 8px;
+  padding: 5px;
+}
+.searchButton{
+  background-color: #364958;
+  color: white;
+}
+
+.searchButton:hover{
+  background-color: #2a4c2e;
+}
 @media (max-width: 768px) {
   .homeContainer {
     margin-left: 0;

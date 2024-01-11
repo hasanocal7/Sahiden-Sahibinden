@@ -15,7 +15,7 @@ function Ilan() {
   const [category, setcategory]= useState("");
   const [address, setAddress] = useState("");
   const [createdAt, setcreatedAt] = useState("");
-const [id, setID]=useState("");
+  const [id, setID]=useState("");
   const [room_count, setroom_count] = useState("");
   const [m2_net, setm2_net] = useState(0);
   const [m2_gross, setm2_gross] = useState(0);
@@ -50,6 +50,9 @@ const [id, setID]=useState("");
   const [status, setStatus] = useState("");
 
   const [image, setImage] = useState([]);
+  const handleLocationSelect = (location) => {
+    
+  };
 
 
   const token = localStorage.getItem("token");
@@ -71,6 +74,7 @@ const [id, setID]=useState("");
         
         console.log(ad);
         setTitle(ad.title);
+        setID(ad.id);
         setImage(ad.image || []);
         setPrice(ad.price);
         setDescription(ad.description);
@@ -153,6 +157,10 @@ const [id, setID]=useState("");
                 <p>
                   <b>İlan Tarihi: </b>
                   {createdAt.split("T")[0]}
+                </p>
+                <p>
+                  <b>İlan Numarası: </b>
+                  {id}
                 </p>
                 <p>
                   <b>Ürün Kategorisi: </b>
