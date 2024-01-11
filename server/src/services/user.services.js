@@ -69,7 +69,7 @@ const forgotPassword = async (email) => {
       to: email,
       subject: "Forgot Password",
       text: `Hello! Please click on this link to change your password:
-      http://localhost:3000/confirm-password/${user.id}`,
+      https://sahiden-sahibinden.vercel.app/confirm-password/${user.id}`,
     });
     return maskedEmail;
   }
