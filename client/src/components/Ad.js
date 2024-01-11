@@ -118,10 +118,6 @@ const [id, setID]=useState("");
     fetchImages();
   }, []);
 
-  const handleLocationSelect = (location) => {
-    
-  };
-
   return (
     <>
       <Navbar />
@@ -137,7 +133,7 @@ const [id, setID]=useState("");
                 <div key={index} className="fotograf text-light p-4">
                   <img
                     className="smallImage"
-                    src={`https://sahiden-sahibinden-production.up.railway.app/uploadss/${name}`}
+                    src={`https://sahiden-sahibinden-production.up.railway.app/uploads/${name}`}
                     alt={`Ürün Fotoğrafı ${index + 1}`}
                   />
                 </div>
@@ -330,7 +326,7 @@ const [id, setID]=useState("");
               Slider
               <hr />
               <div className="icon mt-4">
-                <GoogleMaps address={address} onSelect={handleLocationSelect} />
+                {/* <GoogleMaps address={address} onSelect={handleLocationSelect} /> */}
               </div>
             </div>
           </div>

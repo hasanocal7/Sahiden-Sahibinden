@@ -58,7 +58,9 @@
   object-fit: cover;
   height: 200px; 
 }
-
+.inputSpacer {
+  margin-bottom: 10px; 
+}
 @media (max-width: 768px) {
   .homeContainer {
     margin-left: 0;

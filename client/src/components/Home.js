@@ -43,7 +43,7 @@ function Home() {
     </Link>
   );
 
-  return (
+ return (
     <>
       <Navbar />
       <div className="homeContainer container">
@@ -60,10 +60,9 @@ function Home() {
             <div className="row">
               {data &&
                 data.map((item) => (
-                  <div key={item.slug} className="col-12 col-md-6 col-lg-4">
-                    <div className="card mb-4">
+                  <div key={item.slug} className="col-12 col-md-6 col-lg-4 mb-4">
+                    <div className="card">
                       <img
-
                         src={`https://sahiden-sahibinden-production.up.railway.app/uploads/${item.image[0]}`}
                         className="card-img-top fixed-size-image"
                         alt={item.title}
@@ -83,6 +82,8 @@ function Home() {
                     </div>
                   </div>
                 ))}
+              {/* Ek boş div */}
+              <div className="col-12 col-md-6 col-lg-4 mb-4"></div>
             </div>
           </div>
         </div>

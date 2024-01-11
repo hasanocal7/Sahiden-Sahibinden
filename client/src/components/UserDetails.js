@@ -18,9 +18,35 @@ function UserDetails() {
     setEditMode(true);
   };
 
-  const handleSaveClick = () => {
-    setEditMode(false);
+  const handleSaveClick = async () => {
+    try {
+      const token = localStorage.getItem("token");
+  
+      const response = await Axios.patch(
+        "https://sahiden-sahibinden-production.up.railway.app/api/users/update",
+        {
+          first_name: first_name,
+          last_name: last_name,
+          phone: phone,
+          email: email,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      // İsteğin başarılı olup olmadığını kontrol etmek için response nesnesini kullanabilirsiniz.
+      console.log(response);
+  
+      // Başarılı bir şekilde güncellendiğinde editMode'u kapatın
+      setEditMode(false);
+    } catch (error) {
+      console.error("Kullanıcı bilgileri güncellenirken hata oluştu: ", error);
+    }
   };
+  
 
   const handleInputChange = (e, setter) => {
     setter(e.target.value);
