@@ -28,7 +28,7 @@ const AddProduct = () => {
     year: "",
     model: "",
     fuel: "",
-    brand:"",
+    brand: "",
 
     gear: "",
     km: "",
@@ -161,7 +161,7 @@ const AddProduct = () => {
       year: "",
       model: "",
       fuel: "",
-brand:"",
+      brand: "",
       gear: "",
       km: "",
       case_type: "",
@@ -295,7 +295,7 @@ brand:"",
 
     const renderMotorFields = () => {
       switch (formData.brand) {
-        case "honda":
+        case "Honda":
           return (
             <>
               <div className="mb-3">
@@ -319,7 +319,7 @@ brand:"",
               </div>
             </>
           );
-        case "kawasaki":
+        case "Kawasaki":
           return (
             <>
               <div className="mb-3">
@@ -350,7 +350,7 @@ brand:"",
 
     const renderPhoneFields = () => {
       switch (formData.brand) {
-        case "apple":
+        case "Apple":
           return (
             <>
               <div className="mb-3">
@@ -378,7 +378,7 @@ brand:"",
             </>
           );
 
-        case "xiaomi":
+        case "Xiaomi":
           return (
             <>
               <div className="mb-3">
@@ -576,7 +576,7 @@ brand:"",
               </select>
             </div>
 
-                {renderCarFields()}
+            {renderCarFields()}
             <div className="mb-3">
               <label htmlFor="years" className="form-label">
                 Yıl Giriniz:
