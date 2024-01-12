@@ -187,7 +187,7 @@ function UserProduct() {
                   className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
-                  onClick={handleCallAd}
+                  onClick={handleInputChange}
                 ></button>
               </div>
               <div className="modal-body">
