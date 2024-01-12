@@ -49,7 +49,7 @@ function ConfirmPassword() {
 
   return (
     <div className="container confirm-password-container mt-5 d-flex flex-column align-items-center">
-      <h2 className="confirm-password-heading">DEHA</h2>
+      <h2 className="confirm-password-heading">Sahiden</h2>
 
       <label htmlFor="password" className="confirm-password-label"></label>
       <input

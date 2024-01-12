@@ -42,7 +42,7 @@ function ForgotPassword() {
 
   return (
     <div className=" container forgot-password-container mt-5  d-flex flex-column align-items-center">
-      <h2 className="forgot-password-heading">DEHA</h2>
+      <h2 className="forgot-password-heading">Sahiden</h2>
       <p className="forgot-password-text"></p>
 
       <label htmlFor="email" className="forgot-password-label"></label>
