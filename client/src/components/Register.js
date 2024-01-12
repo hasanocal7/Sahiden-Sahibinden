@@ -19,7 +19,9 @@ function Register() {
     },
     onSubmit: async (values, actions) => {
       try {
-        const response = await axios.post('https://sahiden-sahibinden-production.up.railway.app/api/signup', values);
+        const response = await axios.post('https://sahiden-sahibinden-production.up.railway.app/api/signup', 
+        values
+        );
        
         console.log('Kullanıcı Hesabı Açıldı:', response.data);
         actions.resetForm();
