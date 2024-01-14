@@ -64,30 +64,42 @@ const forgotPassword = async (email) => {
     );
   } else {
     const maskedEmail = `${email[0]}***@${email.split("@")[1]}`;
+    const userID = user.id;
+    const token = jwt.sign({ userID }, process.env.ACCESSTOKEN_SECRET_KEY, {
+      expiresIn: "10m",
+    });
     sendingMail({
       from: "softalyainternship@sahiden.com",
       to: email,
       subject: "Forgot Password",
       text: `Hello! Please click on this link to change your password:
-      https://sahiden-sahibinden.vercel.app/confirm-password/${user.id}`,
+      https://sahiden-sahibinden.vercel.app/confirm-password/${token}`,
     });
     return maskedEmail;
   }
 };
 
-const changePassword = async (id, newPassword) => {
-  const user = await User.findOne({ where: { id: id } });
-  if (user) {
-    const hashedPassword = await cryptor.hash(newPassword);
-    await User.update(
-      {
-        password: hashedPassword,
-      },
-      { where: { id: id } }
-    );
-    return user;
-  } else {
-    throw new Error("User not found");
+const changePassword = async (token, newPassword) => {
+  try {
+    const decodedToken = jwt.verify(token, process.env.ACCESSTOKEN_SECRET_KEY);
+    console.log(decodedToken);
+
+    const user = await User.findOne({ where: { id: decodedToken.userID } });
+
+    if (user) {
+      const hashedPassword = await cryptor.hash(newPassword);
+
+      await User.update(
+        { password: hashedPassword },
+        { where: { id: decodedToken.userID } }
+      );
+
+      return user;
+    } else {
+      throw new Error("User not found");
+    }
+  } catch (error) {
+    throw new Error("Token verification failed: " + error.message);
   }
 };
 
