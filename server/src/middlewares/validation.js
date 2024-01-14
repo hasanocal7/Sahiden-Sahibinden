@@ -1,4 +1,5 @@
 const validators = require("../utils/validators/index");
+const jwt = require("jsonwebtoken");
 
 exports.beforeRegister = async (req, res, next) => {
   try {
@@ -45,8 +46,9 @@ const { User } = require("../models");
 
 exports.beforeChangePassword = async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const user = await User.findOne({ where: { id: id } });
+    const token = req.params.token;
+    const decodedToken = jwt.verify(token, process.env.ACCESSTOKEN_SECRET_KEY);
+    const user = await User.findOne({ where: { id: decodedToken.userID } });
     const currentPassword = user.password;
     const { newPassword, confirmNewPassword } = req.body;
 

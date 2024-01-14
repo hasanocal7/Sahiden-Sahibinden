@@ -20,7 +20,7 @@ router
   );
 
 router
-  .route("/forgot-password/:id")
+  .route("/forgot-password/:token")
   .put(
     validation.beforeChangePassword,
     controller.pageController.changePassword

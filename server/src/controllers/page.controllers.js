@@ -50,8 +50,8 @@ const forgotPassword = async (req, res, next) => {
 const changePassword = async (req, res, next) => {
   try {
     const { newPassword } = req.body;
-    const id = req.params.id;
-    const user = await services.userServices.changePassword(id, newPassword);
+    const token = req.params.token;
+    const user = await services.userServices.changePassword(token, newPassword);
     res.status(200).json({
       success: true,
       message: `Your password has been successfully changed! You can log in to your sahiden sahibinden account using your new password.`,
