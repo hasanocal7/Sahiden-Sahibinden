@@ -40,7 +40,6 @@ function UserProduct() {
         );
 
         const userProducts = response.data.ads;
-        console.log(userProducts);
         setUserProducts(userProducts);
       } catch (error) {
         console.error("Kullanıcı ürünleri alınamadı", error);

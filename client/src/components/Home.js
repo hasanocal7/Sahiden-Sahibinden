@@ -23,7 +23,6 @@ function Home() {
         );
 
         setData(response.data.ads);
-        console.log(response.data.ads);
       } catch (error) {
         console.error("Veri çekme hatası:", error);
         setData([]);

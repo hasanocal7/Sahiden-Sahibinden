@@ -28,7 +28,7 @@ function App() {
         <Route path="/ilanyukle" element={<AddProduct />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/user-product" element={<UserProduct />} />
-        <Route path="/confirm-password/:id" element={<ConfirmPassword />} />
+        <Route path="/confirm-password/:token" element={<ConfirmPassword />} />
         <Route path="/user-details" element={<UserDetails />} />
         <Route path="/car" element={<Car />} />
         <Route path="/land" element={<Land />} />
