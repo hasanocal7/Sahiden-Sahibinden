@@ -4,7 +4,7 @@ import "../style/ConfirmPassword.css";
 import axios from "axios";
 
 function ConfirmPassword() {
-  const { id } = useParams();
+  const { token } = useParams();
   const [newPassword, setPassword] = useState("");
   const [confirmNewPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -29,7 +29,7 @@ function ConfirmPassword() {
       }
 
       const response = await axios.put(
-        `https://sahiden-sahibinden-production.up.railway.app/api/forgot-password/${id}`,
+        `https://sahiden-sahibinden-production.up.railway.app/api/forgot-password/${token}`,
         passwordData,
       );
 
