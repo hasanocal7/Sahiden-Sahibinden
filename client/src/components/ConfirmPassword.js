@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../style/ConfirmPassword.css";
 import axios from "axios";
@@ -10,6 +10,16 @@ function ConfirmPassword() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const tokenExpirationCheckRef = useRef(null);
+
+  useEffect(() => {
+    tokenExpirationCheckRef.current = setTimeout(() => {
+      alert("Token süresi doldu. Şifre sıfırlama işlemi başarısız oldu.");
+      navigate("/");
+    }, 10 * 60 * 1000); 
+
+    return () => clearTimeout(tokenExpirationCheckRef.current);
+  }, [navigate]);
 
   const handleConfirmPassword = async () => {
     try {
@@ -23,17 +33,20 @@ function ConfirmPassword() {
         return;
       }
 
+
       const passwordData = {
         newPassword: newPassword,
-        confirmNewPassword: confirmNewPassword
-      }
+        confirmNewPassword: confirmNewPassword,
+      };
 
       const response = await axios.put(
         `https://sahiden-sahibinden-production.up.railway.app/api/forgot-password/${token}`,
-        passwordData,
+        passwordData
       );
 
       if (response.status === 200) {
+        // Reset the timer since the password reset was successful
+        clearTimeout(tokenExpirationCheckRef.current);
         setMessage(
           "Şifre sıfırlama işlemi başarıyla tamamlandı. Yeni şifrenizle giriş yapabilirsiniz."
         );
