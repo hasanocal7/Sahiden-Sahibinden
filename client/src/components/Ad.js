@@ -72,7 +72,6 @@ function Ilan() {
         const ad = response.data.ad;
         
         
-        console.log(ad);
         setTitle(ad.title);
         setID(ad.id);
         setImage(ad.image || []);

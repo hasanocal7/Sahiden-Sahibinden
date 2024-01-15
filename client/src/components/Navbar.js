@@ -22,7 +22,6 @@ function Navbar() {
   const handleClose = () => setClick(false);
 
   const handleLogout = () => {
-    console.log("Çıkış yapıldı");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
   };

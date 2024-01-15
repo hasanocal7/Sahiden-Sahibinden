@@ -38,7 +38,6 @@ function UserDetails() {
       );
   
       // İsteğin başarılı olup olmadığını kontrol etmek için response nesnesini kullanabilirsiniz.
-      console.log(response);
   
       // Başarılı bir şekilde güncellendiğinde editMode'u kapatın
       setEditMode(false);

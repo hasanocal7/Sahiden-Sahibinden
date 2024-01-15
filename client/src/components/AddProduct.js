@@ -117,7 +117,6 @@ const AddProduct = () => {
           data.append(key, updatedFormData[key]);
         }
       }
-      console.log(data);
       const response = await axios.post(
         "https://sahiden-sahibinden-production.up.railway.app/api/ads",
         data,
@@ -129,7 +128,6 @@ const AddProduct = () => {
         }
       );
 
-      console.log("Başarılı istek:", response.data);
     } catch (error) {
       console.error("İstek hatası:", error);
     }
