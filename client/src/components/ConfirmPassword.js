@@ -40,7 +40,7 @@ function ConfirmPassword() {
       };
 
       const response = await axios.put(
-        `https://sahiden-sahibinden-production.up.railway.app/api/forgot-password/${token}`,
+        `https://sahiden-sahibinden-production-3ef2.up.railway.app/api/forgot-password/${token}`,
         passwordData
       );
 

@@ -23,7 +23,7 @@ function UserDetails() {
       const token = localStorage.getItem("token");
   
       const response = await Axios.patch(
-        "https://sahiden-sahibinden-production.up.railway.app/api/users/update",
+        "https://sahiden-sahibinden-production-3ef2.up.railway.app/api/users/update",
         {
           first_name: first_name,
           last_name: last_name,
@@ -72,7 +72,7 @@ function UserDetails() {
         try {
           const token = localStorage.getItem("token");
           
-          const response = await Axios.get("https://sahiden-sahibinden-production.up.railway.app/api/users/panel", {
+          const response = await Axios.get("https://sahiden-sahibinden-production-3ef2.up.railway.app/api/users/panel", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

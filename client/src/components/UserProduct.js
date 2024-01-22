@@ -31,7 +31,7 @@ function UserProduct() {
         const token = localStorage.getItem("token");
 
         const response = await Axios.get(
-          "https://sahiden-sahibinden-production.up.railway.app/api/ads/userAds",
+          "https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads/userAds",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ function UserProduct() {
       const token = localStorage.getItem("token");
 
       await Axios.patch(
-        `https://sahiden-sahibinden-production.up.railway.app/api/ads/${editProductId}`,
+        `https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads/${editProductId}`,
         editedProduct,
         {
           headers: {
@@ -117,7 +117,7 @@ function UserProduct() {
       const token = localStorage.getItem("token");
 
       await Axios.delete(
-        `https://sahiden-sahibinden-production.up.railway.app/api/ads/${productId}`,
+        `https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -145,7 +145,7 @@ function UserProduct() {
             <div className="col" key={product.id}>
               <div className="card">
                 <img
-                  src={`https://sahiden-sahibinden-production.up.railway.app/uploads/${product.image[0]}`}
+                  src={`https://sahiden-sahibinden-production-3ef2.up.railway.app/uploads/${product.image[0]}`}
                   className="card-img-top"
                   alt={product.title}
                 />

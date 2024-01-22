@@ -14,7 +14,7 @@ function Home() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+          "https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads",
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -61,7 +61,7 @@ function Ilan() {
     const fetchImages = async () => {
       try {
         const response = await axios.get(
-          `https://sahiden-sahibinden-production.up.railway.app/api/ads/${slug}/detay`,
+          `https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads/${slug}/detay`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -136,7 +136,7 @@ function Ilan() {
                 <div key={index} className="fotograf text-light p-4">
                   <img
                     className="smallImage"
-                    src={`https://sahiden-sahibinden-production.up.railway.app/uploads/${name}`}
+                    src={`sahiden-sahibinden-production-3ef2.up.railway.app/uploads/${name}`}
                     alt={`Ürün Fotoğrafı ${index + 1}`}
                   />
                 </div>
