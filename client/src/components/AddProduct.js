@@ -118,7 +118,7 @@ const AddProduct = () => {
         }
       }
       const response = await axios.post(
-        "https://sahiden-sahibinden-production.up.railway.app/api/ads",
+        "https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads",
         data,
         {
           headers: {

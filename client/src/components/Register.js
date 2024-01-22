@@ -19,7 +19,7 @@ function Register() {
     },
     onSubmit: async (values, actions) => {
       try {
-        const response = await axios.post('https://sahiden-sahibinden-production.up.railway.app/api/signup', 
+        const response = await axios.post('https://sahiden-sahibinden-production-3ef2.up.railway.app/api/signup', 
         values
         );
        
