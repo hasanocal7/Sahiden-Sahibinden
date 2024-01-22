@@ -103,7 +103,7 @@ function Home() {
                   <div key={item.slug} className="col-12 col-md-6 col-lg-4 mb-4">
                     <div className="card">
                       <img
-                        src={`https://sahiden-sahibinden-production.up.railway.app/uploads/${item.image[0]}`}
+                        src={`https://sahiden-sahibinden-production-3ef2.up.railway.app/uploads/${item.image[0]}`}
                         className="card-img-top fixed-size-image"
                         alt={item.title}
                       />
