@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  server:
+    build: server/
+    ports:
+      - 4000:4000
+    depends_on:
+      - mysqlserver
+    volumes:
+      - sahiden-uploads:/src/uploads
+
+  client:
+    build: client/
+    ports:
+      - 3000:3000
+
+  mysqlserver:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sahidendb_development
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqlserver
+
+volumes:
+  mysql_data:
+  sahiden-uploads:
