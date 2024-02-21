@@ -16,7 +16,7 @@ function ConfirmPassword() {
     tokenExpirationCheckRef.current = setTimeout(() => {
       alert("Token süresi doldu. Şifre sıfırlama işlemi başarısız oldu.");
       navigate("/");
-    }, 10 * 60 * 1000); 
+    }, 10 * 60 * 1000);
 
     return () => clearTimeout(tokenExpirationCheckRef.current);
   }, [navigate]);
@@ -33,14 +33,13 @@ function ConfirmPassword() {
         return;
       }
 
-
       const passwordData = {
         newPassword: newPassword,
         confirmNewPassword: confirmNewPassword,
       };
 
       const response = await axios.put(
-        `https://sahiden-sahibinden-production-3ef2.up.railway.app/api/forgot-password/${token}`,
+        `http://localhost:4000/api/forgot-password/${token}`,
         passwordData
       );
 

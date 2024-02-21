@@ -13,14 +13,11 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get("http://localhost:4000/api/ads", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setData(response.data.ads);
       } catch (error) {
@@ -60,12 +57,12 @@ function Home() {
     </Link>
   );
 
- return (
+  return (
     <>
       <Navbar />
       <div className="homeContainer container">
         <div className="row">
-        <div className="col-md-3">
+          <div className="col-md-3">
             <div className="filter">
               <h3>Fiyat Aralığı</h3>
               <div className="priceFilter">
@@ -88,26 +85,31 @@ function Home() {
           </div>
 
           <div className="col-md-12">
-          <div className="search">
+            <div className="search">
               <input
                 type="text"
                 placeholder="Ürün Ara"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <button className="searchButton" onClick={handleSearch}>Ara</button>
+              <button className="searchButton" onClick={handleSearch}>
+                Ara
+              </button>
             </div>
             <div className="row">
               {data &&
                 data.map((item) => (
-                  <div key={item.slug} className="col-12 col-md-6 col-lg-4 mb-4">
+                  <div
+                    key={item.slug}
+                    className="col-12 col-md-6 col-lg-4 mb-4"
+                  >
                     <div className="card">
                       <img
-                        src={`https://sahiden-sahibinden-production-3ef2.up.railway.app/uploads/${item.image[0]}`}
+                        src={`http://localhost:4000/uploads/${item.image[0]}`}
                         className="card-img-top fixed-size-image"
                         alt={item.title}
                       />
-                     <div className="card-body">
+                      <div className="card-body">
                         <h5 className="card-title">{item.title}</h5>
                         <p>Fiyat: {item.price} TL</p>
                         <Link
@@ -130,7 +132,6 @@ function Home() {
       </div>
     </>
   );
-  
 }
 
 export default Home;

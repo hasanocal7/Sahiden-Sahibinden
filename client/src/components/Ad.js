@@ -12,10 +12,10 @@ function Ilan() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setcategory]= useState("");
+  const [category, setcategory] = useState("");
   const [address, setAddress] = useState("");
   const [createdAt, setcreatedAt] = useState("");
-  const [id, setID]=useState("");
+  const [id, setID] = useState("");
   const [room_count, setroom_count] = useState("");
   const [m2_net, setm2_net] = useState(0);
   const [m2_gross, setm2_gross] = useState(0);
@@ -50,10 +50,7 @@ function Ilan() {
   const [status, setStatus] = useState("");
 
   const [image, setImage] = useState([]);
-  const handleLocationSelect = (location) => {
-    
-  };
-
+  const handleLocationSelect = (location) => {};
 
   const token = localStorage.getItem("token");
 
@@ -61,7 +58,7 @@ function Ilan() {
     const fetchImages = async () => {
       try {
         const response = await axios.get(
-          `https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads/${slug}/detay`,
+          `http://localhost:4000/api/ads/${slug}/detay`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -70,8 +67,7 @@ function Ilan() {
         );
 
         const ad = response.data.ad;
-        
-        
+
         setTitle(ad.title);
         setID(ad.id);
         setImage(ad.image || []);
@@ -111,8 +107,6 @@ function Ilan() {
         setCamera(ad.camera);
         setfront_camera(ad.front_camera);
         setStatus(ad.status);
-
-      
       } catch (error) {
         console.error("Verileri alınırken hata oluştu:", error);
       }
@@ -130,21 +124,20 @@ function Ilan() {
         <div className="row">
           <div className="col-md-6">
             <div className="fotograf text-light p-4">
-            <Carousel>
-              {image.map((name, index) => (
-                <Carousel.Item key={index}>
-                <div key={index} className="fotograf text-light p-4">
-                  <img
-                    className="smallImage"
-                    src={`sahiden-sahibinden-production-3ef2.up.railway.app/uploads/${name}`}
-                    alt={`Ürün Fotoğrafı ${index + 1}`}
-                  />
-                </div>
-                 </Carousel.Item>
-              ))}
-               </Carousel>
+              <Carousel>
+                {image.map((name, index) => (
+                  <Carousel.Item key={index}>
+                    <div key={index} className="fotograf text-light p-4">
+                      <img
+                        className="smallImage"
+                        src={`http://localhost:4000/uploads/${name}`}
+                        alt={`Ürün Fotoğrafı ${index + 1}`}
+                      />
+                    </div>
+                  </Carousel.Item>
+                ))}
+              </Carousel>
             </div>
-
           </div>
           <div className="col-md-6">
             <div className="rightSide p-4">
@@ -218,7 +211,10 @@ function Ilan() {
 
                 {case_type && (
                   <div>
-                    <p><b>Marka: </b>{brand}</p>
+                    <p>
+                      <b>Marka: </b>
+                      {brand}
+                    </p>
 
                     <p>
                       <b>Serisi: </b> {series}
@@ -229,7 +225,7 @@ function Ilan() {
                     <p>
                       <b>Yıl: </b> {year}
                     </p>
-                   
+
                     <p>
                       <b>Yakıt Tipi: </b> {fuel}
                     </p>
@@ -253,7 +249,10 @@ function Ilan() {
                     <p>
                       <b>Yıl: </b> {year}
                     </p>
-                    <p><b>Marka: </b>{brand}</p>
+                    <p>
+                      <b>Marka: </b>
+                      {brand}
+                    </p>
                     <p>
                       <b>Modeli: </b> {model}
                     </p>
@@ -338,8 +337,6 @@ function Ilan() {
             </div>
           </div>
         </div>
-       
-        
       </div>
     </>
   );

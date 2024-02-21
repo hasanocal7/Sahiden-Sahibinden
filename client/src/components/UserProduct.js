@@ -11,18 +11,17 @@ function UserProduct() {
     title: "",
     description: "",
     price: "",
-    address:"",
+    address: "",
 
     series: "",
     year: "",
     model: "",
     fuel: "",
-    brand:"",
+    brand: "",
     gear: "",
     km: "",
     case_type: "",
     traction: "",
-
   });
 
   useEffect(() => {
@@ -31,7 +30,7 @@ function UserProduct() {
         const token = localStorage.getItem("token");
 
         const response = await Axios.get(
-          "https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads/userAds",
+          "http://localhost:4000/api/ads/userAds",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -51,9 +50,7 @@ function UserProduct() {
 
   const handleEdit = (productId) => {
     setEditProductId(productId);
-    const editedProductData = async ()=> {
-        
-    }
+    const editedProductData = async () => {};
 
     setEditedProduct(editedProductData);
   };
@@ -63,7 +60,7 @@ function UserProduct() {
       const token = localStorage.getItem("token");
 
       await Axios.patch(
-        `https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads/${editProductId}`,
+        `http://localhost:4000/api/ads/${editProductId}`,
         editedProduct,
         {
           headers: {
@@ -91,13 +88,13 @@ function UserProduct() {
       title: "",
       description: "",
       price: "",
-      address:"",
+      address: "",
 
       series: "",
       year: "",
       model: "",
       fuel: "",
-      brand:"",
+      brand: "",
       gear: "",
       km: "",
       case_type: "",
@@ -116,14 +113,11 @@ function UserProduct() {
     try {
       const token = localStorage.getItem("token");
 
-      await Axios.delete(
-        `https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads/${productId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await Axios.delete(`http://localhost:4000/api/ads/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setUserProducts((prevProducts) =>
         prevProducts.filter((product) => product.id !== productId)
@@ -132,8 +126,6 @@ function UserProduct() {
       console.error("Ürün silme işlemi başarısız", error);
     }
   };
-
-
 
   return (
     <div>
@@ -227,7 +219,6 @@ function UserProduct() {
                   />
                 </div>
 
-
                 <div className="mb-3">
                   <label className="form-label">Serisi:</label>
                   <input
@@ -267,7 +258,6 @@ function UserProduct() {
                     onChange={(e) => handleInputChange(e, "fuel")}
                   />
                 </div>
-
               </div>
               <div className="modal-footer">
                 <button

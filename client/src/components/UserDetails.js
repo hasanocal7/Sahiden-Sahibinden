@@ -21,9 +21,9 @@ function UserDetails() {
   const handleSaveClick = async () => {
     try {
       const token = localStorage.getItem("token");
-  
+
       const response = await Axios.patch(
-        "https://sahiden-sahibinden-production-3ef2.up.railway.app/api/users/update",
+        "http://localhost:4000/api/users/update",
         {
           first_name: first_name,
           last_name: last_name,
@@ -36,16 +36,15 @@ function UserDetails() {
           },
         }
       );
-  
+
       // İsteğin başarılı olup olmadığını kontrol etmek için response nesnesini kullanabilirsiniz.
-  
+
       // Başarılı bir şekilde güncellendiğinde editMode'u kapatın
       setEditMode(false);
     } catch (error) {
       console.error("Kullanıcı bilgileri güncellenirken hata oluştu: ", error);
     }
   };
-  
 
   const handleInputChange = (e, setter) => {
     setter(e.target.value);
@@ -71,12 +70,15 @@ function UserDetails() {
       const fetchUserData = async () => {
         try {
           const token = localStorage.getItem("token");
-          
-          const response = await Axios.get("https://sahiden-sahibinden-production-3ef2.up.railway.app/api/users/panel", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+
+          const response = await Axios.get(
+            "http://localhost:4000/api/users/panel",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
           setFirst_Name(response.data.user.first_name);
           setLast_Name(response.data.user.last_name);
           setPhone(response.data.user.phonenumber);
@@ -125,7 +127,12 @@ function UserDetails() {
                   onChange={handlePhoneInputChange}
                 />
               ) : (
-                <input type="text" readOnly className="form-control-plaintext" value={phonenumber} />
+                <input
+                  type="text"
+                  readOnly
+                  className="form-control-plaintext"
+                  value={phonenumber}
+                />
               )}
             </div>
           </div>
@@ -138,18 +145,26 @@ function UserDetails() {
           />
 
           {editMode ? (
-            <button className="userDetailsButton btn" type="button" onClick={handleSaveClick}>
+            <button
+              className="userDetailsButton btn"
+              type="button"
+              onClick={handleSaveClick}
+            >
               Kaydet
             </button>
           ) : (
-            <button className="userDetailsButton btn " type="button" onClick={handleEditClick}>
+            <button
+              className="userDetailsButton btn "
+              type="button"
+              onClick={handleEditClick}
+            >
               Düzenle
             </button>
           )}
 
           <div>
-          <button className="userProductButton btn" type="button" >
-              <a href="/user-product" >İlanlarımı Göster</a>
+            <button className="userProductButton btn" type="button">
+              <a href="/user-product">İlanlarımı Göster</a>
             </button>
           </div>
         </div>

@@ -23,7 +23,8 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.id]: e.target.id === "password" ? e.target.value.trim() : e.target.value,
+      [e.target.id]:
+        e.target.id === "password" ? e.target.value.trim() : e.target.value,
     });
 
     setErrors({
@@ -41,7 +42,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://sahiden-sahibinden-production-3ef2.up.railway.app/api/signin",
+        "http://localhost:4000/api/signin",
         formData
       );
 
@@ -54,7 +55,7 @@ const Login = () => {
       // Başarılı giriş sonrasında anasayfaya yönlendirme
       navigate("/home");
     } catch (error) {
-   console.error("Hata:", error);
+      console.error("Hata:", error);
 
       setErrors({
         email: "E-posta adresinizi doğru girdiğinizden emin olunuz.",
@@ -66,48 +67,49 @@ const Login = () => {
   return (
     <div className="loginContainer container mt-5 d-flex flex-column align-items-center">
       <h1 className="loginFormTitle form-title mb-4">Sahiden</h1>
-     
+
       <form onSubmit={handleSubmit} className="w-50">
-      <div className="loginInputs mb-3">
-            <label htmlFor="email" className="form-label"></label>
-            
+        <div className="loginInputs mb-3">
+          <label htmlFor="email" className="form-label"></label>
+
+          <input
+            type="email"
+            id="email"
+            className={`loginFormControl form-control ${
+              errors.email ? "is-invalid" : ""
+            }`}
+            placeholder="E-posta giriniz"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          {errors.email && (
+            <p className="loginError invalid-feedback ">{errors.email}</p>
+          )}
+
+          <label htmlFor="password" className="form-label"></label>
+          <div className="password-container input-group">
             <input
-              type="email"
-              id="email"
+              type={showPassword ? "text" : "password"}
+              id="password"
               className={`loginFormControl form-control ${
-                errors.email ? "is-invalid" : ""
+                errors.password ? "is-invalid" : ""
               }`}
-              placeholder="E-posta giriniz"
-              value={formData.email}
+              placeholder="Şifre giriniz"
+              value={formData.password}
               onChange={handleChange}
             />
-            {errors.email && <p className="loginError invalid-feedback ">{errors.email}</p>}
-            
-
-            <label htmlFor="password" className="form-label"></label>
-            <div className="password-container input-group">
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                className={`loginFormControl form-control ${
-                  errors.password ? "is-invalid" : ""
-                }`}
-                placeholder="Şifre giriniz"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <button
-                type="button"
-                className="password-toggle-btn btn btn-outline-secondary"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
-              </button>
-            </div>
-            {errors.password && (
-              <p className="invalid-feedback">{errors.password}</p>
-            )}
+            <button
+              type="button"
+              className="password-toggle-btn btn btn-outline-secondary"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
+            </button>
           </div>
+          {errors.password && (
+            <p className="invalid-feedback">{errors.password}</p>
+          )}
+        </div>
 
         <div className="forgotPasswordLink">
           <a href="/forgot-password" className="forgotPasswordLink">

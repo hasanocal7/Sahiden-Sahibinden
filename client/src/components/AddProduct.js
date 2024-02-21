@@ -117,17 +117,12 @@ const AddProduct = () => {
           data.append(key, updatedFormData[key]);
         }
       }
-      const response = await axios.post(
-        "https://sahiden-sahibinden-production-3ef2.up.railway.app/api/ads",
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
+      const response = await axios.post("http://localhost:4000/api/ads", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
     } catch (error) {
       console.error("İstek hatası:", error);
     }

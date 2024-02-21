@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import { useFormik } from 'formik';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
-import axios from 'axios';
-import '../style/Register.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import axios from "axios";
+import "../style/Register.css";
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,21 +12,22 @@ function Register() {
 
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
-      email: '',
-      first_name: '',
-      last_name: '',
-      password: '',
+      email: "",
+      first_name: "",
+      last_name: "",
+      password: "",
     },
     onSubmit: async (values, actions) => {
       try {
-        const response = await axios.post('https://sahiden-sahibinden-production-3ef2.up.railway.app/api/signup', 
-        values
+        const response = await axios.post(
+          "http://localhost:4000/api/signup",
+          values
         );
-       
+
         actions.resetForm();
-        navigate('/');
+        navigate("/");
       } catch (error) {
-        console.error('Hata:', error);
+        console.error("Hata:", error);
       }
     },
   });
@@ -99,7 +100,7 @@ function Register() {
           </div>
         </div>
         <div className="registerLink">
-          <p className='hesapRegister'>
+          <p className="hesapRegister">
             Hesabın var mı <a href="/">Giriş Yap!</a>
           </p>
         </div>

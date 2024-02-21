@@ -20,8 +20,8 @@ function ForgotPassword() {
       }
 
       const response = await axios.post(
-        "sahiden-sahibinden-production-3ef2.up.railway.app/api/forgot-password",
-        {  
+        "http://localhost:4000/api/forgot-password",
+        {
           email,
         }
       );
