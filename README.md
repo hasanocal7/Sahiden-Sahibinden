@@ -8,6 +8,8 @@ Sahiden is a platform where users advertise and sell their products.
 
 Let's first familiarize ourselves with the necessary endpoints to be able to use the app.
 
+![Logo](https://i.imgur.com/TFSlNFx.png)
+
 ### API Endpoints
 
 #### Register
@@ -190,13 +192,16 @@ We have already specified the parameters required for ad creation. For updating,
 
 
   
-## Dağıtım
+## Deployment
 
-Bu projeyi dağıtmak için çalıştırın
+Run this project for deployment
 
 ```bash
-  npm run deploy
+  docker-compose build
+  docker-compose up
 ```
+
+`WARNING` In the docker-compose file, please type whatever `MYSQL_ROOT_PASSWORD` you gave in the server-side environment variable
 
   
 ## Environments
@@ -205,32 +210,13 @@ To run this project you will need to add the following environment variables to 
 
 `PORT`
 
-`MYSQLDATABASE`
-
-`MYSQLHOST`
-
-`MYSQLPASSWORD`
-
-`MYSQLPORT`
-
-`MYSQLUSER`
+`MYSQL_ROOT_PASSWORD`
 
 `ACCESSTOKEN_SECRET_KEY`
 
 `TRANSPORTER_USER`
 
 `TRANSPORTER_PASS`
-
-  
-
-  
-## Katkı
-
-Katkılara her zaman açığız!
-
-Başlamak `Contributor.md'ye bakın.
-
-Lütfen bu projenin `davranış kurallarına` uyun.
 
   ## Feedback
 
@@ -277,11 +263,6 @@ Start the server
 
 
   
-## Ekran Görüntüleri
-
-![Uygulama Ekran Görüntüsü](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-  
 ## Technologies Used
 
 **Client:** React, Redux, Google Maps API
@@ -290,7 +271,7 @@ Start the server
 
 **Database:** MySQL
 
-**Deployment:** Vercel, Railway, Docker
+**Deployment:** Docker
 
   
 ## Developers and Acknowledgements
