@@ -1,15 +1,15 @@
-.container {
+.addProductContainer {
     background-color: #f8f9fa;
     padding: 50px;
 }
 .form-control {
     height: 40px;
 }
-.urunYukleButton {
+.productUploadButton {
     color: white;
     background-color: #3f475f;
 }
-.urunYukleButton:hover {
+.productUploadButton:hover {
     color: white;
     background-color: darkred;
 }
